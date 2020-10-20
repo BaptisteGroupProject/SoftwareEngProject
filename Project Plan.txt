@@ -1,9 +1,13 @@
 ﻿Project Plan
 Organisation Plan:
 Baptiste has been selected as our team leader, we feel this is a good choice as he has some experience of app development as well as existing software engineering knowledge.
+
 As a group we have identified two main areas in the software development lifecycle, firstly, planning and documentation. This team will be responsible for tasks such as, requirement analysis, project planning and ensuring everything is documented correctly. Within this group we have members with some software engineering experience, this is important as they can understand and identify how various decisions will affect the other sub-team.
+
 The second team is responsible for the actual development as well as the testing. The members of this group have varying levels of experience. The more experienced members will act as mentors, using their knowledge to help other members complete their tasks.
+
 We understand that there might be a need for some members to jump between both groups, depending on workloads and other factors. We will account for this once further deliverables have been announced. 
+
 Below is a breakdown of the two sub-groups:
 Planning, Analysis and Documentation:
 Charlie: Undergraduate in Business and Project Management, little to no skill in coding or software development.
