@@ -1,0 +1,70 @@
+﻿Project Plan
+Organisation Plan:
+Baptiste has been selected as our team leader, we feel this is a good choice as he has some experience of app development as well as existing software engineering knowledge.
+As a group we have identified two main areas in the software development lifecycle, firstly, planning and documentation. This team will be responsible for tasks such as, requirement analysis, project planning and ensuring everything is documented correctly. Within this group we have members with some software engineering experience, this is important as they can understand and identify how various decisions will affect the other sub-team.
+The second team is responsible for the actual development as well as the testing. The members of this group have varying levels of experience. The more experienced members will act as mentors, using their knowledge to help other members complete their tasks.
+We understand that there might be a need for some members to jump between both groups, depending on workloads and other factors. We will account for this once further deliverables have been announced. 
+Below is a breakdown of the two sub-groups:
+Planning, Analysis and Documentation:
+Charlie: Undergraduate in Business and Project Management, little to no skill in coding or software development.
+Rina: Undergraduate in Computer Science & Artificial Intelligence. Proficient in Python for Data Science/ Machine Learning, limited experience with Java Web Development, absolutely none in Mobile App Development. Some experience in the software development process from undergrad. 
+Daniel: Undergraduate in Computing for Digital Media, some programming experience, mainly in game development. Some software engineering experience in an undergraduate module.
+Programing & Testing:
+Baptiste (Mentor) : Undergraduate in Computer Science, experience with multiple programming languages, with experience in Web development and App development & specifically for this project I have produced fairly simple android apps using android studio.
+Qihao(Mirage) (Mentor): Undergraduate in software engineering, two years programming (Java)  experience.  
+Mohsen : Undergraduate in Computer Science, experience in programing ( C#, java). Basic experience in Cyber security. Mobile app development for my final year dissertation.
+Sumedh Nimkar : Undergraduate in Computer Science, Background in Web Development and Design. Proficient in OO Based Languages and Data Analysis related roles. No experience in mobile app development. 
+We have decided to use Java as our programming language, the main reason for this was that every member with programming experience had used Java in the past. Although some members haven’t had any experience with app development, the use of a familiar programming language should speed up the learning process.
+For the actual development of the apps we are going to use Android Studio, this was suggested by one of the experienced members of our team. One main reason for using Android Studio is that it’s the official integrated development environment (IDE) for Android. There is also large amounts of documentation and other materials online, again speeding up the learning process.
+
+
+Conflict Resolution: 
+1. Illness:
+   * Team member might be required to self isolate 
+   * High Probability
+   * Moderate Effect 
+   * Resolution: Delegate tasks to other team members to cover for the tasks not being carried out.
+   * This should go fairly smoothly due to the organisational structure that has been chosen, where two or more team members collaborate on each task.
+2. Time difference and distance between group members:
+   * This might cause communication issues, where certain members become unavailable during certain times of the day.
+   * High probability
+   * Low Effect 
+   * Resolution: Agree on a weekly online meeting time and platform. Set up a group chat, which everyone has immediate access to. 
+3. Hardware and Software Unavailability:
+   * Essential hardware and software becomes unavailable for various reasons
+   * Low Probability 
+   * Serious Effect
+   * Resolution: Use Github so that all progress is backed up on the cloud and is accessible by all team members.
+4. Requirements change:
+   * Client changes what is required from the product more often than expected, which can cause delays
+   * High Probability 
+   * Moderate Effect
+   * Resolution: Adopt an agile approach to the software development process
+      1. Designate extra time to work on changes
+      2. Team Leader should communicate frequently and clearly with customer
+      3. Code in a reproducible manner that would allow for smooth changes
+5. Estimation:
+   * Time required to develop a specification is underestimated 
+   * Moderate Probability 
+   * Serious Effect (Failure to meet deadline)
+   * Resolution: 
+      1. Identify the worst case for both time to develop software and size of software to reduce the impact of underestimation.
+      2. Team Leader should assign more team members to tasks that require more time 
+6. A member of the group not working as promised:
+   * High Probability 
+   * Moderate Effect
+   * Resolution: 
+      1. Set tasks for each member to complete in a given time frame.
+      2. Team leader should keep track of tasks being completed via GitHub
+      3. Team leader should delegate the task to another team member that is deemed fit and has already completed their task
+      4. Using peer assessment, the failing team member shall be penalised and the replacement should be awarded
+7. The group cannot agree on the peer assessment.
+   * Low Probability
+   * Low Risk
+   * Resolution: Agree on a peer assessment plan prior to any work being done. This can be found in the following section.
+
+
+Peer Assessment:
+Throughout the entirety of the project we will record every members’ contribution, this will be done in two ways. Firstly there will be a log, this will contain the tasks that each member has been assigned for the week. Once the task is completed it will be signed off and the member will be assigned a new one. Having a log of each task will help us understand how much each member has contributed to each deliverable. The second way in which we will analyse contribution is through GitHub, here we will be able to see exactly who has been working on what and the changes they have made.
+At the end of the project we will convene to distribute the 100 points, the main basis for the points awarded to each member will be down to the contribution they have made throughout the project. By looking through the log of tasks and on GitHub we should be able to ascertain a fair understanding of each member's contribution. If each member of the group undertakes the same amount of work they would receive 14 points (100 / 7 = 14). If, as a group, we decide a couple of members deserve 12 points then we would be left with 4 points to redistribute between the other members. 
+Other factors that will affect the number of points will include; the quality of work, conductive group behaviour and overall commitment. These will be discussed as a group at the end of the project.
