@@ -39,11 +39,11 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
             }
         }
         setContentView(binding.getRoot());
-        init();
+        init(savedInstanceState);
     }
 
     /**
      * First method to run
      */
-    protected abstract void init();
+    protected abstract void init(Bundle bundle);
 }

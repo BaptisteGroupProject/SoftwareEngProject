@@ -2,38 +2,25 @@ package com.ASETP.project;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityMainBinding;
-import com.ASETP.project.location.Gps;
 
 /**
  * @author MirageLe
  */
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
-    private Gps gps;
+    private boolean isPermissionOk = false;
 
     @Override
-    protected void init() {
-        gps = new Gps(this, new LocationListener() {
-            @Override
-            public void onLocationChanged(@NonNull Location location) {
-                binding.location.setText(location.toString());
-                gps.setLocation(location);
-                Log.e(tag, location.toString());
-            }
-        });
-        getPermission();
+    protected void init(Bundle bundle) {
+
     }
 
     /**
@@ -44,10 +31,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                 , Manifest.permission.ACCESS_FINE_LOCATION};
         boolean checkPermission = checkSelfPermission(permissions[0]) == PackageManager.PERMISSION_GRANTED
                 && checkSelfPermission(permissions[1]) == PackageManager.PERMISSION_GRANTED;
-        if (checkPermission) {
-            gps.getGps();
-        } else {
+        if (!checkPermission) {
             ActivityCompat.requestPermissions(this, permissions, 1);
+            isPermissionOk = false;
+        } else {
+            isPermissionOk = true;
         }
     }
 
@@ -64,12 +52,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         if (requestCode == 1) {
             for (int result : grantResults) {
                 if (result != PackageManager.PERMISSION_GRANTED) {
+                    isPermissionOk = false;
                     Toast.makeText(MainActivity.this, "please turn on location service", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                gps.getGps();
+                isPermissionOk = true;
             }
         }
     }
-
 }
