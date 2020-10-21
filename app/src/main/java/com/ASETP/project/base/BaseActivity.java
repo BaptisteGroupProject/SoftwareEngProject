@@ -46,4 +46,5 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
      * First method to run
      */
     protected abstract void init(Bundle bundle);
+
 }
