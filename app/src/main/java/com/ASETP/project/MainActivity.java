@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,19 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 
-import com.ASETP.project.base.BaseActivity;
-import com.ASETP.project.databinding.ActivityMainBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -61,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
         mapFragment.getMapAsync(MainActivity.this);
     }
 
@@ -102,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Log.e(this.getClass().getSimpleName(), "Exception: %s", task.getException());
                     googleMap.getUiSettings().setMyLocationButtonEnabled(false);
                 }
-
             }
         });
     }
@@ -128,9 +122,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case REQUEST_CODE:
+                updateLocationUi();
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.e(tag, "true");
-                    updateLocationUi();
                     fetchLastLocation();
                 } else {
                     Toast.makeText(this, "please turn the location service", Toast.LENGTH_SHORT).show();
