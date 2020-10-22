@@ -25,29 +25,23 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 /**
- * @author MirageLe
+ * @author MirageLe, Baptiste Sagna
  */
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private boolean isPermissionOk = false;
-
-    FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int REQUEST_CODE = 101;
-
-    private Location lastKnownLocation;
-
     private GoogleMap googleMap;
+    private Location lastKnownLocation;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private PlacesClient placesClient;
+    private final String tag = this.getClass().getSimpleName();
 
+    private static final int REQUEST_CODE = 101;
     private static final int DEFAULT_ZOOM = 15;
 
-    private PlacesClient placesClient;
-
-    private final String tag = this.getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_main);
         Places.initialize(this, getString(R.string.google_api));
         placesClient = Places.createClient(this);
@@ -59,9 +53,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(MainActivity.this);
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        this.googleMap = googleMap;
+        getLocationPermission();
+        updateLocationUi();
+        fetchLastLocation();
+    }
+
+    /**
+     * check permission if denied go turn on else get location
+     */
+    private void getLocationPermission() {
+        String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
+        boolean checkPermission = checkSelfPermission(permissions[0]) == PackageManager.PERMISSION_GRANTED;
+        if (!checkPermission) {
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE);
+        }
+    }
+
     private void updateLocationUi() {
         if (googleMap == null) {
-            Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
             return;
         }
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
@@ -101,15 +114,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        this.googleMap = googleMap;
-        getPermission();
-        updateLocationUi();
-        fetchLastLocation();
-    }
-
     /**
      * when permission return
      *
@@ -126,24 +130,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     fetchLastLocation();
                 } else {
-                    Toast.makeText(this, "please turn the location service", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Location services needs to be enabled", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
                 break;
         }
     }
-
-    /**
-     * check permission if denied go turn on else get location
-     */
-    private void getPermission() {
-        String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
-        boolean checkPermission = checkSelfPermission(permissions[0]) == PackageManager.PERMISSION_GRANTED;
-        if (!checkPermission) {
-            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE);
-        }
-    }
-
 
 }
