@@ -12,31 +12,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private int maxLoginAttempts = 4;
 
-    private EditText Username;
-    private EditText Password;
-    private TextView info;
-    private Button Signin;
-    private TextView Signup;
-    private int counter = 4;
-
+    //Temp login details
     private String userName = "Admin";
     private String passWord = "12345";
 
-    boolean isValid = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Username = (EditText) findViewById(R.id.inputEmail);
-        Password = (EditText) findViewById(R.id.inputPassword);
-       // info = (TextView) findViewById(R.id.textView);
-        Signin = (Button) findViewById(R.id.btnRegister);
-        Signup = (TextView) findViewById(R.id.goToRegister);
+        final EditText Username = findViewById(R.id.inputEmail);
+        final EditText Password = findViewById(R.id.inputPassword);
+        final Button loginButton = findViewById(R.id.btnLogin);
 
-        Signin.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -45,43 +37,28 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (inputName.isEmpty() || inputPassword.isEmpty()){
 
-                    Toast.makeText(LoginActivity.this, "please enter all the details correctly" , Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(LoginActivity.this, "Please enter all the details correctly" , Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    isValid = validate(inputName, inputPassword);
+                    if(!validate(inputName, inputPassword)){
+                        maxLoginAttempts --;
+                        Toast.makeText(LoginActivity.this, "Credentials Incorrect" , Toast.LENGTH_SHORT).show();
 
-                    if(!isValid){
-                        counter --;
-                        Toast.makeText(LoginActivity.this, "Credentials incorrect" , Toast.LENGTH_SHORT).show();
-
-                        if(counter == 0) {
-                            Signin.setEnabled(false);
+                        if(maxLoginAttempts == 0) {
+                            loginButton.setEnabled(false);
                         }
                     }else {
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        Intent beginLogin = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(beginLogin);
                     }
-
               }
             }
         });
 
-
-      /*////*  final Intent switchToLogin = new Intent(this, MainActivity.class);
-        Button loginButton = findViewById(R.id.btnRegister);
-        // Make the login button receptive to being clicked
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            // onClick method implementation for the killButton object
-            public void onClick(View v) {
-                startActivity(switchToLogin);
-            }
-        });*///
-
         final Intent switchToRegister = new Intent(this, RegisterActivity.class);
-        TextView registerButton = (TextView) findViewById(R.id.goToRegister);
+        final TextView registerButton = findViewById(R.id.goToRegister);
         registerButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
