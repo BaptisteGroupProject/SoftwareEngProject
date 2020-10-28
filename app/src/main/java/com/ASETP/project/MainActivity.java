@@ -1,71 +1,79 @@
 package com.ASETP.project;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
 
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
+import com.ASETP.project.base.BaseActivity;
+import com.ASETP.project.databinding.ActivityMainBinding;
+import com.ASETP.project.location.GoogleMapLocation;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @author MirageLe, Baptiste Sagna
  */
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends BaseActivity<ActivityMainBinding> implements OnMapReadyCallback, GoogleMapLocation.OnLocationSuccessListener {
 
-
-    private GoogleMap googleMap;
-    private Location lastKnownLocation;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    private PlacesClient placesClient;
-    private final String tag = this.getClass().getSimpleName();
+    private GoogleMapLocation mapLocation;
 
     private static final int REQUEST_CODE = 101;
-    private static final int DEFAULT_ZOOM = 15;
 
+    private CircleImageView icon;
+    private TextView username, lat, lon, currentLocation;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Places.initialize(this, getString(R.string.google_api));
-        placesClient = Places.createClient(this);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+    protected void init(Bundle bundle) {
+        setToolBar();
+        setNavHeader();
+        mapLocation = new GoogleMapLocation(this, this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-
-        mapFragment.getMapAsync(MainActivity.this);
+        mapFragment.getMapAsync(this);
     }
 
+    private void setToolBar() {
+        initToolBar(binding.appbar.toolbar, true, "Map");
+        binding.appbar.toolbar.setNavigationIcon(R.mipmap.home_nav);
+    }
+
+    private void setNavHeader() {
+        View view = binding.navView.getHeaderView(0);
+        icon = view.findViewById(R.id.icon_image);
+        username = view.findViewById(R.id.username);
+        lat = view.findViewById(R.id.lat);
+        lon = view.findViewById(R.id.lon);
+        currentLocation = view.findViewById(R.id.location);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            binding.drawerLayout.openDrawer(GravityCompat.START);
+        }
+        return true;
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        this.googleMap = googleMap;
+        mapLocation.setGoogleMap(googleMap);
         getLocationPermission();
-        updateLocationUi();
-        fetchLastLocation();
+        mapLocation.updateLocationUi();
+        mapLocation.getCurrentLocation();
     }
 
     /**
@@ -79,47 +87,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private void updateLocationUi() {
-        if (googleMap == null) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            googleMap.setMyLocationEnabled(true);
-            googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        } else {
-            googleMap.setMyLocationEnabled(false);
-            googleMap.getUiSettings().setMyLocationButtonEnabled(false);
-        }
-    }
-
-    private void fetchLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnCompleteListener(this, new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                if (task.isSuccessful()) {
-                    // Set the map's camera position to the current location of the device.
-                    lastKnownLocation = task.getResult();
-                    if (lastKnownLocation != null) {
-                        Log.e(this.getClass().getSimpleName(), lastKnownLocation.toString());
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                new LatLng(lastKnownLocation.getLatitude(),
-                                        lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-                    }
-                } else {
-                    Log.d(this.getClass().getSimpleName(), "Current location is null. Using defaults.");
-                    Log.e(this.getClass().getSimpleName(), "Exception: %s", task.getException());
-                    googleMap.getUiSettings().setMyLocationButtonEnabled(false);
-                }
-            }
-        });
-    }
 
     /**
      * when permission return
@@ -131,18 +98,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUEST_CODE:
-                updateLocationUi();
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    fetchLastLocation();
-                } else {
-                    Toast.makeText(this, "Location services needs to be enabled", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            default:
-                break;
+        if (requestCode == REQUEST_CODE) {
+            mapLocation.updateLocationUi();
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                mapLocation.getCurrentLocation();
+            } else {
+                Toast.makeText(this, "Location services needs to be enabled", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
+    @Override
+    public void onPlace(PlaceLikelihood placeLikelihood) {
+        String latitude = "latitude: " + placeLikelihood.getPlace().getLatLng().latitude;
+        lat.setText(latitude);
+        String longitude = "longitude: " + placeLikelihood.getPlace().getLatLng().longitude;
+        lon.setText(longitude);
+        String placeName = "location: " + placeLikelihood.getPlace().getAddress();
+        currentLocation.setText(placeName);
+    }
 }

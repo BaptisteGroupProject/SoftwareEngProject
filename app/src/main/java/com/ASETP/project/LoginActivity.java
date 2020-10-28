@@ -2,79 +2,41 @@ package com.ASETP.project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
-public class LoginActivity extends AppCompatActivity {
+import com.ASETP.project.base.BaseActivity;
+import com.ASETP.project.databinding.ActivityLoginBinding;
+
+public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener, TextWatcher {
 
     private int maxLoginAttempts = 4;
 
-    //Temp login details
-    private String userName = "Admin";
-    private String passWord = "12345";
+    /**
+     * Temp login details
+     */
+    private final String userName = "Admin@email.com";
+    private final String passWord = "12345";
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    protected void init(Bundle bundle) {
+        generalSetting();
+    }
 
-        final EditText Username = findViewById(R.id.inputEmail);
-        final EditText Password = findViewById(R.id.inputPassword);
-        final Button loginButton = findViewById(R.id.btnLogin);
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String inputEmail = Username.getText().toString();
-                String inputPassword = Password.getText().toString();
-
-                if (inputEmail.isEmpty() || inputPassword.isEmpty()){
-
-                    Toast.makeText(LoginActivity.this, "Please enter all the details correctly" , Toast.LENGTH_SHORT).show();
-                }
-                else if(!validateEmail(inputEmail)) {
-                    Toast.makeText(LoginActivity.this, "Please enter a valid email" , Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    if(!validate(inputEmail, inputPassword)){
-                        maxLoginAttempts --;
-                        Toast.makeText(LoginActivity.this, "Credentials Incorrect" , Toast.LENGTH_SHORT).show();
-
-                        if(maxLoginAttempts == 0) {
-                            loginButton.setEnabled(false);
-                        }
-                    }else {
-                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
-                        Intent beginLogin = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(beginLogin);
-                    }
-              }
-            }
-        });
-
-        final Intent switchToRegister = new Intent(this, RegisterActivity.class);
-        final TextView registerButton = findViewById(R.id.goToRegister);
-        registerButton.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View view) {
-                        startActivity(switchToRegister);
-                    }
-                }
-        );
-
+    private void generalSetting() {
+        binding.inputEmail.addTextChangedListener(this);
+        binding.inputPassword.addTextChangedListener(this);
+        binding.btnLogin.setOnClickListener(this);
+        binding.forgotPassword.setOnClickListener(this);
+        binding.goToRegister.setOnClickListener(this);
     }
 
     private boolean validate(String name, String password) {
-
         return name.equals(userName) && password.equals(passWord);
     }
 
@@ -82,4 +44,62 @@ public class LoginActivity extends AppCompatActivity {
         return Patterns.EMAIL_ADDRESS.matcher(inputEmail).matches();
     }
 
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.btnLogin) {
+            String inputEmail = binding.inputEmail.getText().toString();
+            String inputPassword = binding.inputPassword.getText().toString();
+            if (!validateEmail(inputEmail)) {
+                showToast("Please enter a valid email");
+            } else {
+                if (!validate(inputEmail, inputPassword)) {
+                    maxLoginAttempts--;
+                    showToast("Credentials Incorrect");
+                    if (maxLoginAttempts == 0) {
+                        setSubmitButton(false);
+                    }
+                } else {
+                    showToast("Login Successful");
+                    Intent beginLogin = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(beginLogin);
+                }
+            }
+        } else if (id == R.id.forgotPassword) {
+
+        } else {
+            Intent switchToRegister = new Intent(this, RegisterActivity.class);
+            startActivity(switchToRegister);
+        }
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        setSubmitButton(binding.inputEmail.getText().length() > 0 && binding.inputPassword.getText().length() > 0);
+    }
+
+    /**
+     * check if loginButton is enable
+     *
+     * @param isLoginEnable isLoginEnable
+     */
+    private void setSubmitButton(boolean isLoginEnable) {
+        if (isLoginEnable) {
+            binding.btnLogin.setBackground(ContextCompat.getDrawable(this, R.drawable.blue_round_bg));
+        } else {
+            binding.btnLogin.setBackground(ContextCompat.getDrawable(this, R.drawable.gray_round_bg));
+        }
+        binding.btnLogin.setEnabled(isLoginEnable);
+    }
 }

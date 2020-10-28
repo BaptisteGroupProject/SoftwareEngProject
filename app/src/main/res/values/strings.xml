@@ -4,5 +4,13 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="google_api">AIzaSyDNHI6faVqbHx_4TpGPbhalMj_22zx59j0</string>
+    <string name="loading">loading...</string>
+    <string name="login">LOGIN</string>
+    <string name="forgot_password">FORGOT PASSWORD?</string>
+    <string name="new_user_register_now">New User? Register Now</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="already_have_an_account">Already Have an Account?</string>
+    <string name="register">REGISTER</string>
 </resources>
 
