@@ -1,10 +1,14 @@
 package com.ASETP.project;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +33,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
  */
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+
     private GoogleMap googleMap;
     private Location lastKnownLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Places.initialize(this, getString(R.string.google_api));
         placesClient = Places.createClient(this);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -52,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mapFragment.getMapAsync(MainActivity.this);
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
