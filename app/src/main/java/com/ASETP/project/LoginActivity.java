@@ -2,6 +2,7 @@ package com.ASETP.project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,15 +33,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String inputName = Username.getText().toString();
+                String inputEmail = Username.getText().toString();
                 String inputPassword = Password.getText().toString();
 
-                if (inputName.isEmpty() || inputPassword.isEmpty()){
+                if (inputEmail.isEmpty() || inputPassword.isEmpty()){
 
                     Toast.makeText(LoginActivity.this, "Please enter all the details correctly" , Toast.LENGTH_SHORT).show();
                 }
+                else if(!validateEmail(inputEmail)) {
+                    Toast.makeText(LoginActivity.this, "Please enter a valid email" , Toast.LENGTH_SHORT).show();
+                }
                 else {
-                    if(!validate(inputName, inputPassword)){
+                    if(!validate(inputEmail, inputPassword)){
                         maxLoginAttempts --;
                         Toast.makeText(LoginActivity.this, "Credentials Incorrect" , Toast.LENGTH_SHORT).show();
 
@@ -72,6 +76,10 @@ public class LoginActivity extends AppCompatActivity {
     private boolean validate(String name, String password) {
 
         return name.equals(userName) && password.equals(passWord);
+    }
+
+    private boolean validateEmail(String inputEmail) {
+        return Patterns.EMAIL_ADDRESS.matcher(inputEmail).matches();
     }
 
 }
