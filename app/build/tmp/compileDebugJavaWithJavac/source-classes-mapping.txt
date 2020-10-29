@@ -1,0 +1,32 @@
+com/ASETP/project/databinding/ActivityRegisterBinding.java
+ com.ASETP.project.databinding.ActivityRegisterBinding
+com/ASETP/project/databinding/WidgetWaitDialogBinding.java
+ com.ASETP.project.databinding.WidgetWaitDialogBinding
+com/ASETP/project/databinding/ActivityLoginBinding.java
+ com.ASETP.project.databinding.ActivityLoginBinding
+com/ASETP/project/databinding/NavHeaderBinding.java
+ com.ASETP.project.databinding.NavHeaderBinding
+com/ASETP/project/databinding/ActivityMainBinding.java
+ com.ASETP.project.databinding.ActivityMainBinding
+com/ASETP/project/location/Gps.java
+ com.ASETP.project.location.Gps
+com/ASETP/project/base/BaseActivity.java
+ com.ASETP.project.base.BaseActivity
+com/ASETP/project/databinding/HeadbarBinding.java
+ com.ASETP.project.databinding.HeadbarBinding
+com/ASETP/project/base/BaseFragment.java
+ com.ASETP.project.base.BaseFragment
+com/ASETP/project/BuildConfig.java
+ com.ASETP.project.BuildConfig
+com/ASETP/project/location/GoogleMapLocation.java
+ com.ASETP.project.location.GoogleMapLocation
+ com.ASETP.project.location.GoogleMapLocation$1
+ com.ASETP.project.location.GoogleMapLocation$2
+ com.ASETP.project.location.GoogleMapLocation$OnLocationSuccessListener
+com/ASETP/project/LoginActivity.java
+ com.ASETP.project.LoginActivity
+com/ASETP/project/RegisterActivity.java
+ com.ASETP.project.RegisterActivity
+ com.ASETP.project.RegisterActivity$1
+com/ASETP/project/MainActivity.java
+ com.ASETP.project.MainActivity
