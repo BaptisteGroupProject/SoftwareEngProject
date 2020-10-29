@@ -50,6 +50,8 @@ dependencies {
     implementation 'com.amplifyframework:aws-datastore:1.4.1'
     // Support for Java 8 features
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+    // amplify rxjava
+    implementation 'com.amplifyframework:rxbindings:1.4.1'
 
 }
 

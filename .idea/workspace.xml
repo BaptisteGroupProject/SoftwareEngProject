@@ -40,6 +40,7 @@
   <component name="ChangeListManager">
     <list default="true" id="61a164ff-46e8-42de-8196-d4b0f6c0729f" name="Default Changelist" comment="MainActivity - Navigation page. Move map method to a new class.&#10;LoginActivity, RegisterActivity - change the extends to &#10;BaseActivity which weren't need to use findViewById anymore just as code shows. &#10;Add a listener to check whether the button is enable.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +234,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603932036827</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="MainActivity - Navigation page. Move map method to a new class.&#10;LoginActivity, RegisterActivity - change the extends to &#10;BaseActivity which weren't need to use findViewById anymore just as code shows. &#10;Add a listener to check whether the button is enable.">
+      <created>1603932427953</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1603932427953</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -328,10 +336,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="93" y="100" width="1626" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603916726187" />
-    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603932088416">
+    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603932432453">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603932088416" />
+    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603932432453" />
     <state x="823" y="0" width="1113" height="1026" key="dock-window-1" timestamp="1603910758140">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
