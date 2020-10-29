@@ -10,6 +10,11 @@
       "StackName": "amplify-softwareengproject-dev-220735",
       "StackId": "arn:aws:cloudformation:eu-west-1:044741081476:stack/amplify-softwareengproject-dev-220735/fdff2770-1969-11eb-8876-0af128d4b3c0",
       "AmplifyAppId": "d3a1gjh13zf5oj"
+    },
+    "categories": {
+      "auth": {
+        "softwareengproject29d28ece": {}
+      }
     }
   }
 }
