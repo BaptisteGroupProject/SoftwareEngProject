@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 
@@ -11,6 +12,8 @@ import androidx.core.content.ContextCompat;
 
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityLoginBinding;
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.core.*;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener, TextWatcher {
 
@@ -26,6 +29,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     @Override
     protected void init(Bundle bundle) {
         generalSetting();
+        try {
+            Amplify.configure(getApplicationContext());
+            Log.i("LoginActivity", "Initialized Amplify at Login");
+        } catch (AmplifyException error) {
+            Log.e("LoginActivity", "Could not initialize Amplify at Login", error);
+        }
     }
 
     private void generalSetting() {
