@@ -34,7 +34,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     @Override
     protected void init(Bundle bundle) {
         generalSetting();
-
+        AmplifyApp currentSession = new AmplifyApp();
     }
 
     private void generalSetting() {

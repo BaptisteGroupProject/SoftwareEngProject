@@ -64,9 +64,11 @@
     <orderEntry type="library" name="Gradle: org.reactivestreams:reactive-streams:1.0.3" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.uuid:java-uuid-generator:4.0.1" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.29" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:1.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.databinding:viewbinding:4.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.amplifyframework:aws-api:1.4.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.amplifyframework:aws-datastore:1.4.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.amplifyframework:aws-auth-cognito:1.4.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.amplifyframework:rxbindings:1.4.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.amplifyframework:aws-api-appsync:1.4.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.amplifyframework:core:1.4.1@aar" level="project" />
@@ -110,6 +112,8 @@
     <orderEntry type="library" name="Gradle: androidx.activity:activity-ktx:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.activity:activity:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.media:media:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-android-sdk-cognitoauth:2.19.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.browser:browser:1.2.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.core:core-ktx:1.1.0@aar" level="project" />
