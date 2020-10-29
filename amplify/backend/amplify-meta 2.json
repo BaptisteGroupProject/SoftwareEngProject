@@ -1,0 +1,59 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-softwareengproject-dev-220735-authRole",
+            "UnauthRoleArn": "arn:aws:iam::044741081476:role/amplify-softwareengproject-dev-220735-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::044741081476:role/amplify-softwareengproject-dev-220735-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "amplify-softwareengproject-dev-220735-deployment",
+            "UnauthRoleName": "amplify-softwareengproject-dev-220735-unauthRole",
+            "StackName": "amplify-softwareengproject-dev-220735",
+            "StackId": "arn:aws:cloudformation:eu-west-1:044741081476:stack/amplify-softwareengproject-dev-220735/fdff2770-1969-11eb-8876-0af128d4b3c0",
+            "AmplifyAppId": "d3a1gjh13zf5oj"
+        }
+    },
+    "api": {
+        "softwareengproject": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "apiKeyExpirationDays": 365,
+                            "description": "SoftEnfProjApiKey"
+                        }
+                    },
+                    "additionalAuthenticationProviders": []
+                },
+                "GraphQLAPIIdOutput": "emvz62gq7fb4lap32t4vsx2cby",
+                "GraphQLAPIEndpointOutput": "https://gfg4o5e66fhhrba67mlop5s4wu.appsync-api.eu-west-1.amazonaws.com/graphql",
+                "GraphQLAPIKeyOutput": "da2-lx5en4rw3rdxdczpngxcro2rma"
+            },
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-softwareengproject-dev-220735-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+                "logicalId": "apisoftwareengproject"
+            },
+            "lastPushTimeStamp": "2020-10-28T22:55:44.915Z",
+            "lastPushDirHash": "u0Sb9UJBPdo+2osVp160JTEOYPE="
+        },
+        "softwareengproject-dev": {
+            "service": "AppSync",
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY"
+                    },
+                    "additionalAuthenticationProviders": null
+                },
+                "GraphQLAPIIdOutput": "emvz62gq7fb4lap32t4vsx2cby",
+                "GraphQLAPIEndpointOutput": "https://gfg4o5e66fhhrba67mlop5s4wu.appsync-api.eu-west-1.amazonaws.com/graphql",
+                "name": "softwareengproject-dev",
+                "region": "eu-west-1",
+                "GraphQLAPIKeyOutput": "da2-lx5en4rw3rdxdczpngxcro2rma"
+            },
+            "lastPushTimeStamp": "2020-10-28T23:21:30.107Z"
+        }
+    }
+}
