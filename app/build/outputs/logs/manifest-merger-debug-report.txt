@@ -6,6 +6,7 @@ INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\Andr
 INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-62:12
 MERGED from [androidx.databinding:viewbinding:4.1.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\e24de3a6f40faffd1d0a125c25ee4a8a\jetified-viewbinding-4.1.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.amplifyframework:aws-api:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9f36c9b9930baea17fb74c023d751755\jetified-aws-api-1.4.1\AndroidManifest.xml:16:1-27:12
+MERGED from [com.amplifyframework:aws-auth-cognito:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\b399ece8f658e1383893a286553492ab\jetified-aws-auth-cognito-1.4.1\AndroidManifest.xml:16:1-25:12
 MERGED from [com.amplifyframework:rxbindings:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\f3858a37f5d3830270fe9fa25fadfce4\jetified-rxbindings-1.4.1\AndroidManifest.xml:16:1-25:12
 MERGED from [com.amplifyframework:aws-api-appsync:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\031fb357860f3e9d0a3d7f659bd171ac\jetified-aws-api-appsync-1.4.1\AndroidManifest.xml:16:1-25:12
 MERGED from [com.amplifyframework:core:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9eee9aa94e648f65ac01bd6d773d9eb4\jetified-core-1.4.1\AndroidManifest.xml:16:1-33:12
@@ -54,6 +55,8 @@ MERGED from [androidx.activity:activity:1.1.0] C:\Users\Owner\.gradle\caches\tra
 MERGED from [androidx.navigation:navigation-common-ktx:2.3.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\a5377e7367b455a750aecc0e02ec6133\navigation-common-ktx-2.3.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.navigation:navigation-common:2.3.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\7134288a0abf6854360e3d56c7830194\navigation-common-2.3.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.media:media:1.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\df89e363b18d8fcd3e81abd15e1cf53e\media-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.amazonaws:aws-android-sdk-cognitoauth:2.19.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\54e6993563334324659eaa00278c0b3c\jetified-aws-android-sdk-cognitoauth-2.19.0\AndroidManifest.xml:2:1-20:12
+MERGED from [androidx.browser:browser:1.2.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9726c3ec0c40549b1670abc066028d31\browser-1.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\3aa2087705e0c3441277be9fd03c1c30\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\e67e311fdb46aab8796f2f4a29e5b39f\asynclayoutinflater-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core-ktx:1.1.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\bc6ee59500987b5e84273aa85ab42711\jetified-core-ktx-1.1.0\AndroidManifest.xml:2:1-9:12
@@ -190,6 +193,8 @@ MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\e3ed091a2faffe06564aae78cc39f4f0\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-basement:17.2.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\4994c4a2b167352de44ff807dc084fcb\jetified-play-services-basement-17.2.1\AndroidManifest.xml:22:5-26:19
 MERGED from [com.google.android.gms:play-services-basement:17.2.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\4994c4a2b167352de44ff807dc084fcb\jetified-play-services-basement-17.2.1\AndroidManifest.xml:22:5-26:19
+MERGED from [com.amazonaws:aws-android-sdk-cognitoauth:2.19.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\54e6993563334324659eaa00278c0b3c\jetified-aws-android-sdk-cognitoauth-2.19.0\AndroidManifest.xml:12:5-18:19
+MERGED from [com.amazonaws:aws-android-sdk-cognitoauth:2.19.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\54e6993563334324659eaa00278c0b3c\jetified-aws-android-sdk-cognitoauth-2.19.0\AndroidManifest.xml:12:5-18:19
 MERGED from [androidx.core:core:1.3.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\6f5ea6daa7728cbfa429b200913ed716\core-1.3.1\AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.3.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\6f5ea6daa7728cbfa429b200913ed716\core-1.3.1\AndroidManifest.xml:24:5-89
 MERGED from [androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\2250acda7e76338ab8441514e2ec7a52\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:24:5-30:19
@@ -274,6 +279,8 @@ MERGED from [androidx.databinding:viewbinding:4.1.0] C:\Users\Owner\.gradle\cach
 MERGED from [androidx.databinding:viewbinding:4.1.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\e24de3a6f40faffd1d0a125c25ee4a8a\jetified-viewbinding-4.1.0\AndroidManifest.xml:20:5-44
 MERGED from [com.amplifyframework:aws-api:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9f36c9b9930baea17fb74c023d751755\jetified-aws-api-1.4.1\AndroidManifest.xml:21:5-23:41
 MERGED from [com.amplifyframework:aws-api:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9f36c9b9930baea17fb74c023d751755\jetified-aws-api-1.4.1\AndroidManifest.xml:21:5-23:41
+MERGED from [com.amplifyframework:aws-auth-cognito:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\b399ece8f658e1383893a286553492ab\jetified-aws-auth-cognito-1.4.1\AndroidManifest.xml:21:5-23:41
+MERGED from [com.amplifyframework:aws-auth-cognito:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\b399ece8f658e1383893a286553492ab\jetified-aws-auth-cognito-1.4.1\AndroidManifest.xml:21:5-23:41
 MERGED from [com.amplifyframework:rxbindings:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\f3858a37f5d3830270fe9fa25fadfce4\jetified-rxbindings-1.4.1\AndroidManifest.xml:21:5-23:41
 MERGED from [com.amplifyframework:rxbindings:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\f3858a37f5d3830270fe9fa25fadfce4\jetified-rxbindings-1.4.1\AndroidManifest.xml:21:5-23:41
 MERGED from [com.amplifyframework:aws-api-appsync:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\031fb357860f3e9d0a3d7f659bd171ac\jetified-aws-api-appsync-1.4.1\AndroidManifest.xml:21:5-23:41
@@ -370,6 +377,10 @@ MERGED from [androidx.navigation:navigation-common:2.3.1] C:\Users\Owner\.gradle
 MERGED from [androidx.navigation:navigation-common:2.3.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\7134288a0abf6854360e3d56c7830194\navigation-common-2.3.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.media:media:1.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\df89e363b18d8fcd3e81abd15e1cf53e\media-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.media:media:1.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\df89e363b18d8fcd3e81abd15e1cf53e\media-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.amazonaws:aws-android-sdk-cognitoauth:2.19.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\54e6993563334324659eaa00278c0b3c\jetified-aws-android-sdk-cognitoauth-2.19.0\AndroidManifest.xml:8:5-10:41
+MERGED from [com.amazonaws:aws-android-sdk-cognitoauth:2.19.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\54e6993563334324659eaa00278c0b3c\jetified-aws-android-sdk-cognitoauth-2.19.0\AndroidManifest.xml:8:5-10:41
+MERGED from [androidx.browser:browser:1.2.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9726c3ec0c40549b1670abc066028d31\browser-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.browser:browser:1.2.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9726c3ec0c40549b1670abc066028d31\browser-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\3aa2087705e0c3441277be9fd03c1c30\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\3aa2087705e0c3441277be9fd03c1c30\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\e67e311fdb46aab8796f2f4a29e5b39f\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
@@ -488,6 +499,16 @@ ADDED from [com.google.android.gms:play-services-base:17.2.1] C:\Users\Owner\.gr
 		ADDED from [com.google.android.gms:play-services-base:17.2.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\6af87a53018d27d5e4c3f6ff118aafac\jetified-play-services-base-17.2.1\AndroidManifest.xml:26:13-72
 	android:name
 		ADDED from [com.google.android.gms:play-services-base:17.2.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\6af87a53018d27d5e4c3f6ff118aafac\jetified-play-services-base-17.2.1\AndroidManifest.xml:24:13-79
+activity#com.amazonaws.mobileconnectors.cognitoauth.activities.CustomTabsManagerActivity
+ADDED from [com.amazonaws:aws-android-sdk-cognitoauth:2.19.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\54e6993563334324659eaa00278c0b3c\jetified-aws-android-sdk-cognitoauth-2.19.0\AndroidManifest.xml:13:9-17:75
+	android:launchMode
+		ADDED from [com.amazonaws:aws-android-sdk-cognitoauth:2.19.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\54e6993563334324659eaa00278c0b3c\jetified-aws-android-sdk-cognitoauth-2.19.0\AndroidManifest.xml:16:13-44
+	android:exported
+		ADDED from [com.amazonaws:aws-android-sdk-cognitoauth:2.19.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\54e6993563334324659eaa00278c0b3c\jetified-aws-android-sdk-cognitoauth-2.19.0\AndroidManifest.xml:15:13-37
+	android:theme
+		ADDED from [com.amazonaws:aws-android-sdk-cognitoauth:2.19.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\54e6993563334324659eaa00278c0b3c\jetified-aws-android-sdk-cognitoauth-2.19.0\AndroidManifest.xml:17:13-72
+	android:name
+		ADDED from [com.amazonaws:aws-android-sdk-cognitoauth:2.19.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\54e6993563334324659eaa00278c0b3c\jetified-aws-android-sdk-cognitoauth-2.19.0\AndroidManifest.xml:14:13-107
 provider#androidx.lifecycle.ProcessLifecycleOwnerInitializer
 ADDED from [androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\2250acda7e76338ab8441514e2ec7a52\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:25:9-29:43
 	android:authorities

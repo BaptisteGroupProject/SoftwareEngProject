@@ -1,13 +1,13 @@
 {
+  "providers": [
+    "awscloudformation"
+  ],
   "projectName": "SoftwareEngProject",
   "version": "3.0",
   "frontend": "android",
   "android": {
     "config": {
-      "ResDir": "/app/res/"
+      "ResDir": "app/src/main/res"
     }
-  },
-  "providers": [
-    "awscloudformation"
-  ]
+  }
 }

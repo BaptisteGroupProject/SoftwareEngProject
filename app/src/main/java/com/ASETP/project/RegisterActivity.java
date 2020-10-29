@@ -52,13 +52,15 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                         hideWaitDialog();
                         final Intent switchBackToLogin = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(switchBackToLogin);
-                        finish();
                         showToast(authSignUpResult.toString());
                         Log.e(tag, authSignUpResult.toString());
+                        finish();
+
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        Log.e(tag, "register error", e);
                         hideWaitDialog();
                     }
                 });

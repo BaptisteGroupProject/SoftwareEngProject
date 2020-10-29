@@ -49,6 +49,8 @@ dependencies {
     implementation 'com.amplifyframework:aws-api:1.4.1'
     // Support for Java 8 features
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+    //Authentication
+    implementation 'com.amplifyframework:aws-auth-cognito:1.4.1'
     // amplify rxjava
     implementation 'com.amplifyframework:rxbindings:1.4.1'
 
