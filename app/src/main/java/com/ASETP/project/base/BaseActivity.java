@@ -120,9 +120,7 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
 
     public void showWaitDialog(String message) {
         if (loadingDialog == null) {
-
             loadingDialog = createWaiteDialog(this, message);
-
         }
         loadingDialog.show();
     }

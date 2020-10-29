@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"Телефонда ашу"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"Кіру"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Google арқылы кіру"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"Орнатудан бас тартылды."</string>
+    <string msgid="863287960437940689" name="installation_failed">"Орнатылмады."</string>
+    <string msgid="5968445461040787716" name="installing_module">"Орнатылатын модуль:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Жоғары қарай жылжу"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Навигация тартпасын ашу"</string>
+    <string msgid="4702104660890557116" name="ok">"Жарайды"</string>
     <string name="places_autocomplete_clear_button">Іздеу жолын тазарту</string>
     <string name="places_autocomplete_label">Орынды таңдау</string>
     <string name="places_autocomplete_no_results_for_query">%1$s бойынша бірде-бір нәтиже жоқ</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Google технологиясына негізделген</string>
     <string name="places_search_error">Іздеу нәтижелері жүктелмеді.</string>
     <string name="places_try_again">Қайталап көру</string>
+    <string msgid="8366783942222789124" name="progress">"Орындалу барысы:"</string>
+    <string msgid="1065327189183624288" name="retry">"Қайталау"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Іздеу"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

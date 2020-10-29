@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"Deschideți pe telefon"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"Conectați-vă"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Conectați-vă cu Google"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"Instalarea a fost anulată."</string>
+    <string msgid="863287960437940689" name="installation_failed">"Instalarea nu a reușit."</string>
+    <string msgid="5968445461040787716" name="installing_module">"Se instalează modulul:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Navigați în sus"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Deschideți panoul de navigare"</string>
+    <string msgid="4702104660890557116" name="ok">"OK"</string>
     <string name="places_autocomplete_clear_button">Ștergeți căutarea</string>
     <string name="places_autocomplete_label">Alegeți o locație</string>
     <string name="places_autocomplete_no_results_for_query">Niciun rezultat pentru %1$s</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Un produs Google</string>
     <string name="places_search_error">Nu se încarcă rezultatele căutării.</string>
     <string name="places_try_again">Reîncercați</string>
+    <string msgid="8366783942222789124" name="progress">"Progres:"</string>
+    <string msgid="1065327189183624288" name="retry">"Reîncercați"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Căutați"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

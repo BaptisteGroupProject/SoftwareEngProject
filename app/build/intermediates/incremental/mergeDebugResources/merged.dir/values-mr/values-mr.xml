@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"फोनवर उघडा"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"साइन इन करा"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Google सह साइन इन करा"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"इंस्टॉल करणे रद्द झाले."</string>
+    <string msgid="863287960437940689" name="installation_failed">"इंस्टॉल करता आले नाही."</string>
+    <string msgid="5968445461040787716" name="installing_module">"मॉड्युल इंस्टॉल करत आहे:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"वर नेव्‍हिगेट करा"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"नेव्हिगेशन ड्रॉवर उघडा"</string>
+    <string msgid="4702104660890557116" name="ok">"ओके"</string>
     <string name="places_autocomplete_clear_button">शोध साफ करा</string>
     <string name="places_autocomplete_label">ठिकाण निवडा</string>
     <string name="places_autocomplete_no_results_for_query">%1$sसाठी कोणतेही परिणाम नाहीत</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Google द्वारे प्रायोजित</string>
     <string name="places_search_error">शोध परिणाम लोड करू शकत नाही.</string>
     <string name="places_try_again">पुन्हा प्रयत्न करा</string>
+    <string msgid="8366783942222789124" name="progress">"प्रगती:"</string>
+    <string msgid="1065327189183624288" name="retry">"पुन्हा प्रयत्न करा"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"शोध"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"९९९+"</string>
 </resources>

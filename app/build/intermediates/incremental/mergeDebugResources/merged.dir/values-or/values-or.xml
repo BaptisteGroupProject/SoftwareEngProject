@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"ଫୋନ୍‌ରେ ଖୋଲନ୍ତୁ"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"ସାଇନ୍‌-ଇନ୍ କରନ୍ତୁ"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Google ସହ ସାଇନ୍‌-ଇନ୍ କରନ୍ତୁ"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"ଇନ୍‍ଷ୍ଟଲେସନ୍ ବାତିଲ୍ କରାଯାଇଛି।"</string>
+    <string msgid="863287960437940689" name="installation_failed">"ଇନ୍‍ଷ୍ଟଲେସନ୍ ବିଫଳ ହୋଇଛି"</string>
+    <string msgid="5968445461040787716" name="installing_module">"ମଡ୍ୟୁଲ୍ ଇନ୍‍ଷ୍ଟଲ୍ କରାଯାଉଛି:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"ଉପରକୁ ନାଭିଗେଟ୍‍ କରନ୍ତୁ"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"ନାଭିଗେସନ୍‍ ଡ୍ରୟର୍‍ ଖୋଲନ୍ତୁ"</string>
+    <string msgid="4702104660890557116" name="ok">"ଠିକ୍ ଅଛି"</string>
     <string name="places_autocomplete_clear_button">ସର୍ଚ୍ଚ ଖାଲି କରନ୍ତୁ</string>
     <string name="places_autocomplete_label">ଗୋଟିଏ ସ୍ଥାନ ବାଛନ୍ତୁ</string>
     <string name="places_autocomplete_no_results_for_query">%1$s ପାଇଁ କୌଣସି ଫଳାଫଳ ନାହିଁ</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Google ଦ୍ଵାରା ପରିଚାଳିତ</string>
     <string name="places_search_error">ସନ୍ଧାନ ଫଳାଫଳଗୁଡ଼ିକ ଲୋଡ୍‌ କରିହେଉନାହିଁ</string>
     <string name="places_try_again">ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ</string>
+    <string msgid="8366783942222789124" name="progress">"ପ୍ରଗତି:"</string>
+    <string msgid="1065327189183624288" name="retry">"ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"ସର୍ଚ୍ଚ କରନ୍ତୁ"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

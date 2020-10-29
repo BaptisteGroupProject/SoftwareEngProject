@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"ဖုန်းပေါ်မှာ ဖွင့်ပါ"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"လက်မှတ်ထိုး ဝင်ရန်"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Google ဖြင့် လက်မှတ်ထိုးဝင်ရေ"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"ထည့်သွင်းခြင်း ပယ်ဖျက်လိုက်ပါပြီ။"</string>
+    <string msgid="863287960437940689" name="installation_failed">"စနစ်ထည့်သွင်း၍ မရပါ။"</string>
+    <string msgid="5968445461040787716" name="installing_module">"မော်ဂျူးထည့်သွင်းနေသည်−"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"အပေါ်သို့ ရွှေ့ရန်"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"လမ်းကြောင်းပြ အံဆွဲကို ဖွင့်ရန်"</string>
+    <string msgid="4702104660890557116" name="ok">"OK"</string>
     <string name="places_autocomplete_clear_button">ရှာဖွေမှု ရှင်းရန်</string>
     <string name="places_autocomplete_label">တစ်နေရာရွေးပါ</string>
     <string name="places_autocomplete_no_results_for_query">%1$s အတွက် ရလဒ် မရှိပါ</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Google က ပံ့ပိုးထားသည်</string>
     <string name="places_search_error">ရှာဖွေမှု ရလဒ်များ မဖွင့်နိုင်ပါ။</string>
     <string name="places_try_again">ထပ်လုပ်ရန်</string>
+    <string msgid="8366783942222789124" name="progress">"တိုးတက်မှု−"</string>
+    <string msgid="1065327189183624288" name="retry">"ထပ်စမ်းရန်"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"ရှာဖွေမှု"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"၉၉၉+"</string>
 </resources>

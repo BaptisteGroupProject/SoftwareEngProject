@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"மொபைலில் திற"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"உள்நுழைக"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Google மூலம் உள்நுழைக"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"நிறுவுதல் ரத்துசெய்யப்பட்டது."</string>
+    <string msgid="863287960437940689" name="installation_failed">"நிறுவ முடியவில்லை."</string>
+    <string msgid="5968445461040787716" name="installing_module">"மாடியூல்டை நிறுவுகிறது:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"மேலே செல்லும்"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"வழிசெலுத்தல் டிராயரைத் திறக்கும்"</string>
+    <string msgid="4702104660890557116" name="ok">"சரி"</string>
     <string name="places_autocomplete_clear_button">தேடலை அழி</string>
     <string name="places_autocomplete_label">இடத்தைத் தேர்ந்தெடுத்தல்</string>
     <string name="places_autocomplete_no_results_for_query">%1$s தொடர்பான முடிவுகள் எதுவுமில்லை</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">வழங்குவது Google</string>
     <string name="places_search_error">தேடல் முடிவுகளை ஏற்ற முடியவில்லை.</string>
     <string name="places_try_again">மீண்டும் முயல்க</string>
+    <string msgid="8366783942222789124" name="progress">"செயல்நிலை:"</string>
+    <string msgid="1065327189183624288" name="retry">"மீண்டும் முயல்க"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"தேடல்"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

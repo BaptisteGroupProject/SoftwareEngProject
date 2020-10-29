@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"Maak oop op foon"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"Meld aan"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Meld aan met Google"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"Installering is gekanselleer."</string>
+    <string msgid="863287960437940689" name="installation_failed">"Kan nie installeer nie."</string>
+    <string msgid="5968445461040787716" name="installing_module">"Installeer tans module:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Gaan op"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Maak navigasielaai oop"</string>
+    <string msgid="4702104660890557116" name="ok">"OK"</string>
     <string name="places_autocomplete_clear_button">Vee soektog uit</string>
     <string name="places_autocomplete_label">Kies \'n plek</string>
     <string name="places_autocomplete_no_results_for_query">Geen resultate vir %1$s nie</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Aangedryf deur Google</string>
     <string name="places_search_error">Kan nie soekresultate laai nie.</string>
     <string name="places_try_again">Probeer weer</string>
+    <string msgid="8366783942222789124" name="progress">"Vordering:"</string>
+    <string msgid="1065327189183624288" name="retry">"Probeer weer"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Soek"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

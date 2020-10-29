@@ -278,6 +278,7 @@
     <attr format="reference" name="materialCardViewStyle"/>
     <attr format="reference" name="materialThemeOverlay"/>
     <attr format="dimension" name="minTouchTargetSize"/>
+    <attr format="string|reference" name="moduleName"/>
     <attr format="float" name="motionPathRotate"/>
     <attr format="float" name="motionProgress"/>
     <attr format="float" name="motionStagger"/>
@@ -481,6 +482,7 @@
     <color name="mtrl_textinput_hovered_box_stroke_color">#DE000000</color>
     <color name="notification_action_color_filter">#ffffffff</color>
     <color name="notification_icon_bg_color">#ff9e9e9e</color>
+    <color name="notification_material_background_media_default_color">#ff424242</color>
     <color name="places_autocomplete_error_button">
     @color/quantum_googblue500
   </color>
@@ -1223,6 +1225,10 @@
     <dimen name="places_autocomplete_search_input_padding">16dp</dimen>
     <dimen name="places_autocomplete_search_input_text">20sp</dimen>
     <dimen name="places_autocomplete_vertical_dropdown">8dp</dimen>
+    <dimen name="subtitle_corner_radius">2dp</dimen>
+    <dimen name="subtitle_outline_width">2dp</dimen>
+    <dimen name="subtitle_shadow_offset">2dp</dimen>
+    <dimen name="subtitle_shadow_radius">2dp</dimen>
     <dimen name="test_mtrl_calendar_day_cornerSize">52dp</dimen>
     <dimen name="tooltip_corner_radius">2dp</dimen>
     <dimen name="tooltip_horizontal_padding">16dp</dimen>
@@ -1271,6 +1277,7 @@
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
+    <item name="dfn_progress_fragment" type="id"/>
     <item name="fragment_container_view_tag" type="id"/>
     <item name="ghost_view" type="id"/>
     <item name="ghost_view_holder" type="id"/>
@@ -1373,6 +1380,7 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with <ns1:g example="Mail" id="application_name">%s</ns1:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="all_logs">All Logs</string>
     <string name="already_have_an_account">Already Have an Account?</string>
     <string name="app_name">Advanced Software Engineering Team Project</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
@@ -1400,20 +1408,43 @@
     <string name="common_open_on_phone">Open on phone</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="copy_issue_text">Copy to Clipboard</string>
+    <string name="debug">Debug</string>
+    <string name="device_button_title">View Device Information</string>
+    <string name="device_view_title">Device Information</string>
     <string name="email">Email</string>
+    <string name="empty"/>
+    <string name="env_button_title">View Environment Information</string>
+    <string name="env_view_title">Environment Information</string>
+    <string name="error">Error</string>
     <string name="error_icon_content_description">Error</string>
     <string name="exposed_dropdown_menu_content_description">Show dropdown menu</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">com.google.android.material.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
+    <string name="file_issue_button_title">File Issue</string>
+    <string name="file_issue_hint">Please enter a brief description…</string>
+    <string name="file_issue_view_title">File Issue</string>
+    <string name="file_issue_warning_text">
+        After pressing \"File Issue\", you will have the opportunity to review the
+        information included.
+    </string>
     <string name="forgot_password">FORGOT PASSWORD?</string>
     <string name="google_api">AIzaSyDNHI6faVqbHx_4TpGPbhalMj_22zx59j0</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>
+    <string name="info">Info</string>
+    <string name="installation_cancelled">Installation cancelled.</string>
+    <string name="installation_failed">Installation failed.</string>
+    <string name="installing_module">Installing module:</string>
     <string name="item_view_role_description">Tab</string>
     <string name="loading">loading...</string>
+    <string name="log_level_filter">Filter by Log Level</string>
     <string name="login">LOGIN</string>
+    <string name="logs_button_title">View Logs</string>
+    <string name="logs_view_title">Logs</string>
     <string description="Content description for the thumb with the maximum value in a Range slider. [CHAR_LIMIT=NONE]" name="material_slider_range_end">Range end, </string>
     <string description="Content description for the thumb with the minimum value in a Range slider. [CHAR_LIMIT=NONE]" name="material_slider_range_start">Range start, </string>
+    <string name="menu_title">Amplify Developer Menu</string>
     <string description="Content description for new notification (no number count) [CHAR_LIMIT=NONE]" name="mtrl_badge_numberless_content_description">New notification</string>
     <string description="Content description for a close icon that lets the user remove content from the screen" name="mtrl_chip_close_icon_content_description">Remove %1$s</string>
     <string description="Plural form content description for when the number of new notifications exceeds a maximum count[CHAR_LIMIT=NONE]" name="mtrl_exceed_max_badge_number_content_description" ns2:ignore="PluralsCandidate">More than <ns1:g example="999" id="maximum number">%1$d</ns1:g> new notifications</string>
@@ -1452,12 +1483,17 @@
     <string name="nav_app_bar_navigate_up_description">Navigate up</string>
     <string name="nav_app_bar_open_drawer_description">Open navigation drawer</string>
     <string name="new_user_register_now">New User? Register Now</string>
+    <string name="ok">Okay</string>
+    <string name="package_name">mobile_client</string>
     <string name="password">Password</string>
     <string name="password_toggle_content_description">Show password</string>
     <string name="path_password_eye" translatable="false">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
+    <string name="placeholder_device_info">Waiting for device info…</string>
+    <string name="placeholder_env_info">Waiting for environment info…</string>
+    <string name="placeholder_logs">Search results will appear here…</string>
     <string name="places_autocomplete_clear_button">Clear search</string>
     <string name="places_autocomplete_label">Pick a place</string>
     <string name="places_autocomplete_no_results_for_query">No results for <ns1:g example="pizza" id="query">%1$s</ns1:g></string>
@@ -1466,12 +1502,19 @@
     <string name="places_powered_by_google">Powered by Google</string>
     <string name="places_search_error">Can\'t load search results.</string>
     <string name="places_try_again">Try again</string>
+    <string name="progress">Progress:</string>
     <string name="register">REGISTER</string>
+    <string name="retry">Retry</string>
+    <string name="search_logs_button_text">Search</string>
+    <string name="search_logs_hint">Enter search phrase…</string>
     <string name="search_menu_title">Search</string>
+    <string name="sign_in_failure_message_format">Sign-in with %1$s failed.\n%2$s</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_home">Home</string>
     <string name="title_notifications">Notifications</string>
+    <string name="verbose">Verbose</string>
+    <string name="warn">Warn</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="AndroidThemeColorAccentYellow" ns2:ignore="NewApi">
@@ -3424,6 +3467,11 @@
     <item name="android:layout_gravity">center</item>
     <item name="android:textAlignment" ns2:ignore="NewApi">center</item>
   </style>
+    <style name="OverlayActivity" parent="@android:style/Theme.Translucent">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
     <style name="PlacesAutocompleteBase" parent="@style/Theme.AppCompat.Light.NoActionBar">
 <item name="colorPrimary">@color/places_ui_default_primary</item>
 <item name="colorPrimaryDark">@color/places_ui_default_primary_dark</item>
@@ -3854,12 +3902,17 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
+    <style name="TextAppearance.Compat.Notification.Info.Media"/>
     <style name="TextAppearance.Compat.Notification.Line2" parent="TextAppearance.Compat.Notification.Info"/>
+    <style name="TextAppearance.Compat.Notification.Line2.Media" parent="TextAppearance.Compat.Notification.Info.Media"/>
+    <style name="TextAppearance.Compat.Notification.Media"/>
     <style name="TextAppearance.Compat.Notification.Time">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
+    <style name="TextAppearance.Compat.Notification.Time.Media"/>
     <style name="TextAppearance.Compat.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title"/>
+    <style name="TextAppearance.Compat.Notification.Title.Media"/>
     <style name="TextAppearance.Design.CollapsingToolbar.Expanded" parent="TextAppearance.AppCompat.Display1">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
   </style>
@@ -4131,6 +4184,14 @@
     <style name="Theme.MaterialComponents.NoActionBar.Bridge" parent="Theme.MaterialComponents.Bridge">
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
+  </style>
+    <style name="Theme.PlayCore.Transparent" parent="android:Theme">
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:backgroundDimEnabled">false</item>
   </style>
     <style name="ThemeOverlay.AppCompat" parent="Base.ThemeOverlay.AppCompat"/>
     <style name="ThemeOverlay.AppCompat.ActionBar" parent="Base.ThemeOverlay.AppCompat.ActionBar"/>
@@ -6506,6 +6567,21 @@
         <!-- The height difference between the drawer and the base surface. Only takes effect on API 21 and above -->
         <attr name="elevation"/>
     </declare-styleable>
+    <declare-styleable name="DynamicActivityNavigator">
+        <attr name="moduleName"/>
+    </declare-styleable>
+    <declare-styleable name="DynamicFragmentNavigator">
+        <attr name="moduleName"/>
+    </declare-styleable>
+    <declare-styleable name="DynamicGraphNavigator">
+        <attr name="moduleName"/>
+        <attr format="reference" name="progressDestination"/>
+    </declare-styleable>
+    <declare-styleable name="DynamicIncludeGraphNavigator">
+        <attr name="moduleName"/>
+        <attr format="string|reference" name="graphResName"/>
+        <attr format="string|reference" name="graphPackage"/>
+    </declare-styleable>
     <declare-styleable name="ExtendedFloatingActionButton">
     <!-- Elevation for the ExtendedFloatingActionButton. -->
     <attr name="elevation"/>
@@ -7484,25 +7560,24 @@
          -->
     <attr name="shapeAppearanceOverlay"/>
   </declare-styleable>
-    <declare-styleable name="SignInButton"><attr format="reference" name="buttonSize">
+    <declare-styleable name="SignInButton"><attr format="string" name="text"/><attr format="enum" name="button_style">
+             <enum name="large" value="0"/>
+             <enum name="small" value="1"/>
+         </attr><attr format="reference" name="buttonSize">
 <enum name="standard" value="0"/>
 
 <enum name="wide" value="1"/>
 
 <enum name="icon_only" value="2"/>
 
-</attr>
-<attr format="reference" name="colorScheme">
+</attr><attr format="reference" name="colorScheme">
 <enum name="dark" value="0"/>
 
 <enum name="light" value="1"/>
 
 <enum name="auto" value="2"/>
 
-</attr>
-
-<attr format="reference|string" name="scopeUris"/>
-</declare-styleable>
+</attr><attr format="reference|string" name="scopeUris"/></declare-styleable>
     <declare-styleable name="Slider">
     <attr name="android:value"/>
     <attr name="android:valueFrom"/>

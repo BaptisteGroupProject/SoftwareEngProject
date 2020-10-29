@@ -12,8 +12,12 @@ import androidx.core.content.ContextCompat;
 
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityLoginBinding;
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.core.*;
+import com.amplifyframework.auth.result.AuthSignInResult;
+import com.amplifyframework.rx.RxAmplify;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener, TextWatcher {
@@ -30,12 +34,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     @Override
     protected void init(Bundle bundle) {
         generalSetting();
-        try {
-            Amplify.configure(getApplicationContext());
-            Log.i("LoginActivity", "Initialized Amplify at Login");
-        } catch (AmplifyException error) {
-            Log.e("LoginActivity", "Could not initialize Amplify at Login", error);
-        }
+
     }
 
     private void generalSetting() {
@@ -46,8 +45,34 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         binding.goToRegister.setOnClickListener(this);
     }
 
-    private boolean validate(String name, String password) {
-        return name.equals(userName) && password.equals(passWord);
+    private void validate(String name, String password) {
+        RxAmplify.Auth.signIn(name, password).subscribe(new SingleObserver<AuthSignInResult>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                showWaitDialog("");
+            }
+
+            @Override
+            public void onSuccess(@NonNull AuthSignInResult authSignInResult) {
+                if (authSignInResult.isSignInComplete()) {
+                    showToast(authSignInResult.toString());
+                    Intent beginLogin = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(beginLogin);
+                    finish();
+                } else {
+                    maxLoginAttempts--;
+                    showToast("Credentials Incorrect");
+                    if (maxLoginAttempts == 0) {
+                        setSubmitButton(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                hideWaitDialog();
+            }
+        });
     }
 
     private boolean validateEmail(String inputEmail) {
@@ -63,17 +88,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
             if (!validateEmail(inputEmail)) {
                 showToast("Please enter a valid email");
             } else {
-                if (!validate(inputEmail, inputPassword)) {
-                    maxLoginAttempts--;
-                    showToast("Credentials Incorrect");
-                    if (maxLoginAttempts == 0) {
-                        setSubmitButton(false);
-                    }
-                } else {
-                    showToast("Login Successful");
-                    Intent beginLogin = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(beginLogin);
-                }
+                validate(inputEmail, inputPassword);
             }
         } else if (id == R.id.forgotPassword) {
 
@@ -81,7 +96,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
             Intent switchToRegister = new Intent(this, RegisterActivity.class);
             startActivity(switchToRegister);
         }
-
     }
 
     @Override

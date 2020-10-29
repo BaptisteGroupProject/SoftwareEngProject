@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"Abrir no teléfono"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"Iniciar sesión"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Iniciar sesión con Google"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"Cancelouse a instalación."</string>
+    <string msgid="863287960437940689" name="installation_failed">"Produciuse un erro na instalación."</string>
+    <string msgid="5968445461040787716" name="installing_module">"Instalando módulo:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Desprazarse cara arriba"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Abrir o panel de navegación"</string>
+    <string msgid="4702104660890557116" name="ok">"Aceptar"</string>
     <string name="places_autocomplete_clear_button">Borrar busca</string>
     <string name="places_autocomplete_label">Indica un lugar</string>
     <string name="places_autocomplete_no_results_for_query">Non se atoparon resultados para %1$s</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Con tecnoloxía de Google</string>
     <string name="places_search_error">Produciuse un erro ao cargar os resultados da busca.</string>
     <string name="places_try_again">Tentar de novo</string>
+    <string msgid="8366783942222789124" name="progress">"Progreso:"</string>
+    <string msgid="1065327189183624288" name="retry">"Tentar de novo"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Buscar"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">">999"</string>
 </resources>

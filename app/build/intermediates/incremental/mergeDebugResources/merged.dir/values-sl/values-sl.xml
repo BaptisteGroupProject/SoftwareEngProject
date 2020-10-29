@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"Odpiranje v telefonu"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"Prijava"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Prijava z Google Računom"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"Namestitev je bila preklicana."</string>
+    <string msgid="863287960437940689" name="installation_failed">"Namestitev ni uspela."</string>
+    <string msgid="5968445461040787716" name="installing_module">"Nameščanje modula:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Pomik navzgor"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Odpri predal za krmarjenje"</string>
+    <string msgid="4702104660890557116" name="ok">"V redu"</string>
     <string name="places_autocomplete_clear_button">Počisti iskanje</string>
     <string name="places_autocomplete_label">Izbira mesta</string>
     <string name="places_autocomplete_no_results_for_query">Za %1$s ni rezultatov</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Uporablja tehnologijo Google</string>
     <string name="places_search_error">Rezultatov iskanja ni mogoče naložiti.</string>
     <string name="places_try_again">Poskusi znova</string>
+    <string msgid="8366783942222789124" name="progress">"Potek:"</string>
+    <string msgid="1065327189183624288" name="retry">"Poskusi znova"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Iskanje"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

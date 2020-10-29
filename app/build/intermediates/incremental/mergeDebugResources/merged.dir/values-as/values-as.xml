@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"ফ\'নত খোলক"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"ছাইন ইন কৰক"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Googleৰ জৰিয়তে ছাইন ইন কৰক"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"ইনষ্টল কৰাটো বাতিল কৰা হৈছে।"</string>
+    <string msgid="863287960437940689" name="installation_failed">"ইনষ্টল কৰিব পৰা নগ’ল।"</string>
+    <string msgid="5968445461040787716" name="installing_module">"ইনষ্টল কৰাৰ মডিউল:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"ওপৰলৈ যাওক"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"নেভিগেশ্বন ড্ৰৱাৰ খোলক"</string>
+    <string msgid="4702104660890557116" name="ok">"ঠিক আছে"</string>
     <string name="places_autocomplete_clear_button">সন্ধানৰ কৰা সমল মচক</string>
     <string name="places_autocomplete_label">এখন ঠাই বাছনি কৰক</string>
     <string name="places_autocomplete_no_results_for_query">%1$sৰ কোনো ফলাফল নাই</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Googleৰ দ্বাৰা সঞ্চালিত</string>
     <string name="places_search_error">সন্ধানৰ ফলাফল ল’ড কৰিব নোৱাৰি।</string>
     <string name="places_try_again">আকৌ চেষ্টা কৰক</string>
+    <string msgid="8366783942222789124" name="progress">"অগ্ৰগতি:"</string>
+    <string msgid="1065327189183624288" name="retry">"পুনৰ চেষ্টা কৰক"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"সন্ধান"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"৯৯৯+"</string>
 </resources>

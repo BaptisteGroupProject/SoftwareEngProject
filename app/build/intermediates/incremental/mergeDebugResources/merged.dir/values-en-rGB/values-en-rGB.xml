@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"Open on phone"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"Sign In"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Sign in with Google"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"Installation cancelled."</string>
+    <string msgid="863287960437940689" name="installation_failed">"Installation failed."</string>
+    <string msgid="5968445461040787716" name="installing_module">"Installing module:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Navigate up"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Open navigation drawer"</string>
+    <string msgid="4702104660890557116" name="ok">"OK"</string>
     <string name="places_autocomplete_clear_button">Clear search</string>
     <string name="places_autocomplete_label">Pick a place</string>
     <string name="places_autocomplete_no_results_for_query">No results for %1$s</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Powered by Google</string>
     <string name="places_search_error">Can\'t load search results.</string>
     <string name="places_try_again">Try again</string>
+    <string msgid="8366783942222789124" name="progress">"Progress:"</string>
+    <string msgid="1065327189183624288" name="retry">"Retry"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Search"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

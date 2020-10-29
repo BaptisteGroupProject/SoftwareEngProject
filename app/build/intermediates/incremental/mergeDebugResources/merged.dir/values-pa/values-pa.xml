@@ -45,8 +45,12 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"ਫ਼ੋਨ \'ਤੇ ਖੋਲ੍ਹੋ"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"ਸਾਈਨ-ਇਨ ਕਰੋ"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"Google ਨਾਲ ਸਾਈਨ-ਇਨ ਕਰੋ"</string>
+    <string msgid="475402237100444685" name="installation_cancelled">"ਸਥਾਪਨਾ ਨੂੰ ਰੱਦ ਕੀਤਾ ਗਿਆ।"</string>
+    <string msgid="863287960437940689" name="installation_failed">"ਸਥਾਪਨਾ ਅਸਫਲ ਹੋਈ।"</string>
+    <string msgid="5968445461040787716" name="installing_module">"ਮਾਡਿਊਲ ਸਥਾਪਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ:"</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"ਉੱਪਰ ਵੱਲ ਨੈਵੀਗੇਟ ਕਰੋ"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"ਨੈਵੀਗੇਸ਼ਨ ਡ੍ਰਾਅਰ ਖੋਲ੍ਹੋ"</string>
+    <string msgid="4702104660890557116" name="ok">"ਠੀਕ"</string>
     <string name="places_autocomplete_clear_button">ਖੋਜ ਕਲੀਅਰ ਕਰੋ</string>
     <string name="places_autocomplete_label">ਕੋਈ ਥਾਂ ਚੁਣੋ</string>
     <string name="places_autocomplete_no_results_for_query">%1$s ਲਈ ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ ਹਨ</string>
@@ -55,6 +59,8 @@
     <string name="places_powered_by_google">Google ਵੱਲੋਂ ਸੰਚਾਲਿਤ</string>
     <string name="places_search_error">ਖੋਜ ਨਤੀਜੇ ਲੋਡ ਨਹੀਂ ਕੀਤੇ ਜਾ ਸਕਦੇ।</string>
     <string name="places_try_again">ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
+    <string msgid="8366783942222789124" name="progress">"ਪ੍ਰਗਤੀ:"</string>
+    <string msgid="1065327189183624288" name="retry">"ਮੁੜ-ਕੋਸ਼ਿਸ਼ ਕਰੋ"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"ਖੋਜ"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

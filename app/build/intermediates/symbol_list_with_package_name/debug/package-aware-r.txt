@@ -183,6 +183,7 @@ attr buttonStyle
 attr buttonStyleSmall
 attr buttonTint
 attr buttonTintMode
+attr button_style
 attr cameraBearing
 attr cameraMaxZoomPreference
 attr cameraMinZoomPreference
@@ -447,6 +448,8 @@ attr gapBetweenBars
 attr gestureInsetBottomIgnored
 attr goIcon
 attr graph
+attr graphPackage
+attr graphResName
 attr haloColor
 attr haloRadius
 attr headerLayout
@@ -648,6 +651,7 @@ attr mock_labelBackgroundColor
 attr mock_labelColor
 attr mock_showDiagonals
 attr mock_showLabel
+attr moduleName
 attr motionDebug
 attr motionInterpolator
 attr motionPathRotate
@@ -717,6 +721,7 @@ attr preserveIconSpacing
 attr pressedTranslationZ
 attr progressBarPadding
 attr progressBarStyle
+attr progressDestination
 attr queryBackground
 attr queryHint
 attr radioButtonStyle
@@ -835,6 +840,7 @@ attr targetPackage
 attr telltales_tailColor
 attr telltales_tailScale
 attr telltales_velocityMode
+attr text
 attr textAllCaps
 attr textAppearanceBody1
 attr textAppearanceBody2
@@ -1150,6 +1156,7 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color notification_material_background_media_default_color
 color places_autocomplete_error_button
 color places_autocomplete_error_message
 color places_autocomplete_fullscreen_background
@@ -1887,6 +1894,10 @@ dimen places_autocomplete_search_bar_padding
 dimen places_autocomplete_search_input_padding
 dimen places_autocomplete_search_input_text
 dimen places_autocomplete_vertical_dropdown
+dimen subtitle_corner_radius
+dimen subtitle_outline_width
+dimen subtitle_shadow_offset
+dimen subtitle_shadow_radius
 dimen test_mtrl_calendar_day_cornerSize
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
@@ -2122,6 +2133,7 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
+id action0
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -2147,6 +2159,7 @@ id adjust_width
 id alertTitle
 id aligned
 id all
+id all_logs
 id always
 id animateToEnd
 id animateToStart
@@ -2168,6 +2181,7 @@ id btnLogin
 id btnRegister
 id buttonPanel
 id cache_measures
+id cancel_action
 id cancel_button
 id center
 id center_horizontal
@@ -2191,12 +2205,14 @@ id container
 id content
 id contentPanel
 id coordinator
+id copy_issue
 id cos
 id custom
 id customPanel
 id cut
 id dark
 id date_picker_actions
+id debug_logs
 id decelerate
 id decelerateAndComplete
 id decor_content_parent
@@ -2208,6 +2224,12 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
+id dev_layout
+id dev_menu_nav_graph
+id device_button
+id device_fragment
+id device_info_text
+id dfn_progress_fragment
 id dialog_button
 id dialog_view
 id dimensions
@@ -2228,16 +2250,26 @@ id easeInOut
 id easeOut
 id edit_query
 id end
+id end_padder
 id enterAlways
 id enterAlwaysCollapsed
+id env_button
+id env_info_text
+id environment_fragment
+id error_logs
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fade
+id file_issue
+id file_issue_button
+id file_issue_fragment
+id file_issue_warning
 id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id filter_logs
 id fitToContents
 id fixed
 id flip
@@ -2270,14 +2302,19 @@ id image
 id imageView
 id img
 id info
+id info_logs
 id inputEmail
 id inputPassword
+id installation_progress
 id invisible
+id issue_buttons
+id issue_description
 id italic
 id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
 id labeled
+id large
 id largeLabel
 id lat
 id layout
@@ -2289,9 +2326,14 @@ id linear
 id listMode
 id list_item
 id location
+id logs_button
+id logs_fragment
+id logs_text
 id lon
+id main_fragment
 id map
 id masked
+id media_actions
 id message
 id middle
 id mini
@@ -2325,6 +2367,7 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id multiply
 id nav_controller_view_tag
+id nav_host_fragment
 id nav_host_fragment_container
 id nav_view
 id navigation_header_container
@@ -2370,8 +2413,11 @@ id places_autocomplete_try_again
 id places_autocomplete_try_again_progress
 id position
 id postLayout
+id progress_action
 id progress_circular
 id progress_horizontal
+id progress_icon
+id progress_title
 id radio
 id ratio
 id rectangles
@@ -2398,6 +2444,7 @@ id search_button
 id search_close_btn
 id search_edit_frame
 id search_go_btn
+id search_logs_field
 id search_mag_icon
 id search_plate
 id search_src_text
@@ -2408,9 +2455,14 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id show_device_info
+id show_env_info
+id show_file_issue
+id show_logs
 id sin
 id skipCollapsed
 id slide
+id small
 id smallLabel
 id snackbar_action
 id snackbar_text
@@ -2431,6 +2483,7 @@ id startHorizontal
 id startVertical
 id staticLayout
 id staticPostLayout
+id status_bar_latest_event_content
 id stop
 id stretch
 id submenuarrow
@@ -2489,10 +2542,12 @@ id unlabeled
 id up
 id useLogo
 id username
+id verbose_logs
 id view2
 id view_offset_helper
 id visible
 id visible_removing_fragment_view_tag
+id warn_logs
 id wide
 id withText
 id withinBounds
@@ -2561,6 +2616,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_dev_menu
 layout activity_login
 layout activity_main
 layout activity_register
@@ -2580,6 +2636,12 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout dev_menu_fragment_device
+layout dev_menu_fragment_environment
+layout dev_menu_fragment_file_issue
+layout dev_menu_fragment_logs
+layout dev_menu_fragment_main
+layout dynamic_feature_install_fragment
 layout headbar
 layout mtrl_alert_dialog
 layout mtrl_alert_dialog_actions
@@ -2612,8 +2674,17 @@ layout mtrl_picker_text_input_date_range
 layout nav_header
 layout notification_action
 layout notification_action_tombstone
+layout notification_media_action
+layout notification_media_cancel_action
+layout notification_template_big_media
+layout notification_template_big_media_custom
+layout notification_template_big_media_narrow
+layout notification_template_big_media_narrow_custom
 layout notification_template_custom_big
 layout notification_template_icon_group
+layout notification_template_lines_media
+layout notification_template_media
+layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout places_autocomplete_activity
@@ -2643,11 +2714,13 @@ layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
 layout widget_wait_dialog
+menu dev_menu_logs_menu
 menu nav_menu
 mipmap home_nav
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap progress_loading_icon
+navigation dev_menu_nav_graph
 plurals mtrl_badge_content_description
 raw places_keep
 string abc_action_bar_home_description
@@ -2677,6 +2750,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string all_logs
 string already_have_an_account
 string app_name
 string appbar_scrolling_view_behavior
@@ -2704,20 +2778,40 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string copy_issue_text
+string debug
+string device_button_title
+string device_view_title
 string email
+string empty
+string env_button_title
+string env_view_title
+string error
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string file_issue_button_title
+string file_issue_hint
+string file_issue_view_title
+string file_issue_warning_text
 string forgot_password
 string google_api
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
+string info
+string installation_cancelled
+string installation_failed
+string installing_module
 string item_view_role_description
 string loading
+string log_level_filter
 string login
+string logs_button_title
+string logs_view_title
 string material_slider_range_end
 string material_slider_range_start
+string menu_title
 string mtrl_badge_numberless_content_description
 string mtrl_chip_close_icon_content_description
 string mtrl_exceed_max_badge_number_content_description
@@ -2756,12 +2850,17 @@ string mtrl_picker_toggle_to_year_selection
 string nav_app_bar_navigate_up_description
 string nav_app_bar_open_drawer_description
 string new_user_register_now
+string ok
+string package_name
 string password
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string placeholder_device_info
+string placeholder_env_info
+string placeholder_logs
 string places_autocomplete_clear_button
 string places_autocomplete_label
 string places_autocomplete_no_results_for_query
@@ -2770,12 +2869,19 @@ string places_cancel
 string places_powered_by_google
 string places_search_error
 string places_try_again
+string progress
 string register
+string retry
+string search_logs_button_text
+string search_logs_hint
 string search_menu_title
+string sign_in_failure_message_format
 string status_bar_notification_info_overflow
 string title_dashboard
 string title_home
 string title_notifications
+string verbose
+string warn
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style AndroidThemeColorAccentYellow
@@ -3017,6 +3123,7 @@ style MaterialAlertDialog_MaterialComponents_Title_Panel
 style MaterialAlertDialog_MaterialComponents_Title_Panel_CenterStacked
 style MaterialAlertDialog_MaterialComponents_Title_Text
 style MaterialAlertDialog_MaterialComponents_Title_Text_CenterStacked
+style OverlayActivity
 style PlacesAutocompleteBase
 style PlacesAutocompleteErrorButtonText
 style PlacesAutocompleteErrorMessageText
@@ -3135,9 +3242,14 @@ style TextAppearance_AppCompat_Widget_Switch
 style TextAppearance_AppCompat_Widget_TextView_SpinnerItem
 style TextAppearance_Compat_Notification
 style TextAppearance_Compat_Notification_Info
+style TextAppearance_Compat_Notification_Info_Media
 style TextAppearance_Compat_Notification_Line2
+style TextAppearance_Compat_Notification_Line2_Media
+style TextAppearance_Compat_Notification_Media
 style TextAppearance_Compat_Notification_Time
+style TextAppearance_Compat_Notification_Time_Media
 style TextAppearance_Compat_Notification_Title
+style TextAppearance_Compat_Notification_Title_Media
 style TextAppearance_Design_CollapsingToolbar_Expanded
 style TextAppearance_Design_Counter
 style TextAppearance_Design_Counter_Overflow
@@ -3245,6 +3357,7 @@ style Theme_MaterialComponents_Light_NoActionBar
 style Theme_MaterialComponents_Light_NoActionBar_Bridge
 style Theme_MaterialComponents_NoActionBar
 style Theme_MaterialComponents_NoActionBar_Bridge
+style Theme_PlayCore_Transparent
 style ThemeOverlay_AppCompat
 style ThemeOverlay_AppCompat_ActionBar
 style ThemeOverlay_AppCompat_Dark
@@ -3518,6 +3631,10 @@ styleable CustomAttribute attributeName customBoolean customColorDrawableValue c
 styleable DialogFragmentNavigator android_name
 styleable DrawerArrowToggle arrowHeadLength arrowShaftLength barLength color drawableSize gapBetweenBars spinBars thickness
 styleable DrawerLayout elevation
+styleable DynamicActivityNavigator moduleName
+styleable DynamicFragmentNavigator moduleName
+styleable DynamicGraphNavigator moduleName progressDestination
+styleable DynamicIncludeGraphNavigator graphPackage graphResName moduleName
 styleable ExtendedFloatingActionButton elevation extendMotionSpec hideMotionSpec showMotionSpec shrinkMotionSpec
 styleable ExtendedFloatingActionButton_Behavior_Layout behavior_autoHide behavior_autoShrink
 styleable FloatingActionButton android_enabled backgroundTint backgroundTintMode borderWidth elevation ensureMinTouchTargetSize fabCustomSize fabSize hideMotionSpec hoveredFocusedTranslationZ maxImageSize pressedTranslationZ rippleColor shapeAppearance shapeAppearanceOverlay showMotionSpec useCompatPadding
@@ -3591,7 +3708,7 @@ styleable ScrollingViewBehavior_Layout behavior_overlapTop
 styleable SearchView android_focusable android_maxWidth android_inputType android_imeOptions closeIcon commitIcon defaultQueryHint goIcon iconifiedByDefault layout queryBackground queryHint searchHintIcon searchIcon submitBackground suggestionRowLayout voiceIcon
 styleable ShapeAppearance cornerFamily cornerFamilyBottomLeft cornerFamilyBottomRight cornerFamilyTopLeft cornerFamilyTopRight cornerSize cornerSizeBottomLeft cornerSizeBottomRight cornerSizeTopLeft cornerSizeTopRight
 styleable ShapeableImageView shapeAppearance shapeAppearanceOverlay strokeColor strokeWidth
-styleable SignInButton buttonSize colorScheme scopeUris
+styleable SignInButton buttonSize button_style colorScheme scopeUris text
 styleable Slider android_enabled android_value android_stepSize android_valueFrom android_valueTo haloColor haloRadius labelBehavior labelStyle thumbColor thumbElevation thumbRadius tickColor tickColorActive tickColorInactive trackColor trackColorActive trackColorInactive trackHeight
 styleable Snackbar snackbarButtonStyle snackbarStyle snackbarTextViewStyle
 styleable SnackbarLayout android_maxWidth actionTextColorAlpha animationMode backgroundOverlayColorAlpha backgroundTint backgroundTintMode elevation maxActionInlineWidth
