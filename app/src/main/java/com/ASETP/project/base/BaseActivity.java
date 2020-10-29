@@ -136,8 +136,8 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         }
     }
 
-    protected void showToast(Context context, String msg) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    protected void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     /**

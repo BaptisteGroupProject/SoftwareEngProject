@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityRegisterBinding;
+import com.ASETP.project.location.AndroidScheduler;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.auth.result.AuthSignUpResult;
@@ -35,7 +36,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
             String inputEmail = binding.inputEmail.getText().toString();
             String inputPassword = binding.inputPassword.getText().toString();
             if (!validateEmail(inputEmail)) {
-                showToast(RegisterActivity.this,"Please enter a valid email");
+                showToast("Please enter a valid email");
             } else {
                 register(inputEmail, inputPassword);
             }
@@ -47,6 +48,8 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                 email,
                 password,
                 AuthSignUpOptions.builder().userAttribute(AuthUserAttributeKey.email(), email).build())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidScheduler.mainThread())
                 .subscribe(new SingleObserver<AuthSignUpResult>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
@@ -56,7 +59,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                     @Override
                     public void onSuccess(@NonNull AuthSignUpResult authSignUpResult) {
                         hideWaitDialog();
-                        showToast(RegisterActivity.this, authSignUpResult.toString());
+                        showToast("An Email had been send");
                         Log.e(tag, authSignUpResult.toString());
                         showDialog(email);
                     }
@@ -70,7 +73,6 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
     }
 
     private void showDialog(String username) {
-        Log.e(tag, "showDialog");
         EditText editText = new EditText(this);
         editText.setBackground(null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
@@ -88,6 +90,8 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
 
     private void confirmEmail(String username, String code) {
         RxAmplify.Auth.confirmSignUp(username, code)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidScheduler.mainThread())
                 .subscribe(new SingleObserver<AuthSignUpResult>() {
                                @Override
                                public void onSubscribe(@NonNull Disposable d) {
@@ -97,6 +101,8 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                                @Override
                                public void onSuccess(@NonNull AuthSignUpResult authSignUpResult) {
                                    final Intent switchBackToLogin = new Intent(RegisterActivity.this, LoginActivity.class);
+                                   Log.e(tag, authSignUpResult.toString());
+                                   showToast("Sign up success");
                                    startActivity(switchBackToLogin);
                                    hideWaitDialog();
                                    finish();
@@ -105,6 +111,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                                @Override
                                public void onError(@NonNull Throwable e) {
                                    Log.e(tag, "confirmError", e);
+                                   showToast(e.getMessage());
                                    hideWaitDialog();
                                }
                            }

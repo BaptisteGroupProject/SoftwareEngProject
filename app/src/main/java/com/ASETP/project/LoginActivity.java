@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityLoginBinding;
+import com.ASETP.project.location.AndroidScheduler;
 import com.amplifyframework.auth.result.AuthSignInResult;
 import com.amplifyframework.rx.RxAmplify;
 
@@ -19,6 +20,7 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener, TextWatcher {
@@ -47,7 +49,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     }
 
     private void validate(String name, String password) {
-        RxAmplify.Auth.signIn(name, password).subscribe(new SingleObserver<AuthSignInResult>() {
+        RxAmplify.Auth.signIn(name, password).subscribeOn(Schedulers.io())
+                .observeOn(AndroidScheduler.mainThread()).subscribe(new SingleObserver<AuthSignInResult>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 showWaitDialog("");
@@ -56,13 +59,15 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
             @Override
             public void onSuccess(@NonNull AuthSignInResult authSignInResult) {
                 if (authSignInResult.isSignInComplete()) {
-                    showToast(LoginActivity.this, authSignInResult.toString());
+                    hideWaitDialog();
+                    showToast("sign in complete");
+                    Log.e(tag, authSignInResult.toString());
                     Intent beginLogin = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(beginLogin);
                     finish();
                 } else {
                     maxLoginAttempts--;
-                    showToast(LoginActivity.this, "Credentials Incorrect");
+                    showToast("Credentials Incorrect");
                     if (maxLoginAttempts == 0) {
                         setSubmitButton(false);
                     }
@@ -71,6 +76,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
 
             @Override
             public void onError(@NonNull Throwable e) {
+                Log.e(tag, "login error", e);
                 hideWaitDialog();
             }
         });
@@ -87,7 +93,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
             String inputEmail = binding.inputEmail.getText().toString();
             String inputPassword = binding.inputPassword.getText().toString();
             if (!validateEmail(inputEmail)) {
-                showToast(LoginActivity.this, "Please enter a valid email");
+                showToast("Please enter a valid email");
             } else {
                 validate(inputEmail, inputPassword);
             }
