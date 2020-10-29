@@ -56,13 +56,13 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
             @Override
             public void onSuccess(@NonNull AuthSignInResult authSignInResult) {
                 if (authSignInResult.isSignInComplete()) {
-                    showToast(authSignInResult.toString());
+                    showToast(LoginActivity.this, authSignInResult.toString());
                     Intent beginLogin = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(beginLogin);
                     finish();
                 } else {
                     maxLoginAttempts--;
-                    showToast("Credentials Incorrect");
+                    showToast(LoginActivity.this, "Credentials Incorrect");
                     if (maxLoginAttempts == 0) {
                         setSubmitButton(false);
                     }
@@ -87,7 +87,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
             String inputEmail = binding.inputEmail.getText().toString();
             String inputPassword = binding.inputPassword.getText().toString();
             if (!validateEmail(inputEmail)) {
-                showToast("Please enter a valid email");
+                showToast(LoginActivity.this, "Please enter a valid email");
             } else {
                 validate(inputEmail, inputPassword);
             }

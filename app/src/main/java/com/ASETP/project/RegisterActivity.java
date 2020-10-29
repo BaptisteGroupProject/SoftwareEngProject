@@ -1,23 +1,29 @@
 package com.ASETP.project;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
+import android.widget.EditText;
 
 import androidx.core.content.ContextCompat;
 
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityRegisterBinding;
+import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.auth.result.AuthSignUpResult;
 import com.amplifyframework.rx.RxAmplify;
 
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> implements TextWatcher {
 
@@ -29,7 +35,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
             String inputEmail = binding.inputEmail.getText().toString();
             String inputPassword = binding.inputPassword.getText().toString();
             if (!validateEmail(inputEmail)) {
-                showToast("Please enter a valid email");
+                showToast(RegisterActivity.this,"Please enter a valid email");
             } else {
                 register(inputEmail, inputPassword);
             }
@@ -40,7 +46,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
         RxAmplify.Auth.signUp(
                 email,
                 password,
-                AuthSignUpOptions.builder().build())
+                AuthSignUpOptions.builder().userAttribute(AuthUserAttributeKey.email(), email).build())
                 .subscribe(new SingleObserver<AuthSignUpResult>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
@@ -50,20 +56,59 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                     @Override
                     public void onSuccess(@NonNull AuthSignUpResult authSignUpResult) {
                         hideWaitDialog();
-                        final Intent switchBackToLogin = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(switchBackToLogin);
-                        showToast(authSignUpResult.toString());
+                        showToast(RegisterActivity.this, authSignUpResult.toString());
                         Log.e(tag, authSignUpResult.toString());
-                        finish();
-
+                        showDialog(email);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e(tag, "register error", e);
                         hideWaitDialog();
+                        Log.e(tag, "register error", e);
                     }
                 });
+    }
+
+    private void showDialog(String username) {
+        Log.e(tag, "showDialog");
+        EditText editText = new EditText(this);
+        editText.setBackground(null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setView(editText)
+                .setTitle("Confirm Email")
+                .setPositiveButton("OK", (dialog, which) -> {
+                    String code = editText.getText().toString();
+                    confirmEmail(username, code);
+                }).setNegativeButton("cancel", (dialog, which) -> {
+
+                }).setCancelable(true);
+        builder.create().show();
+    }
+
+
+    private void confirmEmail(String username, String code) {
+        RxAmplify.Auth.confirmSignUp(username, code)
+                .subscribe(new SingleObserver<AuthSignUpResult>() {
+                               @Override
+                               public void onSubscribe(@NonNull Disposable d) {
+                                   showWaitDialog("");
+                               }
+
+                               @Override
+                               public void onSuccess(@NonNull AuthSignUpResult authSignUpResult) {
+                                   final Intent switchBackToLogin = new Intent(RegisterActivity.this, LoginActivity.class);
+                                   startActivity(switchBackToLogin);
+                                   hideWaitDialog();
+                                   finish();
+                               }
+
+                               @Override
+                               public void onError(@NonNull Throwable e) {
+                                   Log.e(tag, "confirmError", e);
+                                   hideWaitDialog();
+                               }
+                           }
+                );
     }
 
     private boolean validateEmail(String inputEmail) {

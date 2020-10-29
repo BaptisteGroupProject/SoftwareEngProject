@@ -83,14 +83,14 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
      * 创建dialog
      *
      * @param context context
-     * @param msg message
+     * @param msg     message
      * @return waiting dialog
      */
     private static Dialog createWaiteDialog(Context context, String msg) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.widget_wait_dialog, null);
 
-        LinearLayout layout =  view.findViewById(R.id.dialog_view);
+        LinearLayout layout = view.findViewById(R.id.dialog_view);
 
         ImageView circleImg = view.findViewById(R.id.img);
 
@@ -136,8 +136,8 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         }
     }
 
-    protected void showToast(String msg) {
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    protected void showToast(Context context, String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
     /**
