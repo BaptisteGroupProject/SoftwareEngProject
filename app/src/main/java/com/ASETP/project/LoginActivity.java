@@ -16,6 +16,7 @@ import com.amplifyframework.auth.result.AuthSignInResult;
 import com.amplifyframework.rx.RxAmplify;
 
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 
