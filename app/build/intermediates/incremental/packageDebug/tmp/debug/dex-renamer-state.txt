@@ -1,13 +1,10 @@
-#Thu Oct 29 01:23:46 GMT 2020
-path.3=classes2.dex
-path.2=classes1000.dex
+#Thu Oct 29 16:00:06 GMT 2020
+path.2=classes2.dex
 path.1=classes.dex
 path.0=classes.dex
-renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.3=C\:\\Users\\Owner\\StudioProjects\\SoftwareEngProject\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-base.2=C\:\\Users\\Owner\\StudioProjects\\SoftwareEngProject\\app\\build\\intermediates\\desugar_lib_dex\\debug\\classes1000.dex
+base.2=C\:\\Users\\Owner\\StudioProjects\\SoftwareEngProject\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 base.1=C\:\\Users\\Owner\\StudioProjects\\SoftwareEngProject\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
 base.0=C\:\\Users\\Owner\\StudioProjects\\SoftwareEngProject\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex

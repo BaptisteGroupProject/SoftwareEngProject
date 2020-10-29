@@ -1,12 +1,11 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-61:12
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-62:12
 MERGED from [androidx.databinding:viewbinding:4.1.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\e24de3a6f40faffd1d0a125c25ee4a8a\jetified-viewbinding-4.1.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.amplifyframework:aws-api:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9f36c9b9930baea17fb74c023d751755\jetified-aws-api-1.4.1\AndroidManifest.xml:16:1-27:12
-MERGED from [com.amplifyframework:aws-datastore:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\609e4d5cb977f67404827a7abac3526b\jetified-aws-datastore-1.4.1\AndroidManifest.xml:16:1-27:12
 MERGED from [com.amplifyframework:rxbindings:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\f3858a37f5d3830270fe9fa25fadfce4\jetified-rxbindings-1.4.1\AndroidManifest.xml:16:1-25:12
 MERGED from [com.amplifyframework:aws-api-appsync:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\031fb357860f3e9d0a3d7f659bd171ac\jetified-aws-api-appsync-1.4.1\AndroidManifest.xml:16:1-25:12
 MERGED from [com.amplifyframework:core:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9eee9aa94e648f65ac01bd6d773d9eb4\jetified-core-1.4.1\AndroidManifest.xml:16:1-33:12
@@ -85,19 +84,17 @@ MERGED from [androidx.print:print:1.0.0] C:\Users\Owner\.gradle\caches\transform
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\bb1b508df4cb7dbd77662f9cb5e5ed61\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.volley:volley:1.1.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\f9a4a40e113d1ad6db601864a2790f6d\jetified-volley-1.1.1\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.datatransport:transport-api:2.2.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\8147b433c7085ba9a0e0af1dfd3e1de5\jetified-transport-api-2.2.0\AndroidManifest.xml:15:1-22:12
-MERGED from [io.reactivex.rxjava3:rxandroid:3.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\12e3053befdb907f1936dd91ab9522da\jetified-rxandroid-3.0.0\AndroidManifest.xml:15:1-20:12
-MERGED from [androidx.multidex:multidex:2.0.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\b32704f81a58a5ff16e03ff99cb39c0e\multidex-2.0.1\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.play:core:1.7.2] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\71717e5488324b4df14eac39e7c8df81\jetified-core-1.7.2\AndroidManifest.xml:2:1-19:12
-INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-62:12
 	package
 		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:5:5-32
 		INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-61:12
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-62:12
 		INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:4:5-51
@@ -105,7 +102,7 @@ INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\Andr
 		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:3:5-61
 	android:versionCode
 		INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-61:12
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:1-62:12
 		INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:2:11-69
@@ -168,9 +165,7 @@ ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\Android
 	dist:instant
 		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:17:18-37
 application
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:19:5-58:19
-MERGED from [com.amplifyframework:aws-datastore:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\609e4d5cb977f67404827a7abac3526b\jetified-aws-datastore-1.4.1\AndroidManifest.xml:25:5-73
-MERGED from [com.amplifyframework:aws-datastore:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\609e4d5cb977f67404827a7abac3526b\jetified-aws-datastore-1.4.1\AndroidManifest.xml:25:5-73
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:19:5-59:19
 MERGED from [com.amplifyframework:core:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9eee9aa94e648f65ac01bd6d773d9eb4\jetified-core-1.4.1\AndroidManifest.xml:27:5-31:19
 MERGED from [com.amplifyframework:core:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9eee9aa94e648f65ac01bd6d773d9eb4\jetified-core-1.4.1\AndroidManifest.xml:27:5-31:19
 MERGED from [com.google.android.material:material:1.2.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\48a48f748091176b8cef1fb0a97b1d7f\material-1.2.1\AndroidManifest.xml:22:5-20
@@ -224,53 +219,53 @@ MERGED from [com.google.android.play:core:1.7.2] C:\Users\Owner\.gradle\caches\t
 	android:allowBackup
 		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:20:9-35
 	android:theme
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:25:9-40
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:26:9-40
 	android:name
-		ADDED from [com.amplifyframework:aws-datastore:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\609e4d5cb977f67404827a7abac3526b\jetified-aws-datastore-1.4.1\AndroidManifest.xml:25:18-70
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:25:9-35
 activity#com.ASETP.project.LoginActivity
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:26:9-34:20
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:27:9-35:20
 	android:label
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:28:13-45
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:29:13-45
 	android:name
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:27:13-42
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:28:13-42
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:29:13-33:29
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:30:13-34:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:30:17-69
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:31:17-69
 	android:name
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:30:25-66
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:31:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:32:17-77
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:33:17-77
 	android:name
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:32:27-74
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:33:27-74
 activity#com.ASETP.project.RegisterActivity
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:35:9-40:20
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:36:9-41:20
 	android:name
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:35:19-51
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:36:19-51
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:37:13-39:50
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:38:13-40:50
 	android:value
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:39:17-47
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:40:17-47
 	android:name
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:38:17-63
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:39:17-63
 activity#com.ASETP.project.MainActivity
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:41:9-46:20
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:42:9-47:20
 	android:name
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:41:19-47
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:42:19-47
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:50:9-52:50
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:51:9-53:50
 	android:value
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:52:13-47
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:53:13-47
 	android:name
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:51:13-58
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:52:13-58
 meta-data#com.google.android.gms.version
-ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:54:9-56:69
+ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:55:9-57:69
 MERGED from [com.google.android.gms:play-services-basement:17.2.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\4994c4a2b167352de44ff807dc084fcb\jetified-play-services-basement-17.2.1\AndroidManifest.xml:23:9-25:69
 MERGED from [com.google.android.gms:play-services-basement:17.2.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\4994c4a2b167352de44ff807dc084fcb\jetified-play-services-basement-17.2.1\AndroidManifest.xml:23:9-25:69
 	android:value
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:56:13-66
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:57:13-66
 	android:name
-		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:55:13-58
+		ADDED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml:56:13-58
 uses-sdk
 INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml
@@ -279,8 +274,6 @@ MERGED from [androidx.databinding:viewbinding:4.1.0] C:\Users\Owner\.gradle\cach
 MERGED from [androidx.databinding:viewbinding:4.1.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\e24de3a6f40faffd1d0a125c25ee4a8a\jetified-viewbinding-4.1.0\AndroidManifest.xml:20:5-44
 MERGED from [com.amplifyframework:aws-api:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9f36c9b9930baea17fb74c023d751755\jetified-aws-api-1.4.1\AndroidManifest.xml:21:5-23:41
 MERGED from [com.amplifyframework:aws-api:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\9f36c9b9930baea17fb74c023d751755\jetified-aws-api-1.4.1\AndroidManifest.xml:21:5-23:41
-MERGED from [com.amplifyframework:aws-datastore:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\609e4d5cb977f67404827a7abac3526b\jetified-aws-datastore-1.4.1\AndroidManifest.xml:21:5-23:41
-MERGED from [com.amplifyframework:aws-datastore:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\609e4d5cb977f67404827a7abac3526b\jetified-aws-datastore-1.4.1\AndroidManifest.xml:21:5-23:41
 MERGED from [com.amplifyframework:rxbindings:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\f3858a37f5d3830270fe9fa25fadfce4\jetified-rxbindings-1.4.1\AndroidManifest.xml:21:5-23:41
 MERGED from [com.amplifyframework:rxbindings:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\f3858a37f5d3830270fe9fa25fadfce4\jetified-rxbindings-1.4.1\AndroidManifest.xml:21:5-23:41
 MERGED from [com.amplifyframework:aws-api-appsync:1.4.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\031fb357860f3e9d0a3d7f659bd171ac\jetified-aws-api-appsync-1.4.1\AndroidManifest.xml:21:5-23:41
@@ -437,10 +430,6 @@ MERGED from [com.android.volley:volley:1.1.1] C:\Users\Owner\.gradle\caches\tran
 MERGED from [com.android.volley:volley:1.1.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\f9a4a40e113d1ad6db601864a2790f6d\jetified-volley-1.1.1\AndroidManifest.xml:7:5-43
 MERGED from [com.google.android.datatransport:transport-api:2.2.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\8147b433c7085ba9a0e0af1dfd3e1de5\jetified-transport-api-2.2.0\AndroidManifest.xml:18:5-20:41
 MERGED from [com.google.android.datatransport:transport-api:2.2.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\8147b433c7085ba9a0e0af1dfd3e1de5\jetified-transport-api-2.2.0\AndroidManifest.xml:18:5-20:41
-MERGED from [io.reactivex.rxjava3:rxandroid:3.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\12e3053befdb907f1936dd91ab9522da\jetified-rxandroid-3.0.0\AndroidManifest.xml:18:5-43
-MERGED from [io.reactivex.rxjava3:rxandroid:3.0.0] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\12e3053befdb907f1936dd91ab9522da\jetified-rxandroid-3.0.0\AndroidManifest.xml:18:5-43
-MERGED from [androidx.multidex:multidex:2.0.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\b32704f81a58a5ff16e03ff99cb39c0e\multidex-2.0.1\AndroidManifest.xml:20:5-43
-MERGED from [androidx.multidex:multidex:2.0.1] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\b32704f81a58a5ff16e03ff99cb39c0e\multidex-2.0.1\AndroidManifest.xml:20:5-43
 MERGED from [com.google.android.play:core:1.7.2] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\71717e5488324b4df14eac39e7c8df81\jetified-core-1.7.2\AndroidManifest.xml:4:3-70
 MERGED from [com.google.android.play:core:1.7.2] C:\Users\Owner\.gradle\caches\transforms-2\files-2.1\71717e5488324b4df14eac39e7c8df81\jetified-core-1.7.2\AndroidManifest.xml:4:3-70
 INJECTED from C:\Users\Owner\StudioProjects\SoftwareEngProject\app\src\main\AndroidManifest.xml

@@ -16,10 +16,10 @@ public class AmplifyApp extends Application {
     public void onCreate() {
         super.onCreate();
         try {
-            Amplify.configure(getApplicationContext());
-            Log.i("LoginActivity", "Initialized Amplify at Login");
+            Amplify.configure(this);
+            Log.i("AmplifyApp", "Initialized Amplify at AmplifyApp");
         } catch (AmplifyException error) {
-            Log.e("LoginActivity", "Could not initialize Amplify at Login", error);
+            Log.e("AmplifyApp", "Could not initialize Amplify at AmplifyApp", error);
         }
     }
 }

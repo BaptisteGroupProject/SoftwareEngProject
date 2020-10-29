@@ -62,11 +62,8 @@
     <orderEntry type="library" name="Gradle: com.amazonaws:aws-android-sdk-cognitoidentityprovider-asf:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: io.reactivex.rxjava3:rxjava:3.0.6" level="project" />
     <orderEntry type="library" name="Gradle: org.reactivestreams:reactive-streams:1.0.3" level="project" />
-    <orderEntry type="library" name="Gradle: com.fasterxml.uuid:java-uuid-generator:4.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.29" level="project" />
     <orderEntry type="library" name="Gradle: androidx.databinding:viewbinding:4.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.amplifyframework:aws-api:1.4.1@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.amplifyframework:aws-datastore:1.4.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.amplifyframework:rxbindings:1.4.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.amplifyframework:aws-api-appsync:1.4.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.amplifyframework:core:1.4.1@aar" level="project" />
@@ -146,8 +143,6 @@
     <orderEntry type="library" name="Gradle: com.google.android.datatransport:transport-api:2.2.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: de.hdodenhof:circleimageview:3.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.play:core:1.7.2@aar" level="project" />
-    <orderEntry type="library" name="Gradle: io.reactivex.rxjava3:rxandroid:3.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.multidex:multidex:2.0.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-integration:1.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-library:1.3" level="project" />

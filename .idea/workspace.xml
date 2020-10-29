@@ -39,8 +39,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61a164ff-46e8-42de-8196-d4b0f6c0729f" name="Default Changelist" comment="A little login and register code. But the server seems not configured.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_manifest/debug/out/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +107,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android-custom-viewC:/Users/Owner/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.0.2/e38e7c85994112b70d4548176128c72b8477c110/appcompat-1.0.2-sources.jar!/androidx/appcompat/widget/Toolbar.java_SELECTED" value="Toolbar" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ReadBook" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="multi-representation-previewC:/Users/Owner/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.0.2/e38e7c85994112b70d4548176128c72b8477c110/appcompat-1.0.2-sources.jar!/androidx/appcompat/widget/Toolbar.java_selected" value="Custom views" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
@@ -256,7 +263,21 @@
       <option name="project" value="LOCAL" />
       <updated>1603935737524</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="A little login and register code. But the server seems not configured.">
+      <created>1603986304559</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1603986304560</updated>
+    </task>
+    <task id="LOCAL-00011" summary="A little login and register code. But the server seems not configured.">
+      <created>1603986473964</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1603986473964</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -333,10 +354,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="0" width="1914" height="958" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603912712478" />
-    <state x="863" y="284" key="MultipleFileMergeDialog" timestamp="1603932113542">
+    <state x="863" y="284" key="MultipleFileMergeDialog" timestamp="1603986312279">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="863" y="284" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603932113542" />
+    <state x="863" y="284" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603986312279" />
     <state x="746" y="202" key="SettingsEditor" timestamp="1603212326114">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -345,6 +366,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="607" height="448" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1603933452004" />
+    <state x="914" y="223" key="VCS.ChangeListViewerDialog" timestamp="1603986484101">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="914" y="223" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603986484101" />
     <state x="989" y="239" key="Vcs.Push.Dialog.v2" timestamp="1603935742484">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -357,10 +382,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="93" y="100" width="1626" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603916726187" />
-    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603932432453">
+    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603986480026">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603932432453" />
+    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603986480026" />
     <state x="823" y="0" width="1113" height="1026" key="dock-window-1" timestamp="1603910758140">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -377,9 +402,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="982" y="275" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603213416674" />
-    <state x="198" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1603935809549">
+    <state x="198" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1603986898523">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="198" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603935809549" />
+    <state x="198" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603986898523" />
   </component>
 </project>
