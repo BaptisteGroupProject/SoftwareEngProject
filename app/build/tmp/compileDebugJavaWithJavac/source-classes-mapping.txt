@@ -9,8 +9,8 @@ com/ASETP/project/location/GoogleMapLocation.java
  com.ASETP.project.location.GoogleMapLocation$1
  com.ASETP.project.location.GoogleMapLocation$2
  com.ASETP.project.location.GoogleMapLocation$OnLocationSuccessListener
-com/ASETP/project/base/BaseActivity.java
- com.ASETP.project.base.BaseActivity
+com/ASETP/project/AmplifyApp.java
+ com.ASETP.project.AmplifyApp
 com/ASETP/project/location/Gps.java
  com.ASETP.project.location.Gps
 com/ASETP/project/databinding/NavHeaderBinding.java
@@ -21,7 +21,6 @@ com/ASETP/project/base/BaseFragment.java
  com.ASETP.project.base.BaseFragment
 com/ASETP/project/BuildConfig.java
  com.ASETP.project.BuildConfig
-<<<<<<< Updated upstream
 com/ASETP/project/databinding/ActivityMainBinding.java
  com.ASETP.project.databinding.ActivityMainBinding
 com/ASETP/project/LoginActivity.java
@@ -35,17 +34,3 @@ com/ASETP/project/MainActivity.java
  com.ASETP.project.MainActivity
 com/ASETP/project/base/BaseActivity.java
  com.ASETP.project.base.BaseActivity
-=======
-com/ASETP/project/AmplifyApp.java
- com.ASETP.project.AmplifyApp
-com/ASETP/project/databinding/ActivityMainBinding.java
- com.ASETP.project.databinding.ActivityMainBinding
-com/ASETP/project/databinding/NavHeaderBinding.java
- com.ASETP.project.databinding.NavHeaderBinding
-com/ASETP/project/RegisterActivity.java
- com.ASETP.project.RegisterActivity
- com.ASETP.project.RegisterActivity$1
-com/ASETP/project/LoginActivity.java
- com.ASETP.project.LoginActivity
- com.ASETP.project.LoginActivity$1
->>>>>>> Stashed changes
