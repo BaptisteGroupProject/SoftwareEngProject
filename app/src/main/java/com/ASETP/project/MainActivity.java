@@ -3,6 +3,7 @@ package com.ASETP.project;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -15,13 +16,31 @@ import androidx.core.view.GravityCompat;
 
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityMainBinding;
+import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.location.GoogleMapLocation;
+import com.amplifyframework.api.graphql.GraphQLResponse;
+import com.amplifyframework.api.graphql.PaginatedResult;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.datastore.generated.model.UserLocation;
+import com.amplifyframework.rx.RxAmplify;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * @author MirageLe, Baptiste Sagna
@@ -43,7 +62,21 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
+
+        uploadUnsuccessfulGaps();
+        checkPosition(RxAmplify.Auth.getCurrentUser().getUsername());
+    }
+
+    private void uploadUnsuccessfulGaps() {
+        List<UserLocation> data = getSharedPreferences(RxAmplify.Auth.getCurrentUser().getUsername());
+        if (data == null || data.size() == 0) {
+            return;
+        }
+        for (UserLocation userLocation : data) {
+            uploadPosition(userLocation);
+        }
     }
 
     private void setToolBar() {
@@ -73,8 +106,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         mapLocation.setGoogleMap(googleMap);
         getLocationPermission();
         mapLocation.updateLocationUi();
-        mapLocation.getCurrentLocation();
+        mapLocation.constantGetLocation(locationCallback);
     }
+
+    LocationCallback locationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            super.onLocationResult(locationResult);
+            mapLocation.getCurrentLocation();
+        }
+    };
 
     /**
      * check permission if denied go turn on else get location
@@ -101,7 +142,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         if (requestCode == REQUEST_CODE) {
             mapLocation.updateLocationUi();
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mapLocation.getCurrentLocation();
+                mapLocation.constantGetLocation(locationCallback);
             } else {
                 Toast.makeText(this, "Location services needs to be enabled", Toast.LENGTH_SHORT).show();
             }
@@ -110,11 +151,76 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
     @Override
     public void onPlace(PlaceLikelihood placeLikelihood) {
-        String latitude = "latitude: " + placeLikelihood.getPlace().getLatLng().latitude;
+        String username = "Email: " + RxAmplify.Auth.getCurrentUser().getUsername();
+        this.username.setText(username);
+        String latitude = "latitude: " + Objects.requireNonNull(placeLikelihood.getPlace().getLatLng()).latitude;
         lat.setText(latitude);
         String longitude = "longitude: " + placeLikelihood.getPlace().getLatLng().longitude;
         lon.setText(longitude);
         String placeName = "location: " + placeLikelihood.getPlace().getAddress();
         currentLocation.setText(placeName);
+        String time = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.UK).format(new Date());
+        assert placeLikelihood.getPlace().getLatLng() != null;
+        UserLocation userLocation = UserLocation.builder()
+                .username(RxAmplify.Auth.getCurrentUser().getUsername())
+                .location(placeLikelihood.getPlace().getAddress())
+                .latitude((float) placeLikelihood.getPlace().getLatLng().latitude)
+                .longitude((float) placeLikelihood.getPlace().getLatLng().longitude)
+                .time(time).build();
+        uploadPosition(userLocation);
+    }
+
+
+    private void uploadPosition(UserLocation userLocation) {
+        /*
+         * If you have multiple endpoints defined, as above, but you only intend to use one,
+         * then simply remove the one you don't need.
+         * If you have multiple endpoints defined, and intend to use more than just one of them,
+         * you need to specify the name of the API when you perform the mutate call:
+         */
+        RxAmplify.API.mutate("softwareengproject", ModelMutation.create(userLocation))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidScheduler.mainThread())
+                .subscribe(new SingleObserver<GraphQLResponse<UserLocation>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull GraphQLResponse<UserLocation> userLocationGraphResponse) {
+                        Log.e(tag, userLocationGraphResponse.toString());
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Log.e(tag, "update gps error", e);
+                        saveSharedPreferences(RxAmplify.Auth.getCurrentUser().getUsername(), userLocation);
+                    }
+                });
+    }
+
+    private void checkPosition(String username) {
+        RxAmplify.API.query("softwareengproject", ModelQuery.list(UserLocation.class, UserLocation.USERNAME.contains(username)))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidScheduler.mainThread())
+                .subscribe(new SingleObserver<GraphQLResponse<PaginatedResult<UserLocation>>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull GraphQLResponse<PaginatedResult<UserLocation>> paginatedResultGraphQLResponse) {
+                        for (UserLocation userLocation : paginatedResultGraphQLResponse.getData()) {
+                            Log.e(tag, userLocation.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Log.e(tag, "checkPosition error", e);
+                    }
+                });
     }
 }

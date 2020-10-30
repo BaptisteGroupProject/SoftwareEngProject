@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -15,6 +16,9 @@ import androidx.core.app.ActivityCompat;
 
 import com.ASETP.project.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -51,12 +55,17 @@ public class GoogleMapLocation {
 
     OnLocationSuccessListener onLocationSuccessListener;
 
+    private LocationRequest locationRequest;
+
+    private boolean isFirstSearch = true;
+
     public GoogleMapLocation(Context context, OnLocationSuccessListener onLocationSuccessListener) {
         this.context = context;
         this.onLocationSuccessListener = onLocationSuccessListener;
         Places.initialize(this.context, this.context.getString(R.string.google_api));
         placesClient = Places.createClient(this.context);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.context);
+        createLocationRequest();
     }
 
     public GoogleMap getGoogleMap() {
@@ -82,31 +91,20 @@ public class GoogleMapLocation {
         }
     }
 
-    public void fetchLastLocation(Activity activity) {
+    private void createLocationRequest() {
+        int five = 1000 * 60 * 5;
+        locationRequest = LocationRequest.create();
+        locationRequest.setInterval(five);
+        locationRequest.setFastestInterval(five);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    public void constantGetLocation(LocationCallback locationCallback) {
         if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnCompleteListener(activity, new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                if (task.isSuccessful()) {
-                    // Set the map's camera position to the current location of the device.
-                    lastKnownLocation = task.getResult();
-                    if (lastKnownLocation != null) {
-                        Log.e(this.getClass().getSimpleName(), lastKnownLocation.toString());
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                new LatLng(lastKnownLocation.getLatitude(),
-                                        lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-                    }
-                } else {
-                    Log.d(this.getClass().getSimpleName(), "Current location is null. Using defaults.");
-                    Log.e(this.getClass().getSimpleName(), "Exception: %s", task.getException());
-                    googleMap.getUiSettings().setMyLocationButtonEnabled(false);
-                }
-            }
-        });
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
     }
 
     public void getCurrentLocation() {
@@ -119,16 +117,18 @@ public class GoogleMapLocation {
         // Use the builder to create a FindCurrentPlaceRequest.
         FindCurrentPlaceRequest request = FindCurrentPlaceRequest.builder(placeFields).build();
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Task<FindCurrentPlaceResponse> placeResult =
-                    placesClient.findCurrentPlace(request);
+            Task<FindCurrentPlaceResponse> placeResult = placesClient.findCurrentPlace(request);
             placeResult.addOnCompleteListener(new OnCompleteListener<FindCurrentPlaceResponse>() {
                 @Override
                 public void onComplete(@NonNull Task<FindCurrentPlaceResponse> task) {
                     if (task.isSuccessful() && task.getResult() != null) {
                         FindCurrentPlaceResponse likelyPlaces = task.getResult();
                         onLocationSuccessListener.onPlace(likelyPlaces.getPlaceLikelihoods().get(0));
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                likelyPlaces.getPlaceLikelihoods().get(0).getPlace().getLatLng(), DEFAULT_ZOOM));
+                        if (isFirstSearch) {
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                    likelyPlaces.getPlaceLikelihoods().get(0).getPlace().getLatLng(), DEFAULT_ZOOM));
+                            isFirstSearch = false;
+                        }
                     } else {
                         Log.e(this.getClass().getSimpleName(), "Exception: %s", task.getException());
                     }
@@ -142,6 +142,7 @@ public class GoogleMapLocation {
     public interface OnLocationSuccessListener {
         /**
          * when search place success
+         *
          * @param placeLikelihood the position that likely to be
          */
         void onPlace(PlaceLikelihood placeLikelihood);

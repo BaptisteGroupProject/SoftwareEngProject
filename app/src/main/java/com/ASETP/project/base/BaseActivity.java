@@ -1,7 +1,9 @@
 package com.ASETP.project.base;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -22,11 +24,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewbinding.ViewBinding;
 
 import com.ASETP.project.R;
+import com.amplifyframework.datastore.generated.model.UserLocation;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -39,6 +46,8 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
     protected String tag;
 
     private Dialog loadingDialog;
+
+    private SharedPreferences preferences;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +64,7 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
             }
         }
         setContentView(binding.getRoot());
+        preferences = this.getSharedPreferences("softWareEngProject", Activity.MODE_PRIVATE);
         init(savedInstanceState);
     }
 
@@ -134,6 +144,34 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
                 e.printStackTrace();
             }
         }
+    }
+
+    protected void clear(String name) {
+        preferences.edit().putString(name, null).apply();
+    }
+
+    protected void saveSharedPreferences(String name, UserLocation userLocation) {
+        Gson gson = new Gson();
+        String leftData = preferences.getString(name, null);
+        List<UserLocation> data = new ArrayList<>();
+        if (leftData != null) {
+            data = gson.fromJson(leftData, new TypeToken<List<UserLocation>>() {
+            }.getType());
+        }
+        data.add(userLocation);
+        preferences.edit().putString(name, gson.toJson(data)).apply();
+    }
+
+    protected List<UserLocation> getSharedPreferences(String name) {
+        List<UserLocation> data;
+        String leftData = preferences.getString(name, null);
+        if (leftData == null) {
+            return null;
+        }
+        Gson gson = new Gson();
+        data = gson.fromJson(leftData, new TypeToken<List<UserLocation>>() {
+        }.getType());
+        return data;
     }
 
     protected void showToast(String msg) {

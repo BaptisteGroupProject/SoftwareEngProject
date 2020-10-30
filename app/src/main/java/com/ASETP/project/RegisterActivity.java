@@ -67,6 +67,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                     @Override
                     public void onError(@NonNull Throwable e) {
                         hideWaitDialog();
+                        showToast(e.getMessage());
                         Log.e(tag, "register error", e);
                     }
                 });

@@ -37,7 +37,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     @Override
     protected void init(Bundle bundle) {
         generalSetting();
-        AmplifyApp currentSession = new AmplifyApp();
     }
 
     private void generalSetting() {
@@ -77,6 +76,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
             @Override
             public void onError(@NonNull Throwable e) {
                 Log.e(tag, "login error", e);
+                showToast(e.getMessage());
                 hideWaitDialog();
             }
         });

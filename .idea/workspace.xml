@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
@@ -38,7 +38,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61a164ff-46e8-42de-8196-d4b0f6c0729f" name="Default Changelist" comment="Amplify Setting">
+    <list default="true" id="61a164ff-46e8-42de-8196-d4b0f6c0729f" name="Default Changelist" comment="Login and Register">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/amplifyframework/datastore/generated/model/AmplifyModelProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/amplifyframework/datastore/generated/model/Priority.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/amplifyframework/datastore/generated/model/Todo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/amplifyframework/datastore/generated/model/UserLocation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
@@ -46,26 +50,48 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/softwareengproject/schema.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/api/softwareengproject/schema.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/api/softwareengproject/transform.conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/api/softwareengproject/transform.conf.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/backend-config.json" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/backend-config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/ASETP/project/LoginActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/ASETP/project/LoginActivity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_manifest/debug/out/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_manifest/debug/out/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/packaged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/packaged_manifests/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/out/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/out/resources-debug.ap_" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/LoginActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/LoginActivity.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/MainActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/MainActivity.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/RegisterActivity$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/RegisterActivity$1.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/RegisterActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/RegisterActivity.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/base/BaseActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/base/BaseActivity.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/location/GoogleMapLocation$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/location/GoogleMapLocation$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/location/GoogleMapLocation$2.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/location/GoogleMapLocation.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/ASETP/project/location/GoogleMapLocation.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/tmp/compileDebugJavaWithJavac/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/tmp/compileDebugJavaWithJavac/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/AmplifyApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/AmplifyApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/RegisterActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/base/BaseActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/base/BaseActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/location/GoogleMapLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ASETP/project/location/GoogleMapLocation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_3a_API_30_x86]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[7462d5bb]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -307,7 +333,21 @@
       <option name="project" value="LOCAL" />
       <updated>1603994299605</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Amplify Setting">
+      <created>1603996554409</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1603996554409</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Login and Register">
+      <created>1603997944463</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1603997944463</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -342,17 +382,18 @@
     <MESSAGE value="Amplify a little change" />
     <MESSAGE value="A little login and register code. But the server seems not configured." />
     <MESSAGE value="Amplify Setting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Amplify Setting" />
+    <MESSAGE value="Login and Register" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login and Register" />
   </component>
   <component name="WindowStateProjectService">
     <state x="951" y="275" key="#PSD" timestamp="1603212488784">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="951" y="275" key="#PSD/0.0.1920.1040@0.0.1920.1040" timestamp="1603212488784" />
-    <state x="392" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1603996032742">
+    <state x="392" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1604081381348">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="392" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1603996032742" />
+    <state x="392" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1604081381348" />
     <state x="865" y="278" key="AndroidCreateResourceFileDialog" timestamp="1603916852462">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -365,22 +406,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="733" y="181" width="440" height="563" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1603996221636" />
-    <state width="1726" height="519" key="GridCell.Tab.0.bottom" timestamp="1603995987096">
+    <state width="1118" height="488" key="GridCell.Tab.0.bottom" timestamp="1604082224516">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1726" height="519" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1603995987096" />
-    <state width="1726" height="519" key="GridCell.Tab.0.center" timestamp="1603995987096">
+    <state width="1118" height="488" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604082224516" />
+    <state width="1118" height="488" key="GridCell.Tab.0.center" timestamp="1604082224516">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1726" height="519" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1603995987096" />
-    <state width="1726" height="519" key="GridCell.Tab.0.left" timestamp="1603995987096">
+    <state width="1118" height="488" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604082224516" />
+    <state width="1118" height="488" key="GridCell.Tab.0.left" timestamp="1604082224516">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1726" height="519" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1603995987096" />
-    <state width="1726" height="519" key="GridCell.Tab.0.right" timestamp="1603995987096">
+    <state width="1118" height="488" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604082224516" />
+    <state width="1118" height="488" key="GridCell.Tab.0.right" timestamp="1604082224516">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1726" height="519" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1603995987096" />
+    <state width="1118" height="488" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604082224516" />
     <state x="0" y="0" width="1914" height="958" key="MergeDialog" timestamp="1603912712478">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -393,18 +434,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="746" y="202" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1603212326114" />
-    <state width="607" height="448" key="SwitcherDM" timestamp="1603933452004">
+    <state width="607" height="498" key="SwitcherDM" timestamp="1604081641796">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="607" height="448" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1603933452004" />
+    <state width="607" height="498" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1604081641796" />
     <state x="914" y="223" key="VCS.ChangeListViewerDialog" timestamp="1603986484101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="914" y="223" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603986484101" />
-    <state x="989" y="239" key="Vcs.Push.Dialog.v2" timestamp="1603994302741">
+    <state x="989" y="239" key="Vcs.Push.Dialog.v2" timestamp="1603997961424">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="989" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603994302741" />
+    <state x="989" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603997961424" />
     <state x="1308" y="299" key="chooseDestDirectoryDialog" timestamp="1603907843759">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -413,29 +454,29 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="93" y="100" width="1626" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603916726187" />
-    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603987767173">
+    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604060410882">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603987767173" />
-    <state x="823" y="0" width="1113" height="1026" key="dock-window-1" timestamp="1603910758140">
+    <state x="348" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604060410882" />
+    <state x="0" y="0" width="1091" height="1019" key="dock-window-1" timestamp="1604069982907">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="823" y="0" width="1113" height="1026" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1603910758140" />
+    <state x="0" y="0" width="1091" height="1019" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1604069982907" />
     <state x="0" y="0" width="1221" height="1026" key="dock-window-2" timestamp="1603916309023">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="0" width="1221" height="1026" key="dock-window-2/0.0.1920.1040@0.0.1920.1040" timestamp="1603916309023" />
-    <state x="377" y="255" width="597" height="536" key="find.popup" timestamp="1603934800007">
+    <state x="377" y="255" width="597" height="536" key="find.popup" timestamp="1603996500166">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="377" y="255" width="597" height="536" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603934800007" />
+    <state x="377" y="255" width="597" height="536" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603996500166" />
     <state x="982" y="275" key="refactoring.ChangeSignatureDialog" timestamp="1603213416674">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="982" y="275" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603213416674" />
-    <state x="198" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1603992134149">
+    <state x="198" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1604078894922">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="198" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603992134149" />
+    <state x="198" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604078894922" />
   </component>
 </project>

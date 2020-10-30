@@ -10,3 +10,12 @@ type Todo @model {
   priority: Priority
   description: String
 }
+
+type UserLocation @model {
+  id: ID!
+  username: String
+  latitude: Float
+  longitude: Float
+  location: String
+  time: String
+}
