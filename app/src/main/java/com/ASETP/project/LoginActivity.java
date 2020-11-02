@@ -100,7 +100,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
                 validate(inputEmail, inputPassword);
             }
         } else if (id == R.id.forgotPassword) {
-
+            Intent switchToForgotPassword = new Intent(this, ForgotPasswordActivity.class);
+            startActivity(switchToForgotPassword);
         } else {
             Intent switchToRegister = new Intent(this, RegisterActivity.class);
             startActivity(switchToRegister);
