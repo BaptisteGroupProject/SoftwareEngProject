@@ -38,6 +38,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -222,5 +223,27 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
                         Log.e(tag, "checkPosition error", e);
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.e(tag, "logout");
+        RxAmplify.Auth.signOut().subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e(tag, "sign out success");
+                finish();
+            }
+
+            @Override
+            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                Log.e(tag, "signOut error", e);
+            }
+        });
     }
 }

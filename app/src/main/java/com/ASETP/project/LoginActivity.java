@@ -48,6 +48,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     }
 
     private void validate(String name, String password) {
+        Log.e(tag, name + ":" + password);
         RxAmplify.Auth.signIn(name, password).subscribeOn(Schedulers.io())
                 .observeOn(AndroidScheduler.mainThread()).subscribe(new SingleObserver<AuthSignInResult>() {
             @Override
