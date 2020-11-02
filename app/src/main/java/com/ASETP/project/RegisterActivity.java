@@ -37,6 +37,8 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
             String inputPassword = binding.inputPassword.getText().toString();
             if (!validateEmail(inputEmail)) {
                 showToast("Please enter a valid email");
+            } else if (inputPassword.length() < 8) {
+                showToast("Password must be at least 8 characters");
             } else {
                 register(inputEmail, inputPassword);
             }
