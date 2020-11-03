@@ -231,18 +231,20 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         signOut();
     }
 
-    private void signOut(){
+    private void signOut() {
         Log.e(tag, "logout");
         RxAmplify.Auth.signOut().subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
 
             }
+
             @Override
             public void onComplete() {
                 Log.e(tag, "sign out success");
                 finish();
             }
+
             @Override
             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
                 Log.e(tag, "signOut error", e);
