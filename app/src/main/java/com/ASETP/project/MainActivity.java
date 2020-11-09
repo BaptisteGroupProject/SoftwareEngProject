@@ -2,6 +2,7 @@ package com.ASETP.project;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityMainBinding;
 import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.location.GoogleMapLocation;
+import com.ASETP.project.utils.FileUtils;
 import com.amplifyframework.api.graphql.GraphQLResponse;
 import com.amplifyframework.api.graphql.PaginatedResult;
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -29,8 +31,13 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -39,6 +46,10 @@ import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -68,6 +79,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
         uploadUnsuccessfulGaps();
         checkPosition(RxAmplify.Auth.getCurrentUser().getUsername());
+
     }
 
     private void uploadUnsuccessfulGaps() {

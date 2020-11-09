@@ -19,3 +19,24 @@ type UserLocation @model {
   location: String
   time: String
 }
+
+type LocationPricePaidData @model {
+  uniqueIdentifier: ID!
+  price: Int
+  transferDate: String
+  postcode: String
+  propertyType: String
+  newOrOld: String
+  duration: String
+  paon: String
+  saon: String
+  strees: String
+  locality: String
+  town: String
+  district: String
+  country: String
+  categoryType: String
+  recordStatus: String
+  longitude: Float
+  latitude: Float
+}
