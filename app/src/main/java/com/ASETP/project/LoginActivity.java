@@ -1,6 +1,7 @@
 package com.ASETP.project;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.ASETP.project.base.BaseActivity;
@@ -34,6 +36,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     private final String userName = "Admin@email.com";
     private final String passWord = "12345";
 
+    private static String[] PERMISSIONS_STORAGE = {
+            "android.permission.READ_EXTERNAL_STORAGE",
+            "android.permission.WRITE_EXTERNAL_STORAGE" };
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+
 
     @Override
     protected void init(Bundle bundle) {
@@ -46,6 +54,31 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         binding.btnLogin.setOnClickListener(this);
         binding.forgotPassword.setOnClickListener(this);
         binding.goToRegister.setOnClickListener(this);
+        verifyStoragePermissions();
+    }
+
+    public void verifyStoragePermissions() {
+        try {
+            //检测是否有写的权限
+            int permission = ActivityCompat.checkSelfPermission(this,
+                    "android.permission.WRITE_EXTERNAL_STORAGE");
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // 没有写的权限，去申请写的权限，会弹出对话框
+                ActivityCompat.requestPermissions(LoginActivity.this, PERMISSIONS_STORAGE,REQUEST_EXTERNAL_STORAGE);
+            } else {
+                FileUtils fileUtils = new FileUtils(this);
+                fileUtils.readPostcodeCSV();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @androidx.annotation.NonNull String[] permissions, @androidx.annotation.NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        FileUtils fileUtils = new FileUtils(this);
+        fileUtils.readPostcodeCSV();
     }
 
     private void validate(String name, String password) {
