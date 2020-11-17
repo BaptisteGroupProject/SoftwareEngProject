@@ -113,7 +113,7 @@ public class GoogleMapLocation {
             return;
         }
         List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS,
-                Place.Field.LAT_LNG);
+                Place.Field.LAT_LNG,Place.Field.PLUS_CODE);
         // Use the builder to create a FindCurrentPlaceRequest.
         FindCurrentPlaceRequest request = FindCurrentPlaceRequest.builder(placeFields).build();
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -135,8 +135,6 @@ public class GoogleMapLocation {
                 }
             });
         }
-
-
     }
 
     public interface OnLocationSuccessListener {

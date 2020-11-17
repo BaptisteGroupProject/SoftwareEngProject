@@ -67,7 +67,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
                 ActivityCompat.requestPermissions(LoginActivity.this, PERMISSIONS_STORAGE,REQUEST_EXTERNAL_STORAGE);
             } else {
                 FileUtils fileUtils = new FileUtils(this);
-                fileUtils.readPostcodeCSV();
+                fileUtils.readLocationPricePaidToJson();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     public void onRequestPermissionsResult(int requestCode, @androidx.annotation.NonNull String[] permissions, @androidx.annotation.NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         FileUtils fileUtils = new FileUtils(this);
-        fileUtils.readPostcodeCSV();
+        fileUtils.readLocationPricePaidToJson();
     }
 
     private void validate(String name, String password) {
