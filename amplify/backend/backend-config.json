@@ -25,5 +25,11 @@
       "customAuth": false
     }
   },
-  "hosting": {}
+  "hosting": {},
+  "analytics": {
+    "softwareengproject": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
+    }
+  }
 }

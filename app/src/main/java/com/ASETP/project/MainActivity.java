@@ -20,10 +20,12 @@ import com.ASETP.project.databinding.ActivityMainBinding;
 import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.location.GoogleMapLocation;
 import com.ASETP.project.utils.FileUtils;
+import com.amplifyframework.analytics.UserProfile;
 import com.amplifyframework.api.graphql.GraphQLResponse;
 import com.amplifyframework.api.graphql.PaginatedResult;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.UserLocation;
 import com.amplifyframework.rx.RxAmplify;
 import com.google.android.gms.location.LocationCallback;
@@ -79,7 +81,23 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
         uploadUnsuccessfulGaps();
         checkPosition(RxAmplify.Auth.getCurrentUser().getUsername());
+        recordUser();
+    }
 
+    private void recordUser() {
+        UserProfile.Location location = UserProfile.Location.builder()
+                .latitude(Double.parseDouble(lat.getText().toString()))
+                .longitude(Double.parseDouble(lon.getText().toString()))
+                .build();
+
+        UserProfile profile = UserProfile.builder()
+                .location(location)
+                .email(Amplify.Auth.getCurrentUser().getUsername())
+                .build();
+
+        String userId = Amplify.Auth.getCurrentUser().getUserId();
+
+        Amplify.Analytics.identifyUser(userId, profile);
     }
 
     private void uploadUnsuccessfulGaps() {

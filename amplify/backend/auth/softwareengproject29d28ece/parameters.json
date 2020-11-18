@@ -1,6 +1,6 @@
 {
     "identityPoolName": "softwareengproject29d28ece_identitypool_29d28ece",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "softwa29d28ece",
     "userPoolName": "softwareengproject29d28ece_userpool_29d28ece",
     "autoVerifiedAttributes": [
