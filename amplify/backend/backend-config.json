@@ -8,8 +8,8 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7,
-              "description": "softwareengproject"
+              "apiKeyExpirationDays": 365,
+              "description": ""
             }
           },
           "additionalAuthenticationProviders": []
@@ -25,10 +25,5 @@
       "customAuth": false
     }
   },
-  "hosting": {
-    "S3AndCloudFront": {
-      "service": "S3AndCloudFront",
-      "providerPlugin": "awscloudformation"
-    }
-  }
+  "hosting": {}
 }

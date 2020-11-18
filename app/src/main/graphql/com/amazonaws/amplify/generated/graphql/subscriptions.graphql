@@ -1,0 +1,91 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateLocationPlaceByJson {
+  onCreateLocationPlaceByJson {
+    id
+    firstPostcode
+    locationItems
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateLocationPlaceByJson {
+  onUpdateLocationPlaceByJson {
+    id
+    firstPostcode
+    locationItems
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteLocationPlaceByJson {
+  onDeleteLocationPlaceByJson {
+    id
+    firstPostcode
+    locationItems
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreatePricePaidDataJson {
+  onCreatePricePaidDataJson {
+    id
+    postcode
+    locationPaidB
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdatePricePaidDataJson {
+  onUpdatePricePaidDataJson {
+    id
+    postcode
+    locationPaidB
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeletePricePaidDataJson {
+  onDeletePricePaidDataJson {
+    id
+    postcode
+    locationPaidB
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateUserLocation {
+  onCreateUserLocation {
+    id
+    username
+    latitude
+    longitude
+    location
+    time
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUserLocation {
+  onUpdateUserLocation {
+    id
+    username
+    latitude
+    longitude
+    location
+    time
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUserLocation {
+  onDeleteUserLocation {
+    id
+    username
+    latitude
+    longitude
+    location
+    time
+    createdAt
+    updatedAt
+  }
+}

@@ -1,8 +1,6 @@
 package com.ASETP.project.utils;
 
 import android.content.Context;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -11,21 +9,11 @@ import com.ASETP.project.model.LocationPlaces;
 import com.ASETP.project.model.PlacePaidData;
 import com.amplifyframework.api.graphql.GraphQLResponse;
 import com.amplifyframework.api.graphql.model.ModelMutation;
-import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.LocationByFirstPostcode;
-import com.amplifyframework.datastore.generated.model.LocationByJson;
-import com.amplifyframework.datastore.generated.model.LocationPlace;
 import com.amplifyframework.datastore.generated.model.LocationPlaceByJson;
-import com.amplifyframework.datastore.generated.model.LocationPriceByFirstPostcode;
 import com.amplifyframework.datastore.generated.model.LocationPricePaidData;
-import com.amplifyframework.datastore.generated.model.LocationPricePaidDataByJson;
-import com.amplifyframework.datastore.generated.model.LocationPricePaidDetail;
 import com.amplifyframework.datastore.generated.model.PricePaidDataJson;
 import com.amplifyframework.rx.RxAmplify;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -33,22 +21,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.core.SingleSource;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**

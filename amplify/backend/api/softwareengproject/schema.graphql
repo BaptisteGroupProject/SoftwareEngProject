@@ -1,102 +1,20 @@
-enum Priority {
-    LOW
-    NORMAL
-    HIGH
-}
-
-type Todo @model {
-    id: ID!
-    name: String!
-    priority: Priority
-    description: String
-}
-
-type UserLocation @model {
-    id: ID!
-    username: String
-    latitude: Float
-    longitude: Float
-    location: String
-    time: String
-}
-
-type LocationPricePaidData @model {
-    uniqueIdentifier: ID!
-    price: Int
-    transferDate: String
-    postcode: String
-    propertyType: String
-    newOrOld: String
-    duration: String
-    paon: String
-    saon: String
-    strees: String
-    locality: String
-    town: String
-    district: String
-    country: String
-    categoryType: String
-    recordStatus: String
-    longitude: Float
-    latitude: Float
-}
-
-type LocationPricePaidDetail @model
-@key(name: "PriceByFirstPostcode", fields:["firstPostcodeId","uniqueIdentifier"
-    ,"price","transferDate","postcode","propertyType","newOrOld"
-    ,"duration","paon","saon","strees","locality","town","district"
-    ,"country","categoryType","recordStatus"]){
-    id: ID!
-    uniqueIdentifier: ID!
-    price: Int
-    transferDate: String
-    postcode: String
-    propertyType: String
-    newOrOld: String
-    duration: String
-    paon: String
-    saon: String
-    strees: String
-    locality: String
-    town: String
-    district: String
-    country: String
-    categoryType: String
-    recordStatus: String
-    firstPostcodeId: ID!
-    firstPostcode: LocationPriceByFirstPostcode! @connection(fields:["firstPostcodeId"])
-}
-
-type LocationPriceByFirstPostcode @model{
-    id:ID!
-    firstPostcode: String
-    locationDetail: [LocationPricePaidDetail]@connection(keyName: "PriceByFirstPostcode",fields:["id"])
-}
-
-type LocationPlace @model
-@key(name: "byFirstPostcode", fields:["firstPostcodeId","postcode","longitude","latitude"]) {
-    id: ID!
-    firstPostcodeId: ID!
-    firstPostcode: LocationByFirstPostcode! @connection(fields:["firstPostcodeId"])
-    postcode: String
-    longitude: Float
-    latitude: Float
-}
-
-type LocationByFirstPostcode @model{
-    id: ID!
-    firstPostcode: String
-    locationPlaces: [LocationPlace] @connection(keyName: "byFirstPostcode",fields:["id"])
-}
-
 type LocationPlaceByJson @model {
-    id: ID!
-    firstPostcode: String
-    locationItems: [String!]!
+  id: ID!
+  firstPostcode: String
+  locationItems: [String!]!
 }
 
 type PricePaidDataJson @model {
-    id: ID!
-    postcode: String
-    locationPaidB: [String!]!
+  id: ID!
+  postcode: String
+  locationPaidB: [String!]!
+}
+
+type UserLocation @model {
+  id: ID!
+  username: String
+  latitude: Float
+  longitude: Float
+  location: String
+  time: String
 }
