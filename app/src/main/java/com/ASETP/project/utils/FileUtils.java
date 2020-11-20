@@ -194,10 +194,10 @@ public class FileUtils {
             String postcode = null;
             String line;
             while ((line = reader.readLine()) != null) {
-//                while (uploadCount >= 15) {
-//                    Log.e(tag, "sleep 1s");
-//                    Thread.sleep(200);
-//                }
+                while (uploadCount >= 20) {
+                    Log.e(tag, "sleep 0.2s");
+                    Thread.sleep(200);
+                }
                 String[] lines = parsingData(line);
                 if (lines[3] == null || TextUtils.isEmpty(lines[3])) {
                     missCount++;
