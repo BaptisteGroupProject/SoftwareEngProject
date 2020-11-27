@@ -1,4 +1,40 @@
 # this is an auto generated file. This will be overwritten
+subscription OnCreateUserLocation {
+  onCreateUserLocation {
+    id
+    username
+    latitude
+    longitude
+    location
+    time
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUserLocation {
+  onUpdateUserLocation {
+    id
+    username
+    latitude
+    longitude
+    location
+    time
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUserLocation {
+  onDeleteUserLocation {
+    id
+    username
+    latitude
+    longitude
+    location
+    time
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateLocationPlaceByJson {
   onCreateLocationPlaceByJson {
     id
@@ -53,38 +89,29 @@ subscription OnDeletePricePaidDataJson {
     updatedAt
   }
 }
-subscription OnCreateUserLocation {
-  onCreateUserLocation {
+subscription OnCreatePricePaidJson {
+  onCreatePricePaidJson {
     id
-    username
-    latitude
-    longitude
-    location
-    time
+    postcode
+    locationPaid
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateUserLocation {
-  onUpdateUserLocation {
+subscription OnUpdatePricePaidJson {
+  onUpdatePricePaidJson {
     id
-    username
-    latitude
-    longitude
-    location
-    time
+    postcode
+    locationPaid
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteUserLocation {
-  onDeleteUserLocation {
+subscription OnDeletePricePaidJson {
+  onDeletePricePaidJson {
     id
-    username
-    latitude
-    longitude
-    location
-    time
+    postcode
+    locationPaid
     createdAt
     updatedAt
   }

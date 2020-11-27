@@ -1,4 +1,49 @@
 # this is an auto generated file. This will be overwritten
+mutation CreateUserLocation(
+  $input: CreateUserLocationInput!
+  $condition: ModelUserLocationConditionInput
+) {
+  createUserLocation(input: $input, condition: $condition) {
+    id
+    username
+    latitude
+    longitude
+    location
+    time
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateUserLocation(
+  $input: UpdateUserLocationInput!
+  $condition: ModelUserLocationConditionInput
+) {
+  updateUserLocation(input: $input, condition: $condition) {
+    id
+    username
+    latitude
+    longitude
+    location
+    time
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteUserLocation(
+  $input: DeleteUserLocationInput!
+  $condition: ModelUserLocationConditionInput
+) {
+  deleteUserLocation(input: $input, condition: $condition) {
+    id
+    username
+    latitude
+    longitude
+    location
+    time
+    createdAt
+    updatedAt
+  }
+}
 mutation CreateLocationPlaceByJson(
   $input: CreateLocationPlaceByJsonInput!
   $condition: ModelLocationPlaceByJsonConditionInput
@@ -71,47 +116,38 @@ mutation DeletePricePaidDataJson(
     updatedAt
   }
 }
-mutation CreateUserLocation(
-  $input: CreateUserLocationInput!
-  $condition: ModelUserLocationConditionInput
+mutation CreatePricePaidJson(
+  $input: CreatePricePaidJsonInput!
+  $condition: ModelPricePaidJsonConditionInput
 ) {
-  createUserLocation(input: $input, condition: $condition) {
+  createPricePaidJson(input: $input, condition: $condition) {
     id
-    username
-    latitude
-    longitude
-    location
-    time
+    postcode
+    locationPaid
     createdAt
     updatedAt
   }
 }
-mutation UpdateUserLocation(
-  $input: UpdateUserLocationInput!
-  $condition: ModelUserLocationConditionInput
+mutation UpdatePricePaidJson(
+  $input: UpdatePricePaidJsonInput!
+  $condition: ModelPricePaidJsonConditionInput
 ) {
-  updateUserLocation(input: $input, condition: $condition) {
+  updatePricePaidJson(input: $input, condition: $condition) {
     id
-    username
-    latitude
-    longitude
-    location
-    time
+    postcode
+    locationPaid
     createdAt
     updatedAt
   }
 }
-mutation DeleteUserLocation(
-  $input: DeleteUserLocationInput!
-  $condition: ModelUserLocationConditionInput
+mutation DeletePricePaidJson(
+  $input: DeletePricePaidJsonInput!
+  $condition: ModelPricePaidJsonConditionInput
 ) {
-  deleteUserLocation(input: $input, condition: $condition) {
+  deletePricePaidJson(input: $input, condition: $condition) {
     id
-    username
-    latitude
-    longitude
-    location
-    time
+    postcode
+    locationPaid
     createdAt
     updatedAt
   }

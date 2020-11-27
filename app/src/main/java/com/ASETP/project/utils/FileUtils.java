@@ -12,6 +12,7 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.datastore.generated.model.LocationPlaceByJson;
 import com.amplifyframework.datastore.generated.model.LocationPricePaidData;
 import com.amplifyframework.datastore.generated.model.PricePaidDataJson;
+import com.amplifyframework.datastore.generated.model.PricePaidJson;
 import com.amplifyframework.rx.RxAmplify;
 import com.google.gson.Gson;
 
@@ -40,15 +41,16 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class FileUtils {
     Context context;
 
-    String tag = this.getClass().getSimpleName();
+    private String tag = this.getClass().getSimpleName();
 
     private List<PostcodeList> postcodeLists = new ArrayList<>();
 
     private final static String rules = "[^,]*,";
 
-    private final static String replaceRules = "(\".*?),(.*?\")";
-
-    private int maxCountPerTerm = 1000 * 10;
+    /**
+     * print log 10,000 count per term
+     */
+    private final int maxCountPerTerm = 1000 * 10;
 
     private List<LocationPlaces> locationPlaces = new ArrayList<>();
 
@@ -58,17 +60,6 @@ public class FileUtils {
         this.context = context;
     }
 
-
-    private String replaceString(String line) {
-        Pattern p = Pattern.compile(replaceRules);
-        Matcher m = p.matcher(line);
-        StringBuffer sb = new StringBuffer();
-        while (m.find()) {
-            m.appendReplacement(sb, m.group().replace(",", ""));
-        }
-        m.appendTail(sb);
-        return sb.toString();
-    }
 
     int totalCount = 1;
     int missCount = 0;
@@ -82,6 +73,13 @@ public class FileUtils {
     }
 
 
+    /**
+     * convert csv line to string lines
+     *
+     * @param line csv line
+     * @return String lines
+     * @throws InterruptedException error
+     */
     private String[] parsingData(String line) throws InterruptedException {
         Pattern pattern = Pattern.compile(rules);
         Matcher matcher = pattern.matcher(line);
@@ -101,6 +99,11 @@ public class FileUtils {
         return lines;
     }
 
+    /**
+     * compare the postcode in pricePaidData csv to Postcode csv, find the GPS location
+     *
+     * @param postcode postcode
+     */
     private void addLocationPlace(String postcode) {
         for (LocationPlaces locationPlace : locationPlaces) {
             if (postcode.equals(locationPlace.getPostcode())) {
@@ -119,6 +122,12 @@ public class FileUtils {
         }
     }
 
+    /**
+     * get the first part of postcode e.g. BN2 1B1  returns BN2
+     *
+     * @param postcode postcode
+     * @return first part of postcode
+     */
     private String getFirstCode(String postcode) {
         String[] first = postcode.split(" ");
         return first[0];
@@ -127,9 +136,19 @@ public class FileUtils {
     int uploadCount = 0;
     int total = 0;
 
+    /**
+     * upload the place location
+     * user uploadCount to check how many data we upload at the same time.
+     * if it is over 5, let the file reading thread sleeping loop 0.2s
+     * @param firstPostcode first part of postcode
+     */
     private void upload(String firstPostcode) {
         List<String> data = new ArrayList<>();
         Gson gson = new Gson();
+        /*
+         * convert the model to json string,add to the upload model,
+         * and remove the model in the locationPlaces list in case the out of memory error
+         */
         for (int i = locationPlaces.size() - 1; i >= 0; i--) {
             data.add(gson.toJson(locationPlaces.get(i)));
             locationPlaces.remove(i);
@@ -157,6 +176,11 @@ public class FileUtils {
         });
     }
 
+    /**
+     * convert the string list to model
+     * @param lines csv data
+     * @return PlacePaidData
+     */
     private PlacePaidData parsingStringToModel(String[] lines) {
         PlacePaidData placePaidData = new PlacePaidData();
         placePaidData.setUniqueIdentifier(lines[0]);
@@ -177,6 +201,11 @@ public class FileUtils {
         return placePaidData;
     }
 
+    /**
+     * Convert the PlacePaidData model to json string
+     * @param placePaidData placePaidData-> the paid history of one place ordered by postcode
+     * @return Json string list
+     */
     private List<String> parsingPlacePaidDataToJson(List<PlacePaidData> placePaidData) {
         List<String> data = new ArrayList<>();
         Gson gson = new Gson();
@@ -187,8 +216,14 @@ public class FileUtils {
         return data;
     }
 
+    /**
+     * Read whole file and parsing to string list
+     * put it in to model and upload
+     * if uploadCount is over 20, make the this thread sleep to prevent the out of memory
+     * this would make the upload speed decrease about 20%
+     */
     public void readLocationPricePaidToJson() {
-        Observable.create((ObservableOnSubscribe<PricePaidDataJson>) emitter -> {
+        Observable.create((ObservableOnSubscribe<PricePaidJson>) emitter -> {
             List<PlacePaidData> data = new ArrayList<>();
             BufferedReader reader = getReader();
             String postcode = null;
@@ -206,8 +241,8 @@ public class FileUtils {
                 if (postcode == null) {
                     postcode = lines[3];
                 } else if (!postcode.equals(lines[3])) {
-                    PricePaidDataJson uploadData = PricePaidDataJson.builder()
-                            .locationPaidB(parsingPlacePaidDataToJson(data)).postcode(postcode).build();
+                    PricePaidJson uploadData = PricePaidJson.builder()
+                            .locationPaid(parsingPlacePaidDataToJson(data)).postcode(postcode).build();
                     emitter.onNext(uploadData);
                     postcode = lines[3];
                     data = new ArrayList<>();
@@ -218,18 +253,18 @@ public class FileUtils {
                     Log.e(tag, "total count = " + totalCount);
                 }
             }
-            PricePaidDataJson uploadData = PricePaidDataJson.builder()
-                    .locationPaidB(parsingPlacePaidDataToJson(data)).postcode(postcode).build();
+            PricePaidJson uploadData = PricePaidJson.builder()
+                    .locationPaid(parsingPlacePaidDataToJson(data)).postcode(postcode).build();
             emitter.onNext(uploadData);
             emitter.onComplete();
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidScheduler.mainThread()).subscribe(new Observer<PricePaidDataJson>() {
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidScheduler.mainThread()).subscribe(new Observer<PricePaidJson>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(@NonNull PricePaidDataJson placePaidData) {
+            public void onNext(@NonNull PricePaidJson placePaidData) {
                 uploadPricePaidDataByJson(placePaidData);
             }
 
@@ -246,20 +281,32 @@ public class FileUtils {
 
     int dataUploadCount = 0;
 
-    private void uploadPricePaidDataByJson(PricePaidDataJson placePaidData) {
+    /**
+     * About the thread, Schedulers.single() and Schedulers.io() is different.
+     * single have only 1 thread and the upload will make one by one in line.
+     * io thread is a thread group that contains about 30?(or maybe 40) thread.
+     * So, using the io thread would make the upload more quick, the problem is when
+     * you finish the upload the thread in io would not release immediately, it would release
+     * after 1 min (Maybe it's the problem of Single Observable, it doesn't contain the onComplete method so it can't release immediately).
+     * so, it would easily lead to out of memory. In that case, using the single thread
+     * may be the only solution.
+     * Upload the model to back-end
+     * @param placePaidData the paid history of one place ordered by postcode
+     */
+    private void uploadPricePaidDataByJson(PricePaidJson placePaidData) {
         RxAmplify.API.mutate("softwareengproject", ModelMutation.create(placePaidData))
                 .subscribeOn(Schedulers.single()).observeOn(AndroidScheduler.mainThread())
-                .subscribe(new SingleObserver<GraphQLResponse<PricePaidDataJson>>() {
+                .subscribe(new SingleObserver<GraphQLResponse<PricePaidJson>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         uploadCount++;
                     }
 
                     @Override
-                    public void onSuccess(@NonNull GraphQLResponse<PricePaidDataJson> locationPricePaidDataByJsonGraphQLResponse) {
+                    public void onSuccess(@NonNull GraphQLResponse<PricePaidJson> locationPricePaidDataByJsonGraphQLResponse) {
                         uploadCount--;
-                        dataUploadCount += placePaidData.getLocationPaidB().size();
-                        Log.e(tag, "upload " + placePaidData.getPostcode() + " success, size = " + placePaidData.getLocationPaidB().size() + " dataUploadCount = " + dataUploadCount);
+                        dataUploadCount += placePaidData.getLocationPaid().size();
+                        Log.e(tag, "upload " + placePaidData.getPostcode() + " success, size = " + placePaidData.getLocationPaid().size() + " dataUploadCount = " + dataUploadCount);
                     }
 
                     @Override
@@ -269,6 +316,12 @@ public class FileUtils {
                 });
     }
 
+    /**
+     * read the whole data and get the postcode and GPS location
+     * when uploadCount is over 5 let the thread sleep 1s
+     * in this method, the subscribe method is useless. I put the upload code in the upper body
+     * (No reasons to do that, just don't want waste time to review the code and fix the previous problem)
+     */
     public void readLocationPricePaidData() {
         Observable.create((ObservableOnSubscribe<LocationPricePaidData>) emitter -> {
             BufferedReader reader = getReader();
@@ -352,7 +405,8 @@ public class FileUtils {
     };
 
     /**
-     * @param locationPricePaidData
+     * useless code
+     * @param locationPricePaidData locationPricePaidData
      */
     private void uploadPriceLocation(LocationPricePaidData locationPricePaidData) {
         RxAmplify.API.mutate("softwareengproject", ModelMutation.create(locationPricePaidData))
@@ -360,6 +414,16 @@ public class FileUtils {
                 .subscribe(singleObserver);
     }
 
+    /**
+     * read the whole UK postcode and put in the memory
+     * the post code is ordered by the first character of postcode
+     * E.G. BN1 2DB then it will be firstChar = B
+     * and put the postcode and GPS location into the list body
+     * the reason to do this is to save time to search
+     * (because the 2.6M postcode data will be divided by 26)
+     * then it would not need to loop the whole data every time when compare the postcode in the pricePaidData
+     *
+     */
     public void readPostcodeCSV() {
         Observable.create((ObservableOnSubscribe<PostcodeList>) emitter -> {
             InputStreamReader inputStreamReader = new InputStreamReader(context.getAssets().open("ukpostcodes.csv"));

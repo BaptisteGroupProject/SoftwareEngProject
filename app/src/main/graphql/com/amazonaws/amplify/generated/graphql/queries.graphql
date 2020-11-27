@@ -1,4 +1,35 @@
 # this is an auto generated file. This will be overwritten
+query GetUserLocation($id: ID!) {
+  getUserLocation(id: $id) {
+    id
+    username
+    latitude
+    longitude
+    location
+    time
+    createdAt
+    updatedAt
+  }
+}
+query ListUserLocations(
+  $filter: ModelUserLocationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUserLocations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      username
+      latitude
+      longitude
+      location
+      time
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetLocationPlaceByJson($id: ID!) {
   getLocationPlaceByJson(id: $id) {
     id
@@ -57,31 +88,25 @@ query ListPricePaidDataJsons(
     nextToken
   }
 }
-query GetUserLocation($id: ID!) {
-  getUserLocation(id: $id) {
+query GetPricePaidJson($id: ID!) {
+  getPricePaidJson(id: $id) {
     id
-    username
-    latitude
-    longitude
-    location
-    time
+    postcode
+    locationPaid
     createdAt
     updatedAt
   }
 }
-query ListUserLocations(
-  $filter: ModelUserLocationFilterInput
+query ListPricePaidJsons(
+  $filter: ModelPricePaidJsonFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listUserLocations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listPricePaidJsons(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      username
-      latitude
-      longitude
-      location
-      time
+      postcode
+      locationPaid
       createdAt
       updatedAt
     }
