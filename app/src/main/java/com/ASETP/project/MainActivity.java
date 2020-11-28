@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityMainBinding;
 import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.location.GoogleMapLocation;
+import com.ASETP.project.model.LocationPlaces;
 import com.ASETP.project.utils.FileUtils;
 import com.amplifyframework.analytics.UserProfile;
 import com.amplifyframework.api.graphql.GraphQLResponse;
@@ -26,6 +28,8 @@ import com.amplifyframework.api.graphql.PaginatedResult;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.LocationPlaceByJson;
+import com.amplifyframework.datastore.generated.model.PricePaidJson;
 import com.amplifyframework.datastore.generated.model.UserLocation;
 import com.amplifyframework.rx.RxAmplify;
 import com.google.android.gms.location.LocationCallback;
@@ -34,13 +38,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -68,6 +75,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
     private CircleImageView icon;
     private TextView username, lat, lon, currentLocation;
 
+    private String firstPostcode, secondPostcode;
+
     @Override
     protected void init(Bundle bundle) {
         setToolBar();
@@ -85,6 +94,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
     }
 
     private void recordUser() {
+        if (TextUtils.isEmpty(lat.getText().toString())) {
+            return;
+        }
         UserProfile.Location location = UserProfile.Location.builder()
                 .latitude(Double.parseDouble(lat.getText().toString()))
                 .longitude(Double.parseDouble(lon.getText().toString()))
@@ -180,8 +192,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         }
     }
 
-    @Override
-    public void onPlace(PlaceLikelihood placeLikelihood) {
+    private void setTextAndUpload(PlaceLikelihood placeLikelihood) {
         String username = "Email: " + RxAmplify.Auth.getCurrentUser().getUsername();
         this.username.setText(username);
         String latitude = "latitude: " + Objects.requireNonNull(placeLikelihood.getPlace().getLatLng()).latitude;
@@ -199,6 +210,97 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
                 .longitude((float) placeLikelihood.getPlace().getLatLng().longitude)
                 .time(time).build();
         uploadPosition(userLocation);
+    }
+
+    @Override
+    public void onPlace(PlaceLikelihood placeLikelihood) {
+        setTextAndUpload(placeLikelihood);
+        getUserPostcode(placeLikelihood);
+        setOnMarkerListener();
+    }
+
+    private void getUserPostcode(PlaceLikelihood placeLikelihood) {
+        String[] split = Objects.requireNonNull(placeLikelihood.getPlace().getAddress()).split(",");
+        String[] postcode = split[1].split(" ");
+        firstPostcode = postcode[2];
+        secondPostcode = postcode[3];
+        getLocationPaidData();
+    }
+
+    private void getWholeLocationPaidData(String postcode) {
+        RxAmplify.API.query("softwareengproject",
+                ModelQuery.list(PricePaidJson.class, PricePaidJson.POSTCODE.contains(postcode)))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidScheduler.mainThread())
+                .subscribe(new SingleObserver<GraphQLResponse<PaginatedResult<PricePaidJson>>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                        Log.e(tag, "start getting data");
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull GraphQLResponse<PaginatedResult<PricePaidJson>> paginatedResultGraphQLResponse) {
+                        for (PricePaidJson locationPlaceByJson : paginatedResultGraphQLResponse.getData()) {
+                            Log.e(tag, locationPlaceByJson.toString());
+                            //todo show the paid history
+                        }
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Log.e(tag, "get price paid data error", e);
+                    }
+                });
+    }
+
+    private void getLocationPaidData() {
+        Log.e(tag, firstPostcode + ":" + secondPostcode);
+        RxAmplify.API.query("softwareengproject",
+                ModelQuery.list(LocationPlaceByJson.class, LocationPlaceByJson.FIRST_POSTCODE.contains("BN")))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidScheduler.mainThread())
+                .subscribe(new SingleObserver<GraphQLResponse<PaginatedResult<LocationPlaceByJson>>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                        Log.e(tag, "start getting data");
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull GraphQLResponse<PaginatedResult<LocationPlaceByJson>> paginatedResultGraphQLResponse) {
+                        mapLocation.getGoogleMap().clear();
+                        for (LocationPlaceByJson locationPlaceByJson : paginatedResultGraphQLResponse.getData()) {
+                            paringLocationPlace(locationPlaceByJson);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Log.e(tag, "get price paid data error", e);
+                    }
+                });
+    }
+
+    private void paringLocationPlace(LocationPlaceByJson locationPlaceByJson) {
+        List<LocationPlaces> locationPlaces = new ArrayList<>();
+        Gson gson = new Gson();
+        for (String temp : locationPlaceByJson.getLocationItems()) {
+            LocationPlaces locationPlaces1 = gson.fromJson(temp, LocationPlaces.class);
+            locationPlaces.add(locationPlaces1);
+        }
+        setMarker(locationPlaces);
+    }
+
+    private void setMarker(List<LocationPlaces> locationPlaces) {
+        for (LocationPlaces locationPlaces1 : locationPlaces) {
+            mapLocation.addLocationPlaceMarker(locationPlaces1);
+        }
+    }
+
+    private void setOnMarkerListener() {
+        mapLocation.getGoogleMap().setOnMarkerClickListener(marker -> {
+            getWholeLocationPaidData(marker.getTitle());
+            return true;
+        });
     }
 
 
@@ -232,27 +334,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
     }
 
     private void checkPosition(String username) {
-        RxAmplify.API.query("softwareengproject", ModelQuery.list(UserLocation.class, UserLocation.USERNAME.contains(username)))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidScheduler.mainThread())
-                .subscribe(new SingleObserver<GraphQLResponse<PaginatedResult<UserLocation>>>() {
-                    @Override
-                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
 
-                    }
-
-                    @Override
-                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull GraphQLResponse<PaginatedResult<UserLocation>> paginatedResultGraphQLResponse) {
-                        for (UserLocation userLocation : paginatedResultGraphQLResponse.getData()) {
-                            Log.e(tag, userLocation.toString());
-                        }
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                        Log.e(tag, "checkPosition error", e);
-                    }
-                });
     }
 
     @Override

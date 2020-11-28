@@ -162,6 +162,10 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         preferences.edit().putString(name, gson.toJson(data)).apply();
     }
 
+    protected void cleanSp(String name) {
+        preferences.edit().clear().apply();
+    }
+
     protected List<UserLocation> getSharedPreferences(String name) {
         List<UserLocation> data;
         String leftData = preferences.getString(name, null);
@@ -171,6 +175,7 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         Gson gson = new Gson();
         data = gson.fromJson(leftData, new TypeToken<List<UserLocation>>() {
         }.getType());
+        cleanSp(name);
         return data;
     }
 

@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 import com.ASETP.project.R;
+import com.ASETP.project.model.LocationPlaces;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -113,7 +115,7 @@ public class GoogleMapLocation {
             return;
         }
         List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS,
-                Place.Field.LAT_LNG,Place.Field.PLUS_CODE);
+                Place.Field.LAT_LNG, Place.Field.PLUS_CODE);
         // Use the builder to create a FindCurrentPlaceRequest.
         FindCurrentPlaceRequest request = FindCurrentPlaceRequest.builder(placeFields).build();
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -135,6 +137,12 @@ public class GoogleMapLocation {
                 }
             });
         }
+    }
+
+    public void addLocationPlaceMarker(LocationPlaces locationPlaces) {
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(locationPlaces.getLatitude(), locationPlaces.getLongitude()))
+                .title(locationPlaces.getPostcode()));
     }
 
     public interface OnLocationSuccessListener {
