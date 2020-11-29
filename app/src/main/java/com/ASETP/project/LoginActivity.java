@@ -26,6 +26,9 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
+/**
+ * @author Mirage
+ */
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener, TextWatcher {
 
     private int maxLoginAttempts = 4;

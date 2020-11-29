@@ -59,6 +59,31 @@ query ListLocationPlaceByJsons(
     nextToken
   }
 }
+query GetLocationPlace($id: ID!) {
+  getLocationPlace(id: $id) {
+    id
+    firstPostcode
+    locationItems
+    createdAt
+    updatedAt
+  }
+}
+query ListLocationPlaces(
+  $filter: ModelLocationPlaceFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listLocationPlaces(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      firstPostcode
+      locationItems
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetPricePaidDataJson($id: ID!) {
   getPricePaidDataJson(id: $id) {
     id

@@ -1,17 +1,18 @@
 package com.ASETP.project;
 
 import android.app.Application;
+
 import android.util.Log;
 
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin;
 import com.amplifyframework.api.aws.AWSApiPlugin;
-import com.amplifyframework.auth.AuthUser;
+
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
-import com.amplifyframework.analytics.*;
+
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.rx.RxAmplify;
+
 
 /**
  * @author MirageLee

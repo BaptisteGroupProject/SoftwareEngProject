@@ -4,14 +4,14 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.ASETP.project.dabase.DaoManager;
 import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.model.LocationPlaces;
 import com.ASETP.project.model.PlacePaidData;
 import com.amplifyframework.api.graphql.GraphQLResponse;
 import com.amplifyframework.api.graphql.model.ModelMutation;
-import com.amplifyframework.datastore.generated.model.LocationPlaceByJson;
+import com.amplifyframework.datastore.generated.model.LocationPlace;
 import com.amplifyframework.datastore.generated.model.LocationPricePaidData;
-import com.amplifyframework.datastore.generated.model.PricePaidDataJson;
 import com.amplifyframework.datastore.generated.model.PricePaidJson;
 import com.amplifyframework.rx.RxAmplify;
 import com.google.gson.Gson;
@@ -27,6 +27,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableEmitter;
+import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.core.CompletableOnSubscribe;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.Observer;
@@ -50,7 +54,7 @@ public class FileUtils {
     /**
      * print log 10,000 count per term
      */
-    private final int maxCountPerTerm = 1000 * 10;
+    private final int maxCountPerTerm = 1000;
 
     private List<LocationPlaces> locationPlaces = new ArrayList<>();
 
@@ -140,6 +144,7 @@ public class FileUtils {
      * upload the place location
      * user uploadCount to check how many data we upload at the same time.
      * if it is over 5, let the file reading thread sleeping loop 0.2s
+     *
      * @param firstPostcode first part of postcode
      */
     private void upload(String firstPostcode) {
@@ -154,16 +159,16 @@ public class FileUtils {
             locationPlaces.remove(i);
         }
         locationPlaces = new ArrayList<>();
-        LocationPlaceByJson locationByJson = LocationPlaceByJson.builder().locationItems(data).build();
+        LocationPlace locationByJson = LocationPlace.builder().locationItems(data).firstPostcode(firstPostcode).build();
         RxAmplify.API.mutate("softwareengproject", ModelMutation.create(locationByJson)).subscribeOn(Schedulers.io())
-                .observeOn(AndroidScheduler.mainThread()).subscribe(new SingleObserver<GraphQLResponse<LocationPlaceByJson>>() {
+                .observeOn(AndroidScheduler.mainThread()).subscribe(new SingleObserver<GraphQLResponse<LocationPlace>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 uploadCount++;
             }
 
             @Override
-            public void onSuccess(@NonNull GraphQLResponse<LocationPlaceByJson> locationByJsonGraphQLResponse) {
+            public void onSuccess(@NonNull GraphQLResponse<LocationPlace> locationByJsonGraphQLResponse) {
                 total += data.size();
                 Log.e(tag + "success upload = ", firstPostcode + "size of data = " + data.size() + " total = " + total);
                 uploadCount--;
@@ -178,6 +183,7 @@ public class FileUtils {
 
     /**
      * convert the string list to model
+     *
      * @param lines csv data
      * @return PlacePaidData
      */
@@ -186,6 +192,7 @@ public class FileUtils {
         placePaidData.setUniqueIdentifier(lines[0]);
         placePaidData.setPrice(Integer.parseInt(lines[1]));
         placePaidData.setTransferDate(lines[2]);
+        placePaidData.setPostcode(lines[3]);
         placePaidData.setPropertyType(lines[4]);
         placePaidData.setNewOrOld(lines[5]);
         placePaidData.setDuration(lines[6]);
@@ -203,6 +210,7 @@ public class FileUtils {
 
     /**
      * Convert the PlacePaidData model to json string
+     *
      * @param placePaidData placePaidData-> the paid history of one place ordered by postcode
      * @return Json string list
      */
@@ -291,6 +299,7 @@ public class FileUtils {
      * so, it would easily lead to out of memory. In that case, using the single thread
      * may be the only solution.
      * Upload the model to back-end
+     *
      * @param placePaidData the paid history of one place ordered by postcode
      */
     private void uploadPricePaidDataByJson(PricePaidJson placePaidData) {
@@ -314,6 +323,63 @@ public class FileUtils {
                         Log.e(tag, "upload " + placePaidData.getPostcode() + " failed", e);
                     }
                 });
+    }
+
+    private void savePlace() {
+        DaoManager.getInstance(context).insertOrReplaceLocationPlace(locationPlaces);
+        locationPlaces = new ArrayList<>();
+    }
+
+    private void savePaidData(PlacePaidData placePaidData) {
+        DaoManager.getInstance(context).insertOrReplacePlacePaidData(placePaidData);
+    }
+
+    int wholeDataLength = 25530306;
+    int readCount = 0;
+
+    public void readWhole() {
+        Completable.create(emitter -> {
+            BufferedReader reader = getReader();
+            reader.readLine();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] lines = parsingData(line);
+                if (lines[3] == null || TextUtils.isEmpty(lines[3])) {
+                    missCount++;
+                    continue;
+                }
+                if (TextUtils.isEmpty(firstPostcode)) {
+                    firstPostcode = getFirstCode(lines[3]);
+                } else if (!firstPostcode.equals(getFirstCode(lines[3]))) {
+                    savePlace();
+                    firstPostcode = getFirstCode(lines[3]);
+                }
+                addLocationPlace(lines[3]);
+//                savePaidData(parsingStringToModel(lines));
+                readCount++;
+                onReadingListener.onReading((readCount / wholeDataLength) * 100);
+                if (readCount % maxCountPerTerm == 0) {
+                    Log.e(tag, "total count = " + wholeDataLength + " readCount = " + readCount);
+                }
+            }
+            savePlace();
+            emitter.onComplete();
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidScheduler.mainThread()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                onReadingListener.onSuccess();
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        });
     }
 
     /**
@@ -351,6 +417,7 @@ public class FileUtils {
                 }
 //                emitter.onNext(data);
             }
+            upload(firstPostcode);
             emitter.onComplete();
         }).subscribeOn(Schedulers.io()).observeOn(AndroidScheduler.mainThread()).subscribe(new Observer<LocationPricePaidData>() {
             @Override
@@ -406,6 +473,7 @@ public class FileUtils {
 
     /**
      * useless code
+     *
      * @param locationPricePaidData locationPricePaidData
      */
     private void uploadPriceLocation(LocationPricePaidData locationPricePaidData) {
@@ -422,7 +490,6 @@ public class FileUtils {
      * the reason to do this is to save time to search
      * (because the 2.6M postcode data will be divided by 26)
      * then it would not need to loop the whole data every time when compare the postcode in the pricePaidData
-     *
      */
     public void readPostcodeCSV() {
         Observable.create((ObservableOnSubscribe<PostcodeList>) emitter -> {
@@ -477,7 +544,8 @@ public class FileUtils {
                     @Override
                     public void onComplete() {
                         Log.e(tag, postcodeLists.get(postcodeLists.size() - 1).getFirstChar() + "");
-                        readLocationPricePaidData();
+//                        readLocationPricePaidData();
+                        readWhole();
                     }
                 });
     }
@@ -552,6 +620,26 @@ public class FileUtils {
                     ", longitude=" + longitude +
                     '}';
         }
+    }
+
+    public void setOnReadingListener(OnReadingListener onReadingListener) {
+        this.onReadingListener = onReadingListener;
+    }
+
+    private OnReadingListener onReadingListener;
+
+    public interface OnReadingListener {
+        /**
+         * show the reading progress
+         *
+         * @param i progress
+         */
+        void onReading(int i);
+
+        /**
+         * when success
+         */
+        void onSuccess();
     }
 
 }

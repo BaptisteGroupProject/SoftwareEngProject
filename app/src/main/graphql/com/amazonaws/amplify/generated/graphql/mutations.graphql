@@ -80,6 +80,42 @@ mutation DeleteLocationPlaceByJson(
     updatedAt
   }
 }
+mutation CreateLocationPlace(
+  $input: CreateLocationPlaceInput!
+  $condition: ModelLocationPlaceConditionInput
+) {
+  createLocationPlace(input: $input, condition: $condition) {
+    id
+    firstPostcode
+    locationItems
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateLocationPlace(
+  $input: UpdateLocationPlaceInput!
+  $condition: ModelLocationPlaceConditionInput
+) {
+  updateLocationPlace(input: $input, condition: $condition) {
+    id
+    firstPostcode
+    locationItems
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteLocationPlace(
+  $input: DeleteLocationPlaceInput!
+  $condition: ModelLocationPlaceConditionInput
+) {
+  deleteLocationPlace(input: $input, condition: $condition) {
+    id
+    firstPostcode
+    locationItems
+    createdAt
+    updatedAt
+  }
+}
 mutation CreatePricePaidDataJson(
   $input: CreatePricePaidDataJsonInput!
   $condition: ModelPricePaidDataJsonConditionInput

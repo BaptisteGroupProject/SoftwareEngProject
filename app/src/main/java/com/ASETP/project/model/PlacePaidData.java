@@ -1,13 +1,23 @@
 package com.ASETP.project.model;
 
+
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
+
+import java.io.Serializable;
+
 /**
  * @author MirageLee
  * @date 2020/11/16
  */
+@Entity
 public class PlacePaidData {
+    @Id
     private String uniqueIdentifier;
     private int price;
     private String transferDate;
+    private String postcode;
     private String propertyType;
     private String newOrOld;
     private String duration;
@@ -20,6 +30,33 @@ public class PlacePaidData {
     private String country;
     private String categoryType;
     private String recordStatusS;
+
+    @Generated(hash = 1446764705)
+    public PlacePaidData(String uniqueIdentifier, int price, String transferDate,
+            String postcode, String propertyType, String newOrOld, String duration,
+            String paon, String saon, String strees, String locality, String town,
+            String district, String country, String categoryType, String recordStatusS) {
+        this.uniqueIdentifier = uniqueIdentifier;
+        this.price = price;
+        this.transferDate = transferDate;
+        this.postcode = postcode;
+        this.propertyType = propertyType;
+        this.newOrOld = newOrOld;
+        this.duration = duration;
+        this.paon = paon;
+        this.saon = saon;
+        this.strees = strees;
+        this.locality = locality;
+        this.town = town;
+        this.district = district;
+        this.country = country;
+        this.categoryType = categoryType;
+        this.recordStatusS = recordStatusS;
+    }
+
+    @Generated(hash = 258392492)
+    public PlacePaidData() {
+    }
 
     public String getUniqueIdentifier() {
         return uniqueIdentifier;
@@ -139,6 +176,14 @@ public class PlacePaidData {
 
     public void setRecordStatusS(String recordStatusS) {
         this.recordStatusS = recordStatusS;
+    }
+
+    public String getPostcode() {
+        return this.postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 
 }

@@ -53,7 +53,7 @@ public class GoogleMapLocation {
     private final FusedLocationProviderClient fusedLocationProviderClient;
     private final PlacesClient placesClient;
 
-    private static final int DEFAULT_ZOOM = 15;
+    private static final int DEFAULT_ZOOM = 17;
 
     OnLocationSuccessListener onLocationSuccessListener;
 

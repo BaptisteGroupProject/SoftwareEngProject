@@ -14,5 +14,20 @@
     <string name="email">Email</string>
     <string name="already_have_an_account">Already Have an Account?</string>
     <string name="register">REGISTER</string>
+    <string name="unique_identifier">identifier</string>
+    <string name="price">price</string>
+    <string name="property_type">property type</string>
+    <string name="duration">duration</string>
+    <string name="pano">pano</string>
+    <string name="sano">sano</string>
+    <string name="street">street</string>
+    <string name="locality">locality</string>
+    <string name="district">district</string>
+    <string name="country">country</string>
+    <string name="new_or_old">new or old</string>
+    <string name="town">town</string>
+    <string name="category_type">category type</string>
+    <string name="record_status">record status</string>
+    <string name="no_data_found">NO DATA FOUND</string>
 </resources>
 

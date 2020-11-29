@@ -12,6 +12,12 @@ type LocationPlaceByJson @model {
     locationItems: [String!]!
 }
 
+type LocationPlace @model {
+    id: ID!
+    firstPostcode: String
+    locationItems: [String!]!
+}
+
 type PricePaidDataJson @model {
     id: ID!
     postcode: String

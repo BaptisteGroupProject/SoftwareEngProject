@@ -62,6 +62,33 @@ subscription OnDeleteLocationPlaceByJson {
     updatedAt
   }
 }
+subscription OnCreateLocationPlace {
+  onCreateLocationPlace {
+    id
+    firstPostcode
+    locationItems
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateLocationPlace {
+  onUpdateLocationPlace {
+    id
+    firstPostcode
+    locationItems
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteLocationPlace {
+  onDeleteLocationPlace {
+    id
+    firstPostcode
+    locationItems
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreatePricePaidDataJson {
   onCreatePricePaidDataJson {
     id

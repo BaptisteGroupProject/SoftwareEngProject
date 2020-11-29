@@ -146,6 +146,14 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         }
     }
 
+    protected boolean checkIfInit() {
+        return preferences.getBoolean("init", false);
+    }
+
+    protected void setInitSuccess() {
+        preferences.edit().putBoolean("init", true).apply();
+    }
+
     protected void clear(String name) {
         preferences.edit().putString(name, null).apply();
     }
