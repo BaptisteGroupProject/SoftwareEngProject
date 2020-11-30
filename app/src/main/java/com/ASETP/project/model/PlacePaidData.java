@@ -4,6 +4,7 @@ package com.ASETP.project.model;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Property;
 
 import java.io.Serializable;
 
@@ -11,31 +12,47 @@ import java.io.Serializable;
  * @author MirageLee
  * @date 2020/11/16
  */
-@Entity
+@Entity(nameInDb = "PLACE_PAID_DATA", createInDb = false)
 public class PlacePaidData {
+    @Property(nameInDb = "UNIQUE_IDENTIFIER")
     @Id
     private String uniqueIdentifier;
+    @Property(nameInDb = "POSTCODE")
     private int price;
+    @Property(nameInDb = "PRICE")
     private String transferDate;
+    @Property(nameInDb = "TRANSFER_DATE")
     private String postcode;
+    @Property(nameInDb = "PROPERTY_TYPE")
     private String propertyType;
+    @Property(nameInDb = "NEW_OR_OLD")
     private String newOrOld;
+    @Property(nameInDb = "DURATION")
     private String duration;
+    @Property(nameInDb = "PAON")
     private String paon;
+    @Property(nameInDb = "SAON")
     private String saon;
+    @Property(nameInDb = "STREES")
     private String strees;
+    @Property(nameInDb = "LOCALITY")
     private String locality;
+    @Property(nameInDb = "TOWN")
     private String town;
+    @Property(nameInDb = "DISTRICT")
     private String district;
+    @Property(nameInDb = "COUNTRY")
     private String country;
+    @Property(nameInDb = "CATEGORY_TYPE")
     private String categoryType;
+    @Property(nameInDb = "RECORD_STATUS_S")
     private String recordStatusS;
 
     @Generated(hash = 1446764705)
     public PlacePaidData(String uniqueIdentifier, int price, String transferDate,
-            String postcode, String propertyType, String newOrOld, String duration,
-            String paon, String saon, String strees, String locality, String town,
-            String district, String country, String categoryType, String recordStatusS) {
+                         String postcode, String propertyType, String newOrOld, String duration,
+                         String paon, String saon, String strees, String locality, String town,
+                         String district, String country, String categoryType, String recordStatusS) {
         this.uniqueIdentifier = uniqueIdentifier;
         this.price = price;
         this.transferDate = transferDate;

@@ -28,9 +28,7 @@ import java.util.regex.Pattern;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.CompletableEmitter;
 import io.reactivex.rxjava3.core.CompletableObserver;
-import io.reactivex.rxjava3.core.CompletableOnSubscribe;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.Observer;
@@ -326,12 +324,12 @@ public class FileUtils {
     }
 
     private void savePlace() {
-        DaoManager.getInstance(context).insertOrReplaceLocationPlace(locationPlaces);
+        DaoManager.getLocationInstance(context).insertOrReplaceLocationPlace(locationPlaces);
         locationPlaces = new ArrayList<>();
     }
 
-    private void savePaidData(PlacePaidData placePaidData) {
-        DaoManager.getInstance(context).insertOrReplacePlacePaidData(placePaidData);
+    private void savePaidData(String postcode, PlacePaidData data) {
+        DaoManager.getInstance(context, String.valueOf(postcode.charAt(0))).insertOrReplacePlacePaidData(data);
     }
 
     int wholeDataLength = 25530306;
@@ -355,11 +353,12 @@ public class FileUtils {
                     firstPostcode = getFirstCode(lines[3]);
                 }
                 addLocationPlace(lines[3]);
-//                savePaidData(parsingStringToModel(lines));
+                savePlace();
+//                savePaidData(lines[3], parsingStringToModel(lines));
                 readCount++;
-                onReadingListener.onReading((readCount / wholeDataLength) * 100);
+                onReadingListener.onReading((int) (((double) ((double) readCount / (double) wholeDataLength)) * 100));
                 if (readCount % maxCountPerTerm == 0) {
-                    Log.e(tag, "total count = " + wholeDataLength + " readCount = " + readCount);
+                    Log.e(tag, "total count = " + wholeDataLength + " readCount = " + readCount + "reading postcode" + lines[3]);
                 }
             }
             savePlace();
@@ -522,6 +521,7 @@ public class FileUtils {
                 postcode.setLongitude(Float.parseFloat(postcodes[3]));
                 list.addPostcodes(postcode);
             }
+            emitter.onNext(list);
             emitter.onComplete();
             Log.e(tag, "total missing count = " + count);
         }).subscribeOn(Schedulers.io()).observeOn(AndroidScheduler.mainThread())

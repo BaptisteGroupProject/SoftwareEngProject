@@ -56,7 +56,10 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> {
 
     private void getData() {
         Observable.create((ObservableOnSubscribe<List<PlacePaidData>>) emitter -> {
-            List<PlacePaidData> data = DaoManager.getInstance(HistoryActivity.this).searchPlacePaidData(postcode);
+            Log.e(tag,postcode);
+            List<PlacePaidData> data = DaoManager
+                    .getInstance(HistoryActivity.this, String.valueOf(postcode.charAt(0)))
+                    .searchPlacePaidData(postcode);
             emitter.onNext(data);
             emitter.onComplete();
         }).subscribeOn(Schedulers.io()).observeOn(AndroidScheduler.mainThread())

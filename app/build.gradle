@@ -31,7 +31,7 @@ android {
     }
 
     greendao {
-        schemaVersion 2
+        schemaVersion 7
         targetGenDir 'src/main/java'
         daoPackage 'com.ASETP.project.greendao.gen'
     }

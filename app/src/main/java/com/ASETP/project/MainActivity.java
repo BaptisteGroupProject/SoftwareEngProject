@@ -240,7 +240,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         double maxLat = latLng.latitude + dLat;
         double minLong = latLng.longitude - dLng;
         double maxLong = latLng.longitude + dLng;
-        return DaoManager.getInstance(this).searchLocationPlacesWithPosition(minLat, maxLat, minLong, maxLong);
+        return DaoManager.getLocationInstance(this).searchLocationPlacesWithPosition(minLat, maxLat, minLong, maxLong);
     }
 
     private void setMarker(List<LocationPlaces> locationPlaces) {

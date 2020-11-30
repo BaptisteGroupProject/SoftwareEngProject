@@ -25,9 +25,9 @@ public class PlacePaidDataDao extends AbstractDao<PlacePaidData, String> {
      */
     public static class Properties {
         public final static Property UniqueIdentifier = new Property(0, String.class, "uniqueIdentifier", true, "UNIQUE_IDENTIFIER");
-        public final static Property Price = new Property(1, int.class, "price", false, "PRICE");
-        public final static Property TransferDate = new Property(2, String.class, "transferDate", false, "TRANSFER_DATE");
-        public final static Property Postcode = new Property(3, String.class, "postcode", false, "POSTCODE");
+        public final static Property Price = new Property(1, int.class, "price", false, "POSTCODE");
+        public final static Property TransferDate = new Property(2, String.class, "transferDate", false, "PRICE");
+        public final static Property Postcode = new Property(3, String.class, "postcode", false, "TRANSFER_DATE");
         public final static Property PropertyType = new Property(4, String.class, "propertyType", false, "PROPERTY_TYPE");
         public final static Property NewOrOld = new Property(5, String.class, "newOrOld", false, "NEW_OR_OLD");
         public final static Property Duration = new Property(6, String.class, "duration", false, "DURATION");
@@ -49,34 +49,6 @@ public class PlacePaidDataDao extends AbstractDao<PlacePaidData, String> {
     
     public PlacePaidDataDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
-    }
-
-    /** Creates the underlying database table. */
-    public static void createTable(Database db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "\"PLACE_PAID_DATA\" (" + //
-                "\"UNIQUE_IDENTIFIER\" TEXT PRIMARY KEY NOT NULL ," + // 0: uniqueIdentifier
-                "\"PRICE\" INTEGER NOT NULL ," + // 1: price
-                "\"TRANSFER_DATE\" TEXT," + // 2: transferDate
-                "\"POSTCODE\" TEXT," + // 3: postcode
-                "\"PROPERTY_TYPE\" TEXT," + // 4: propertyType
-                "\"NEW_OR_OLD\" TEXT," + // 5: newOrOld
-                "\"DURATION\" TEXT," + // 6: duration
-                "\"PAON\" TEXT," + // 7: paon
-                "\"SAON\" TEXT," + // 8: saon
-                "\"STREES\" TEXT," + // 9: strees
-                "\"LOCALITY\" TEXT," + // 10: locality
-                "\"TOWN\" TEXT," + // 11: town
-                "\"DISTRICT\" TEXT," + // 12: district
-                "\"COUNTRY\" TEXT," + // 13: country
-                "\"CATEGORY_TYPE\" TEXT," + // 14: categoryType
-                "\"RECORD_STATUS_S\" TEXT);"); // 15: recordStatusS
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(Database db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"PLACE_PAID_DATA\"";
-        db.execSQL(sql);
     }
 
     @Override

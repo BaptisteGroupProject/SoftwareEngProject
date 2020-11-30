@@ -38,21 +38,6 @@ public class LocationPlacesDao extends AbstractDao<LocationPlaces, String> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(Database db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "\"LOCATION_PLACES\" (" + //
-                "\"POSTCODE\" TEXT PRIMARY KEY NOT NULL ," + // 0: postcode
-                "\"LONGITUDE\" REAL NOT NULL ," + // 1: longitude
-                "\"LATITUDE\" REAL NOT NULL );"); // 2: latitude
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(Database db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"LOCATION_PLACES\"";
-        db.execSQL(sql);
-    }
-
     @Override
     protected final void bindValues(DatabaseStatement stmt, LocationPlaces entity) {
         stmt.clearBindings();

@@ -9,7 +9,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * @author MirageLee
  * @date 2020/11/15
  */
-@Entity
+@Entity(nameInDb = "LOCATION_PLACES",createInDb = false)
 public class LocationPlaces {
     @Id
     private String postcode;
