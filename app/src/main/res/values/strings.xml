@@ -14,20 +14,20 @@
     <string name="email">Email</string>
     <string name="already_have_an_account">Already Have an Account?</string>
     <string name="register">REGISTER</string>
-    <string name="unique_identifier">identifier</string>
-    <string name="price">price</string>
-    <string name="property_type">property type</string>
-    <string name="duration">duration</string>
-    <string name="pano">pano</string>
-    <string name="sano">sano</string>
-    <string name="street">street</string>
-    <string name="locality">locality</string>
-    <string name="district">district</string>
-    <string name="country">country</string>
-    <string name="new_or_old">new or old</string>
-    <string name="town">town</string>
-    <string name="category_type">category type</string>
-    <string name="record_status">record status</string>
+    <string name="unique_identifier">ID</string>
+    <string name="price">Price (£)</string>
+    <string name="property_type">Property Type</string>
+    <string name="duration">Duration</string>
+    <string name="pano">Primary Address</string>
+    <string name="sano">Secondary Address</string>
+    <string name="street">Street</string>
+    <string name="locality">Locality</string>
+    <string name="district">District</string>
+    <string name="country">County</string>
+    <string name="new_or_old">New or Old</string>
+    <string name="town">Town/City</string>
+    <string name="category_type">Category Type</string>
+    <string name="record_status">Record Status</string>
     <string name="no_data_found">NO DATA FOUND</string>
 </resources>
 

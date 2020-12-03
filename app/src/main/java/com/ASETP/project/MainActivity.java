@@ -234,7 +234,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
     private void getUserPostcode(PlaceLikelihood placeLikelihood) {
         String[] split = Objects.requireNonNull(placeLikelihood.getPlace().getAddress()).split(",");
-        String[] postcode = split[2].split(" ");
+        String[] postcode = split[1].split(" ");
         Log.e(tag, Arrays.toString(split));
         firstPostcode = postcode[2];
         secondPostcode = postcode[3];
