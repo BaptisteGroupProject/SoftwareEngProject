@@ -188,3 +188,78 @@ mutation DeletePricePaidJson(
     updatedAt
   }
 }
+mutation CreateLocationPricePaidData(
+  $input: CreateLocationPricePaidDataInput!
+  $condition: ModelLocationPricePaidDataConditionInput
+) {
+  createLocationPricePaidData(input: $input, condition: $condition) {
+    id
+    price
+    transferDate
+    postcode
+    propertyType
+    newOrOld
+    duration
+    paon
+    saon
+    strees
+    locality
+    town
+    district
+    country
+    categoryType
+    recordStatus
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateLocationPricePaidData(
+  $input: UpdateLocationPricePaidDataInput!
+  $condition: ModelLocationPricePaidDataConditionInput
+) {
+  updateLocationPricePaidData(input: $input, condition: $condition) {
+    id
+    price
+    transferDate
+    postcode
+    propertyType
+    newOrOld
+    duration
+    paon
+    saon
+    strees
+    locality
+    town
+    district
+    country
+    categoryType
+    recordStatus
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteLocationPricePaidData(
+  $input: DeleteLocationPricePaidDataInput!
+  $condition: ModelLocationPricePaidDataConditionInput
+) {
+  deleteLocationPricePaidData(input: $input, condition: $condition) {
+    id
+    price
+    transferDate
+    postcode
+    propertyType
+    newOrOld
+    duration
+    paon
+    saon
+    strees
+    locality
+    town
+    district
+    country
+    categoryType
+    recordStatus
+    createdAt
+    updatedAt
+  }
+}

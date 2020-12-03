@@ -25,9 +25,11 @@ import com.ASETP.project.model.LocationPlaces;
 import com.ASETP.project.model.PlacePaidData;
 import com.ASETP.project.utils.FileUtils;
 import com.amplifyframework.analytics.UserProfile;
+import com.amplifyframework.api.graphql.GraphQLRequest;
 import com.amplifyframework.api.graphql.GraphQLResponse;
 import com.amplifyframework.api.graphql.PaginatedResult;
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelPagination;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.LocationPlace;
@@ -51,6 +53,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -64,7 +67,10 @@ import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
 
 /**
  * @author MirageLe, Baptiste Sagna
@@ -220,8 +226,84 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
     @Override
     public void onPlace(PlaceLikelihood placeLikelihood) {
         setTextAndUpload(placeLikelihood);
+        getUserPostcode(placeLikelihood);
+//        setMarker(searchIn500M(placeLikelihood.getPlace().getLatLng()));
+    }
 
-        setMarker(searchIn500M(placeLikelihood.getPlace().getLatLng()));
+    String firstPostcode, secondPostcode;
+
+    private void getUserPostcode(PlaceLikelihood placeLikelihood) {
+        String[] split = Objects.requireNonNull(placeLikelihood.getPlace().getAddress()).split(",");
+        String[] postcode = split[2].split(" ");
+        Log.e(tag, Arrays.toString(split));
+        firstPostcode = postcode[2];
+        secondPostcode = postcode[3];
+        getLocationPaidData(placeLikelihood.getPlace().getLatLng());
+    }
+
+    private void getLocationPaidData(LatLng latLng) {
+        BehaviorSubject<GraphQLRequest<PaginatedResult<LocationPlaceByJson>>> subject =
+                BehaviorSubject.createDefault(ModelQuery.list(LocationPlaceByJson.class,
+                        LocationPlaceByJson.FIRST_POSTCODE.eq(firstPostcode),
+                        ModelPagination.limit(10000)));
+        subject.concatMap(paginatedResultGraphQLRequest -> RxAmplify.API.query("softwareengproject", paginatedResultGraphQLRequest).toObservable())
+                .doOnNext(response -> {
+                    if (response.hasErrors()) {
+                        subject.onError(new Exception(String.format("Query failed: %s", response.getErrors())));
+                    } else if (!response.hasData()) {
+                        subject.onError(new Exception("Empty response from AppSync."));
+                    } else if (response.getData().hasNextResult()) {
+                        subject.onNext(response.getData().getRequestForNextResult());
+                    } else {
+                        subject.onComplete();
+                    }
+                }).concatMapIterable(GraphQLResponse::getData).observeOn(AndroidScheduler.mainThread()).subscribe(new Observer<LocationPlaceByJson>() {
+            @Override
+            public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                Log.e(tag, "start");
+            }
+
+            @Override
+            public void onNext(@io.reactivex.rxjava3.annotations.NonNull LocationPlaceByJson locationPlaceByJson) {
+                paringLocationPlace(latLng, locationPlaceByJson);
+                onComplete();
+            }
+
+            @Override
+            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                Log.e(tag, "read error");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e(tag, "read complete");
+            }
+        });
+    }
+
+    private void paringLocationPlace(LatLng latLng, LocationPlaceByJson locationPlaceByJson) {
+        //0.5KM
+        double dis = 0.5;
+        double dLng = 2 * Math.asin(Math.sin(dis / (2 * EARTH_RADIUS)) / Math.cos(latLng.latitude * Math.PI / 180));
+        dLng = dLng * 180 / Math.PI;
+        double dLat = dis / EARTH_RADIUS;
+        dLat = dLat * 180 / Math.PI;
+        double minLat = latLng.latitude - dLat;
+        double maxLat = latLng.latitude + dLat;
+        double minLong = latLng.longitude - dLng;
+        double maxLong = latLng.longitude + dLng;
+        List<LocationPlaces> locationPlaces = new ArrayList<>();
+        Gson gson = new Gson();
+        for (String temp : locationPlaceByJson.getLocationItems()) {
+            LocationPlaces locationPlaces1 = gson.fromJson(temp, LocationPlaces.class);
+            if (locationPlaces1.getLatitude() > minLat &&
+                    locationPlaces1.getLatitude() < maxLat &&
+                    locationPlaces1.getLongitude() > minLong &&
+                    locationPlaces1.getLongitude() < maxLong) {
+                locationPlaces.add(locationPlaces1);
+            }
+        }
+        setMarker(locationPlaces);
     }
 
     private void getWholeLocationPaidData(String postcode) {

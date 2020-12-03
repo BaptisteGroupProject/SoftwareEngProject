@@ -29,3 +29,22 @@ type PricePaidJson @model {
     postcode:String
     locationPaid: [String!]!
 }
+
+type LocationPricePaidData @model {
+    id:ID!
+    price: Int
+    transferDate: String
+    postcode: String
+    propertyType: String
+    newOrOld: String
+    duration: String
+    paon: String
+    saon: String
+    strees: String
+    locality: String
+    town: String
+    district: String
+    country: String
+    categoryType: String
+    recordStatus: String
+}

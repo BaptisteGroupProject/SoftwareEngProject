@@ -138,3 +138,58 @@ query ListPricePaidJsons(
     nextToken
   }
 }
+query GetLocationPricePaidData($id: ID!) {
+  getLocationPricePaidData(id: $id) {
+    id
+    price
+    transferDate
+    postcode
+    propertyType
+    newOrOld
+    duration
+    paon
+    saon
+    strees
+    locality
+    town
+    district
+    country
+    categoryType
+    recordStatus
+    createdAt
+    updatedAt
+  }
+}
+query ListLocationPricePaidDatas(
+  $filter: ModelLocationPricePaidDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listLocationPricePaidDatas(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      price
+      transferDate
+      postcode
+      propertyType
+      newOrOld
+      duration
+      paon
+      saon
+      strees
+      locality
+      town
+      district
+      country
+      categoryType
+      recordStatus
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

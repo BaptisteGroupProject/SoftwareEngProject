@@ -143,3 +143,69 @@ subscription OnDeletePricePaidJson {
     updatedAt
   }
 }
+subscription OnCreateLocationPricePaidData {
+  onCreateLocationPricePaidData {
+    id
+    price
+    transferDate
+    postcode
+    propertyType
+    newOrOld
+    duration
+    paon
+    saon
+    strees
+    locality
+    town
+    district
+    country
+    categoryType
+    recordStatus
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateLocationPricePaidData {
+  onUpdateLocationPricePaidData {
+    id
+    price
+    transferDate
+    postcode
+    propertyType
+    newOrOld
+    duration
+    paon
+    saon
+    strees
+    locality
+    town
+    district
+    country
+    categoryType
+    recordStatus
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteLocationPricePaidData {
+  onDeleteLocationPricePaidData {
+    id
+    price
+    transferDate
+    postcode
+    propertyType
+    newOrOld
+    duration
+    paon
+    saon
+    strees
+    locality
+    town
+    district
+    country
+    categoryType
+    recordStatus
+    createdAt
+    updatedAt
+  }
+}
