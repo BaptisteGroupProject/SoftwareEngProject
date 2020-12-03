@@ -236,8 +236,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         String[] split = Objects.requireNonNull(placeLikelihood.getPlace().getAddress()).split(",");
         String[] postcode = split[2].split(" ");
         Log.e(tag, Arrays.toString(split));
-        firstPostcode = postcode[2];
-        secondPostcode = postcode[3];
+        try {
+            firstPostcode = postcode[2];
+            secondPostcode = postcode[3];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            postcode = split[1].split(" ");
+            firstPostcode = postcode[2];
+            secondPostcode = postcode[3];
+        }
+
         getLocationPaidData(placeLikelihood.getPlace().getLatLng());
     }
 
