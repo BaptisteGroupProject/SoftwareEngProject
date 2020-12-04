@@ -29,5 +29,8 @@
     <string name="category_type">Category Type</string>
     <string name="record_status">Record Status</string>
     <string name="no_data_found">NO DATA FOUND</string>
+    <string name="housing">House History</string>
+    <string name="crime">Crime</string>
+    <string name="weather">Weather</string>
 </resources>
 
