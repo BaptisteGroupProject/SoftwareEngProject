@@ -32,5 +32,12 @@
     <string name="housing">House History</string>
     <string name="crime">Crime</string>
     <string name="weather">Weather</string>
+    <string name="location">Location</string>
+    <string name="crimetype">Crime Type</string>
+    <string name="reportedby">Reported By</string>
+    <string name="lsaoName">LSAO Name</string>
+    <string name="lsaoCode">LSAO Code</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
 </resources>
 
