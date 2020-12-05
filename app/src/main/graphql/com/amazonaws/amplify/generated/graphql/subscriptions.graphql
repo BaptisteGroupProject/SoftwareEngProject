@@ -116,6 +116,33 @@ subscription OnDeletePricePaidDataJson {
     updatedAt
   }
 }
+subscription OnCreatePricePaidDataJsonTest {
+  onCreatePricePaidDataJsonTest {
+    id
+    postcode
+    locationPaidB
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdatePricePaidDataJsonTest {
+  onUpdatePricePaidDataJsonTest {
+    id
+    postcode
+    locationPaidB
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeletePricePaidDataJsonTest {
+  onDeletePricePaidDataJsonTest {
+    id
+    postcode
+    locationPaidB
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreatePricePaidJson {
   onCreatePricePaidJson {
     id

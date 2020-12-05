@@ -152,6 +152,42 @@ mutation DeletePricePaidDataJson(
     updatedAt
   }
 }
+mutation CreatePricePaidDataJsonTest(
+  $input: CreatePricePaidDataJsonTestInput!
+  $condition: ModelPricePaidDataJsonTestConditionInput
+) {
+  createPricePaidDataJsonTest(input: $input, condition: $condition) {
+    id
+    postcode
+    locationPaidB
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdatePricePaidDataJsonTest(
+  $input: UpdatePricePaidDataJsonTestInput!
+  $condition: ModelPricePaidDataJsonTestConditionInput
+) {
+  updatePricePaidDataJsonTest(input: $input, condition: $condition) {
+    id
+    postcode
+    locationPaidB
+    createdAt
+    updatedAt
+  }
+}
+mutation DeletePricePaidDataJsonTest(
+  $input: DeletePricePaidDataJsonTestInput!
+  $condition: ModelPricePaidDataJsonTestConditionInput
+) {
+  deletePricePaidDataJsonTest(input: $input, condition: $condition) {
+    id
+    postcode
+    locationPaidB
+    createdAt
+    updatedAt
+  }
+}
 mutation CreatePricePaidJson(
   $input: CreatePricePaidJsonInput!
   $condition: ModelPricePaidJsonConditionInput

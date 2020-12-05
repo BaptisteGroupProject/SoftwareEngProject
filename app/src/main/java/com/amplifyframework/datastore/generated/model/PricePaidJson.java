@@ -18,6 +18,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the PricePaidJson type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "PricePaidJsons")
+@Index(name = "postcode-index", fields = {"postcode"})
 public final class PricePaidJson implements Model {
   public static final QueryField ID = field("id");
   public static final QueryField POSTCODE = field("postcode");

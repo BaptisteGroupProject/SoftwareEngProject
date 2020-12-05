@@ -24,7 +24,14 @@ type PricePaidDataJson @model {
     locationPaidB: [String!]!
 }
 
-type PricePaidJson @model {
+type PricePaidDataJsonTest @model
+@key(name: "postcode-index", fields: ["postcode"]){
+    id: ID!
+    postcode: String
+    locationPaidB: [String!]!
+}
+
+type PricePaidJson @model @key(name: "postcode-index", fields: ["postcode"], queryField:"queryByPostcode"){
     id: ID!
     postcode:String
     locationPaid: [String!]!

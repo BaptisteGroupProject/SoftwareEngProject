@@ -20,7 +20,6 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 @ModelConfig(pluralName = "LocationPricePaidData")
 public final class LocationPricePaidData implements Model {
   public static final QueryField ID = field("id");
-  public static final QueryField UNIQUE_IDENTIFIER = field("uniqueIdentifier");
   public static final QueryField PRICE = field("price");
   public static final QueryField TRANSFER_DATE = field("transferDate");
   public static final QueryField POSTCODE = field("postcode");
@@ -36,10 +35,7 @@ public final class LocationPricePaidData implements Model {
   public static final QueryField COUNTRY = field("country");
   public static final QueryField CATEGORY_TYPE = field("categoryType");
   public static final QueryField RECORD_STATUS = field("recordStatus");
-  public static final QueryField LONGITUDE = field("longitude");
-  public static final QueryField LATITUDE = field("latitude");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="ID", isRequired = true) String uniqueIdentifier;
   private final @ModelField(targetType="Int") Integer price;
   private final @ModelField(targetType="String") String transferDate;
   private final @ModelField(targetType="String") String postcode;
@@ -55,14 +51,8 @@ public final class LocationPricePaidData implements Model {
   private final @ModelField(targetType="String") String country;
   private final @ModelField(targetType="String") String categoryType;
   private final @ModelField(targetType="String") String recordStatus;
-  private final @ModelField(targetType="Float") Float longitude;
-  private final @ModelField(targetType="Float") Float latitude;
   public String getId() {
       return id;
-  }
-  
-  public String getUniqueIdentifier() {
-      return uniqueIdentifier;
   }
   
   public Integer getPrice() {
@@ -125,17 +115,8 @@ public final class LocationPricePaidData implements Model {
       return recordStatus;
   }
   
-  public Float getLongitude() {
-      return longitude;
-  }
-  
-  public Float getLatitude() {
-      return latitude;
-  }
-  
-  private LocationPricePaidData(String id, String uniqueIdentifier, Integer price, String transferDate, String postcode, String propertyType, String newOrOld, String duration, String paon, String saon, String strees, String locality, String town, String district, String country, String categoryType, String recordStatus, Float longitude, Float latitude) {
+  private LocationPricePaidData(String id, Integer price, String transferDate, String postcode, String propertyType, String newOrOld, String duration, String paon, String saon, String strees, String locality, String town, String district, String country, String categoryType, String recordStatus) {
     this.id = id;
-    this.uniqueIdentifier = uniqueIdentifier;
     this.price = price;
     this.transferDate = transferDate;
     this.postcode = postcode;
@@ -151,8 +132,6 @@ public final class LocationPricePaidData implements Model {
     this.country = country;
     this.categoryType = categoryType;
     this.recordStatus = recordStatus;
-    this.longitude = longitude;
-    this.latitude = latitude;
   }
   
   @Override
@@ -164,7 +143,6 @@ public final class LocationPricePaidData implements Model {
       } else {
       LocationPricePaidData locationPricePaidData = (LocationPricePaidData) obj;
       return ObjectsCompat.equals(getId(), locationPricePaidData.getId()) &&
-              ObjectsCompat.equals(getUniqueIdentifier(), locationPricePaidData.getUniqueIdentifier()) &&
               ObjectsCompat.equals(getPrice(), locationPricePaidData.getPrice()) &&
               ObjectsCompat.equals(getTransferDate(), locationPricePaidData.getTransferDate()) &&
               ObjectsCompat.equals(getPostcode(), locationPricePaidData.getPostcode()) &&
@@ -179,9 +157,7 @@ public final class LocationPricePaidData implements Model {
               ObjectsCompat.equals(getDistrict(), locationPricePaidData.getDistrict()) &&
               ObjectsCompat.equals(getCountry(), locationPricePaidData.getCountry()) &&
               ObjectsCompat.equals(getCategoryType(), locationPricePaidData.getCategoryType()) &&
-              ObjectsCompat.equals(getRecordStatus(), locationPricePaidData.getRecordStatus()) &&
-              ObjectsCompat.equals(getLongitude(), locationPricePaidData.getLongitude()) &&
-              ObjectsCompat.equals(getLatitude(), locationPricePaidData.getLatitude());
+              ObjectsCompat.equals(getRecordStatus(), locationPricePaidData.getRecordStatus());
       }
   }
   
@@ -189,7 +165,6 @@ public final class LocationPricePaidData implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
-      .append(getUniqueIdentifier())
       .append(getPrice())
       .append(getTransferDate())
       .append(getPostcode())
@@ -205,8 +180,6 @@ public final class LocationPricePaidData implements Model {
       .append(getCountry())
       .append(getCategoryType())
       .append(getRecordStatus())
-      .append(getLongitude())
-      .append(getLatitude())
       .toString()
       .hashCode();
   }
@@ -216,7 +189,6 @@ public final class LocationPricePaidData implements Model {
     return new StringBuilder()
       .append("LocationPricePaidData {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("uniqueIdentifier=" + String.valueOf(getUniqueIdentifier()) + ", ")
       .append("price=" + String.valueOf(getPrice()) + ", ")
       .append("transferDate=" + String.valueOf(getTransferDate()) + ", ")
       .append("postcode=" + String.valueOf(getPostcode()) + ", ")
@@ -231,14 +203,12 @@ public final class LocationPricePaidData implements Model {
       .append("district=" + String.valueOf(getDistrict()) + ", ")
       .append("country=" + String.valueOf(getCountry()) + ", ")
       .append("categoryType=" + String.valueOf(getCategoryType()) + ", ")
-      .append("recordStatus=" + String.valueOf(getRecordStatus()) + ", ")
-      .append("longitude=" + String.valueOf(getLongitude()) + ", ")
-      .append("latitude=" + String.valueOf(getLatitude()))
+      .append("recordStatus=" + String.valueOf(getRecordStatus()))
       .append("}")
       .toString();
   }
   
-  public static UniqueIdentifierStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -277,16 +247,12 @@ public final class LocationPricePaidData implements Model {
       null,
       null,
       null,
-      null,
-      null,
-      null,
       null
     );
   }
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      uniqueIdentifier,
       price,
       transferDate,
       postcode,
@@ -301,15 +267,8 @@ public final class LocationPricePaidData implements Model {
       district,
       country,
       categoryType,
-      recordStatus,
-      longitude,
-      latitude);
+      recordStatus);
   }
-  public interface UniqueIdentifierStep {
-    BuildStep uniqueIdentifier(String uniqueIdentifier);
-  }
-  
-
   public interface BuildStep {
     LocationPricePaidData build();
     BuildStep id(String id) throws IllegalArgumentException;
@@ -328,14 +287,11 @@ public final class LocationPricePaidData implements Model {
     BuildStep country(String country);
     BuildStep categoryType(String categoryType);
     BuildStep recordStatus(String recordStatus);
-    BuildStep longitude(Float longitude);
-    BuildStep latitude(Float latitude);
   }
   
 
-  public static class Builder implements UniqueIdentifierStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
-    private String uniqueIdentifier;
     private Integer price;
     private String transferDate;
     private String postcode;
@@ -351,15 +307,12 @@ public final class LocationPricePaidData implements Model {
     private String country;
     private String categoryType;
     private String recordStatus;
-    private Float longitude;
-    private Float latitude;
     @Override
      public LocationPricePaidData build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
         return new LocationPricePaidData(
           id,
-          uniqueIdentifier,
           price,
           transferDate,
           postcode,
@@ -374,16 +327,7 @@ public final class LocationPricePaidData implements Model {
           district,
           country,
           categoryType,
-          recordStatus,
-          longitude,
-          latitude);
-    }
-    
-    @Override
-     public BuildStep uniqueIdentifier(String uniqueIdentifier) {
-        Objects.requireNonNull(uniqueIdentifier);
-        this.uniqueIdentifier = uniqueIdentifier;
-        return this;
+          recordStatus);
     }
     
     @Override
@@ -476,18 +420,6 @@ public final class LocationPricePaidData implements Model {
         return this;
     }
     
-    @Override
-     public BuildStep longitude(Float longitude) {
-        this.longitude = longitude;
-        return this;
-    }
-    
-    @Override
-     public BuildStep latitude(Float latitude) {
-        this.latitude = latitude;
-        return this;
-    }
-    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -511,10 +443,9 @@ public final class LocationPricePaidData implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String uniqueIdentifier, Integer price, String transferDate, String postcode, String propertyType, String newOrOld, String duration, String paon, String saon, String strees, String locality, String town, String district, String country, String categoryType, String recordStatus, Float longitude, Float latitude) {
+    private CopyOfBuilder(String id, Integer price, String transferDate, String postcode, String propertyType, String newOrOld, String duration, String paon, String saon, String strees, String locality, String town, String district, String country, String categoryType, String recordStatus) {
       super.id(id);
-      super.uniqueIdentifier(uniqueIdentifier)
-        .price(price)
+      super.price(price)
         .transferDate(transferDate)
         .postcode(postcode)
         .propertyType(propertyType)
@@ -528,14 +459,7 @@ public final class LocationPricePaidData implements Model {
         .district(district)
         .country(country)
         .categoryType(categoryType)
-        .recordStatus(recordStatus)
-        .longitude(longitude)
-        .latitude(latitude);
-    }
-    
-    @Override
-     public CopyOfBuilder uniqueIdentifier(String uniqueIdentifier) {
-      return (CopyOfBuilder) super.uniqueIdentifier(uniqueIdentifier);
+        .recordStatus(recordStatus);
     }
     
     @Override
@@ -611,16 +535,6 @@ public final class LocationPricePaidData implements Model {
     @Override
      public CopyOfBuilder recordStatus(String recordStatus) {
       return (CopyOfBuilder) super.recordStatus(recordStatus);
-    }
-    
-    @Override
-     public CopyOfBuilder longitude(Float longitude) {
-      return (CopyOfBuilder) super.longitude(longitude);
-    }
-    
-    @Override
-     public CopyOfBuilder latitude(Float latitude) {
-      return (CopyOfBuilder) super.latitude(latitude);
     }
   }
   

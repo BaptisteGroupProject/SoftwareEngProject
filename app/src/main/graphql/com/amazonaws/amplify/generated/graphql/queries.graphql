@@ -113,6 +113,35 @@ query ListPricePaidDataJsons(
     nextToken
   }
 }
+query GetPricePaidDataJsonTest($id: ID!) {
+  getPricePaidDataJsonTest(id: $id) {
+    id
+    postcode
+    locationPaidB
+    createdAt
+    updatedAt
+  }
+}
+query ListPricePaidDataJsonTests(
+  $filter: ModelPricePaidDataJsonTestFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPricePaidDataJsonTests(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      postcode
+      locationPaidB
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetPricePaidJson($id: ID!) {
   getPricePaidJson(id: $id) {
     id
@@ -187,6 +216,30 @@ query ListLocationPricePaidDatas(
       country
       categoryType
       recordStatus
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query QueryByPostcode(
+  $postcode: String
+  $sortDirection: ModelSortDirection
+  $filter: ModelPricePaidJsonFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  queryByPostcode(
+    postcode: $postcode
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      postcode
+      locationPaid
       createdAt
       updatedAt
     }

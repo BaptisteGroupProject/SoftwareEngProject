@@ -5,6 +5,7 @@ import android.app.Application;
 import android.util.Log;
 
 
+import com.ASETP.project.utils.QueryFactory;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin;
 import com.amplifyframework.api.aws.AWSApiPlugin;

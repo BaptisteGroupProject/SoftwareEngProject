@@ -244,7 +244,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
             firstPostcode = postcode[2];
             secondPostcode = postcode[3];
         }
-
         getLocationPaidData(placeLikelihood.getPlace().getLatLng());
     }
 

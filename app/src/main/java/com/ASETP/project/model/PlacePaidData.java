@@ -203,4 +203,25 @@ public class PlacePaidData {
         this.postcode = postcode;
     }
 
+    @Override
+    public String toString() {
+        return "PlacePaidData{" +
+                "uniqueIdentifier='" + uniqueIdentifier + '\'' +
+                ", price=" + price +
+                ", transferDate='" + transferDate + '\'' +
+                ", postcode='" + postcode + '\'' +
+                ", propertyType='" + propertyType + '\'' +
+                ", newOrOld='" + newOrOld + '\'' +
+                ", duration='" + duration + '\'' +
+                ", paon='" + paon + '\'' +
+                ", saon='" + saon + '\'' +
+                ", strees='" + strees + '\'' +
+                ", locality='" + locality + '\'' +
+                ", town='" + town + '\'' +
+                ", district='" + district + '\'' +
+                ", country='" + country + '\'' +
+                ", categoryType='" + categoryType + '\'' +
+                ", recordStatusS='" + recordStatusS + '\'' +
+                '}';
+    }
 }
