@@ -36,6 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+
 /**
  * @author MirageLe
  */
@@ -48,6 +51,8 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
     private Dialog loadingDialog;
 
     private SharedPreferences preferences;
+
+    private CompositeDisposable compositeDisposable;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -143,6 +148,19 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    protected void addSubscription(Disposable disposable) {
+        if (compositeDisposable == null) {
+            compositeDisposable = new CompositeDisposable();
+        }
+        compositeDisposable.add(disposable);
+    }
+
+    protected void unSubscription() {
+        if (compositeDisposable != null) {
+            compositeDisposable.dispose();
         }
     }
 

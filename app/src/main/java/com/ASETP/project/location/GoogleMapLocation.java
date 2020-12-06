@@ -139,6 +139,10 @@ public class GoogleMapLocation {
         }
     }
 
+    public void moveToCamera(LatLng latLng) {
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
+    }
+
     public void addLocationPlaceMarker(LocationPlaces locationPlaces) {
         googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(locationPlaces.getLatitude(), locationPlaces.getLongitude()))

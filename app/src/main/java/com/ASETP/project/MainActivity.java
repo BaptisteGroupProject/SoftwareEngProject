@@ -1,17 +1,23 @@
 package com.ASETP.project;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 
@@ -22,8 +28,6 @@ import com.ASETP.project.databinding.ActivityMainBinding;
 import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.location.GoogleMapLocation;
 import com.ASETP.project.model.LocationPlaces;
-import com.ASETP.project.model.PlacePaidData;
-import com.ASETP.project.utils.FileUtils;
 import com.amplifyframework.analytics.UserProfile;
 import com.amplifyframework.api.graphql.GraphQLRequest;
 import com.amplifyframework.api.graphql.GraphQLResponse;
@@ -32,9 +36,7 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelPagination;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.LocationPlace;
 import com.amplifyframework.datastore.generated.model.LocationPlaceByJson;
-import com.amplifyframework.datastore.generated.model.PricePaidJson;
 import com.amplifyframework.datastore.generated.model.UserLocation;
 import com.amplifyframework.rx.RxAmplify;
 import com.google.android.gms.location.LocationCallback;
@@ -43,14 +45,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
+import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,16 +61,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.rxjava3.core.CompletableObserver;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
-import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Consumer;
-import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 
@@ -81,7 +77,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
     private static final int REQUEST_CODE = 101;
 
+    private static final int REQUEST_FOR_PLACE = 114;
+
     private TextView username, lat, lon, currentLocation;
+
+    private LatLng userLocation;
 
 
     /**
@@ -135,6 +135,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
     private void setToolBar() {
         initToolBar(binding.appbar.toolbar, true, "Map");
+        binding.appbar.toolbar.inflateMenu(R.menu.toolbar);
         binding.appbar.toolbar.setNavigationIcon(R.mipmap.home_nav);
     }
 
@@ -147,9 +148,20 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             binding.drawerLayout.openDrawer(GravityCompat.START);
+        } else if (item.getItemId() == R.id.search) {
+            List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
+            Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this);
+            startActivityForResult(intent, REQUEST_FOR_PLACE);
         }
         return true;
     }
@@ -160,6 +172,14 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         getLocationPermission();
         mapLocation.updateLocationUi();
         mapLocation.constantGetLocation(locationCallback);
+
+        mapLocation.getGoogleMap().setOnMyLocationButtonClickListener(() -> {
+            Log.e(tag, "click");
+            if (userLocation != null) {
+                getUserPostcode(userLocation);
+            }
+            return false;
+        });
         setOnMarkerListener();
     }
 
@@ -203,6 +223,20 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode) {
+            case REQUEST_FOR_PLACE:
+                if (resultCode == RESULT_OK) {
+                    Place place = Autocomplete.getPlaceFromIntent(data);
+                    getUserPostcode(place.getLatLng());
+                }
+                break;
+            default:
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void setTextAndUpload(PlaceLikelihood placeLikelihood) {
         String username = "Email: " + RxAmplify.Auth.getCurrentUser().getUsername();
         this.username.setText(username);
@@ -225,29 +259,30 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
     @Override
     public void onPlace(PlaceLikelihood placeLikelihood) {
+        userLocation = placeLikelihood.getPlace().getLatLng();
         setTextAndUpload(placeLikelihood);
-        getUserPostcode(placeLikelihood);
+        getUserPostcode(placeLikelihood.getPlace().getLatLng());
 //        setMarker(searchIn500M(placeLikelihood.getPlace().getLatLng()));
     }
 
     String firstPostcode, secondPostcode;
 
-    private void getUserPostcode(PlaceLikelihood placeLikelihood) {
-        String[] split = Objects.requireNonNull(placeLikelihood.getPlace().getAddress()).split(",");
-        String[] postcode = split[2].split(" ");
-        Log.e(tag, Arrays.toString(split));
+    private void getUserPostcode(LatLng latLng) {
+        Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
         try {
-            firstPostcode = postcode[2];
-            secondPostcode = postcode[3];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            postcode = split[1].split(" ");
-            firstPostcode = postcode[2];
-            secondPostcode = postcode[3];
+            List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            String[] split = addresses.get(0).getPostalCode().split(" ");
+            firstPostcode = split[0];
+            secondPostcode = split[1];
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        getLocationPaidData(placeLikelihood.getPlace().getLatLng());
+        getLocationPaidData(latLng);
     }
 
     private void getLocationPaidData(LatLng latLng) {
+        mapLocation.getGoogleMap().clear();
+        mapLocation.moveToCamera(latLng);
         BehaviorSubject<GraphQLRequest<PaginatedResult<LocationPlaceByJson>>> subject =
                 BehaviorSubject.createDefault(ModelQuery.list(LocationPlaceByJson.class,
                         LocationPlaceByJson.FIRST_POSTCODE.eq(firstPostcode),
@@ -266,13 +301,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
                 }).concatMapIterable(GraphQLResponse::getData).observeOn(AndroidScheduler.mainThread()).subscribe(new Observer<LocationPlaceByJson>() {
             @Override
             public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+//                //cancel the internet connection created before
+//                unSubscription();
+//                //add this request to management
+//                addSubscription(d);
                 Log.e(tag, "start");
             }
 
             @Override
             public void onNext(@io.reactivex.rxjava3.annotations.NonNull LocationPlaceByJson locationPlaceByJson) {
                 paringLocationPlace(latLng, locationPlaceByJson);
-                onComplete();
             }
 
             @Override

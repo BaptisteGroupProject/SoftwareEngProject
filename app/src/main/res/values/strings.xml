@@ -39,5 +39,6 @@
     <string name="lsaoCode">LSAO Code</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="search">Search</string>
 </resources>
 
