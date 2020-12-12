@@ -1,5 +1,6 @@
 package com.ASETP.project;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -69,27 +70,36 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject;
  * @author Mirage
  * @date 2020/11/20
  */
-public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> {
+public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> implements View.OnClickListener {
 
     public static String DATA_KEY = "data";
 
     public static String POSTCODE = "postcode";
+    public static String SORTTYPE = "sortType";
+
+    private static final int DEFAULT = 1;
+    private static final int BYPRICE = 2;
 
     private List<PlacePaidData> data = new ArrayList<>();
 
     private String postcode;
+    private int sortType;
 
     private HistoryAdapter adapter;
 
-    public static void startHistoryActivity(Context context, String postcode) {
+    public static void startHistoryActivity(Context context, String postcode, int sortType) {
         Intent intent = new Intent(context, HistoryActivity.class);
         intent.putExtra(POSTCODE, postcode);
+        intent.putExtra(SORTTYPE, sortType);
         context.startActivity(intent);
     }
 
     @Override
     protected void init(Bundle bundle) {
+        binding.btnSortByPrice.setOnClickListener(this);
+        binding.btnSortByDate.setOnClickListener(this);
         postcode = getIntent().getStringExtra(POSTCODE);
+        sortType = getIntent().getIntExtra(SORTTYPE, DEFAULT);
         initToolBar(binding.appbar.toolbar, true, postcode + " History");
         QueryFactory.init(this);
         queryByPostcode();
@@ -160,7 +170,15 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> {
                 data.add(placePaidData);
             }
         }
-        sortByDate();
+
+        switch(sortType) {
+            case DEFAULT:
+                sortByDate();
+                break;
+            case BYPRICE:
+                sortByPrice();
+                break;
+        }
     }
 
     private void sortByDate() {
@@ -173,5 +191,21 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> {
                 return 0;
             }
         });
+    }
+
+
+    private void sortByPrice() {
+        Collections.sort(data, (o1, o2) -> Integer.compare(o1.getPrice(), o2.getPrice()));
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        Intent intent = getIntent();
+        intent.putExtra(POSTCODE, postcode);
+        if (id == R.id.btnSortByDate) { intent.putExtra(SORTTYPE, DEFAULT); }
+        else if (id == R.id.btnSortByPrice) { intent.putExtra(SORTTYPE, BYPRICE); }
+        finish();
+        startActivity(intent);
     }
 }

@@ -351,7 +351,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
     }
 
     private void getWholeLocationPaidData(String postcode) {
-        HistoryActivity.startHistoryActivity(this, postcode);
+        HistoryActivity.startHistoryActivity(this, postcode, 1);
     }
 
 
