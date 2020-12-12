@@ -222,6 +222,96 @@ query ListLocationPricePaidDatas(
     nextToken
   }
 }
+query GetCrimeData($id: ID!) {
+  getCrimeData(id: $id) {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+query ListCrimeDatas(
+  $filter: ModelCrimeDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCrimeDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      crimeId
+      month
+      reportedBy
+      fallsWithin
+      longitude
+      latitude
+      location
+      LSOACode
+      LSOAName
+      CrimeType
+      lastOutCome
+      Context
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetUkCrimeData($id: ID!) {
+  getUKCrimeData(id: $id) {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+query ListUkCrimeDatas(
+  $filter: ModelUKCrimeDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUKCrimeDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      crimeId
+      month
+      reportedBy
+      fallsWithin
+      longitude
+      latitude
+      location
+      LSOACode
+      LSOAName
+      CrimeType
+      lastOutCome
+      Context
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query QueryByPostcode(
   $postcode: String
   $sortDirection: ModelSortDirection
@@ -240,6 +330,42 @@ query QueryByPostcode(
       id
       postcode
       locationPaid
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query ByPosition(
+  $longitude: Float
+  $latitude: ModelFloatKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelCrimeDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  byPosition(
+    longitude: $longitude
+    latitude: $latitude
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      crimeId
+      month
+      reportedBy
+      fallsWithin
+      longitude
+      latitude
+      location
+      LSOACode
+      LSOAName
+      CrimeType
+      lastOutCome
+      Context
       createdAt
       updatedAt
     }

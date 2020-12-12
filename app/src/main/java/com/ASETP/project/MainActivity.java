@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -49,6 +48,7 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
 
@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
     private GoogleMapLocation mapLocation;
 
-    private static final int REQUEST_CODE = 101;
+    public static final int REQUEST_CODE = 101;
 
     private static final int REQUEST_FOR_PLACE = 114;
 
@@ -87,7 +87,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
     /**
      * radius of earth km
      */
-    private static final double EARTH_RADIUS = 6378.137;
+    public static final double EARTH_RADIUS = 6378.137;
 
     @Override
     protected void init(Bundle bundle) {
@@ -145,6 +145,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         lat = view.findViewById(R.id.lat);
         lon = view.findViewById(R.id.lon);
         currentLocation = view.findViewById(R.id.location);
+        binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.nav_call) {
+                    signOut();
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -350,8 +360,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         setMarker(locationPlaces);
     }
 
-    private void getWholeLocationPaidData(String postcode) {
-        HistoryActivity.startHistoryActivity(this, postcode, 1);
+    private void getWholeLocationPaidData(String postcode, LatLng position) {
+        DashboardActivity.startDashboardActivity(this, postcode, position);
     }
 
 
@@ -377,7 +387,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
     private void setOnMarkerListener() {
         mapLocation.getGoogleMap().setOnMarkerClickListener(marker -> {
-            getWholeLocationPaidData(marker.getTitle());
+            getWholeLocationPaidData(marker.getTitle(), marker.getPosition());
             return true;
         });
     }
@@ -438,7 +448,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
     @Override
     protected void onDestroy() {
-        signOut();
         super.onDestroy();
     }
 
@@ -452,6 +461,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
             @Override
             public void onComplete() {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 Log.e(tag, "sign out success");
                 finish();
             }

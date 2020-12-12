@@ -299,3 +299,135 @@ mutation DeleteLocationPricePaidData(
     updatedAt
   }
 }
+mutation CreateCrimeData(
+  $input: CreateCrimeDataInput!
+  $condition: ModelCrimeDataConditionInput
+) {
+  createCrimeData(input: $input, condition: $condition) {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCrimeData(
+  $input: UpdateCrimeDataInput!
+  $condition: ModelCrimeDataConditionInput
+) {
+  updateCrimeData(input: $input, condition: $condition) {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCrimeData(
+  $input: DeleteCrimeDataInput!
+  $condition: ModelCrimeDataConditionInput
+) {
+  deleteCrimeData(input: $input, condition: $condition) {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateUkCrimeData(
+  $input: CreateUKCrimeDataInput!
+  $condition: ModelUKCrimeDataConditionInput
+) {
+  createUKCrimeData(input: $input, condition: $condition) {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateUkCrimeData(
+  $input: UpdateUKCrimeDataInput!
+  $condition: ModelUKCrimeDataConditionInput
+) {
+  updateUKCrimeData(input: $input, condition: $condition) {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteUkCrimeData(
+  $input: DeleteUKCrimeDataInput!
+  $condition: ModelUKCrimeDataConditionInput
+) {
+  deleteUKCrimeData(input: $input, condition: $condition) {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}

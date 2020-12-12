@@ -10,9 +10,11 @@ import com.ASETP.project.model.LocationPlaces;
 import com.ASETP.project.model.PlacePaidData;
 import com.amplifyframework.api.graphql.GraphQLResponse;
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.datastore.generated.model.CrimeData;
 import com.amplifyframework.datastore.generated.model.LocationPlace;
 import com.amplifyframework.datastore.generated.model.LocationPricePaidData;
 import com.amplifyframework.datastore.generated.model.PricePaidJson;
+import com.amplifyframework.datastore.generated.model.UKCrimeData;
 import com.amplifyframework.rx.RxAmplify;
 import com.google.gson.Gson;
 
@@ -28,12 +30,18 @@ import java.util.regex.Pattern;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableEmitter;
 import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.core.CompletableOnSubscribe;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.core.SingleSource;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
@@ -74,6 +82,14 @@ public class FileUtils {
         return new BufferedReader(new FileReader(file));
     }
 
+    private BufferedReader getReader(String fileName) throws FileNotFoundException {
+        String privateFilePate = context.getFilesDir().getAbsolutePath() + File.separator + fileName;
+        Log.e(tag, privateFilePate);
+        File file = new File(privateFilePate);
+        Log.e(tag, file.length() + "");
+        return new BufferedReader(new FileReader(file));
+    }
+
 
     /**
      * convert csv line to string lines
@@ -95,6 +111,25 @@ public class FileUtils {
             while (temp.charAt(temp.length() - 1) != '\"') {
                 temp = matcher.find() ? temp + matcher.group().replace(",", "") : temp;
             }
+            lines[i] = temp.trim().replace("\"", "");
+            i++;
+        }
+        return lines;
+    }
+
+    private String[] parsingCrimeData(String line) {
+        Pattern pattern = Pattern.compile(rules);
+        Matcher matcher = pattern.matcher(line);
+        String[] lines = new String[12];
+        int i = 0;
+        while (matcher.find()) {
+            if (i >= 12) {
+                Log.e(tag + " over length", line);
+            }
+            String temp = matcher.group().replace(",", "");
+//            while (temp.charAt(temp.length() - 1) != '\"') {
+//                temp = matcher.find() ? temp + matcher.group().replace(",", "") : temp;
+//            }
             lines[i] = temp.trim().replace("\"", "");
             i++;
         }
@@ -283,6 +318,81 @@ public class FileUtils {
             public void onComplete() {
             }
         });
+    }
+
+    private boolean isCrimeDataEmpty(String text, String type) {
+        return TextUtils.isEmpty(text) || text.equals(type);
+    }
+
+    public void uploadCrimeData() {
+        Completable.create(emitter -> {
+            List<UKCrimeData> dataS = new ArrayList<>();
+            BufferedReader reader = getReader("all.csv");
+            String line;
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] data = parsingCrimeData(line);
+                String longitude = data[4];
+                String latitude = data[5];
+                if (isCrimeDataEmpty(longitude, "Longitude") || isCrimeDataEmpty(latitude, "Latitude")) {
+                    missCount++;
+                    continue;
+                }
+                CrimeData crimeData = CrimeData.builder().crimeId(data[0]).month(data[1])
+                        .reportedBy(data[2]).fallsWithin(data[3])
+                        .longitude(Float.parseFloat(longitude)).latitude(Float.parseFloat(latitude))
+                        .location(data[6]).lsoaCode(data[7]).lsoaName(data[8])
+                        .crimeType(data[9]).lastOutCome(data[10]).build();
+                uploadCrimeData(crimeData);
+            }
+            emitter.onComplete();
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidScheduler.mainThread())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.e(tag, "start upload");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(tag, "missCount = " + missCount);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(tag, "reading crime error," + " error count = " + total, e);
+                    }
+                });
+    }
+
+    private void uploadCrimeData(CrimeData crimeData) throws Exception {
+        if (uploadCount > 30) {
+            Log.e(tag, "sleep for 0.2S");
+            Thread.sleep(200);
+        }
+        RxAmplify.API.mutate("softwareengproject", ModelMutation.create(crimeData))
+                .subscribeOn(Schedulers.single()).observeOn(AndroidScheduler.mainThread())
+                .subscribe(new SingleObserver<GraphQLResponse<CrimeData>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        uploadCount++;
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull GraphQLResponse<CrimeData> locationPricePaidDataByJsonGraphQLResponse) {
+                        total++;
+                        uploadCount--;
+                        if (total % maxCountPerTerm == 0) {
+                            Log.e(tag, "total count = 5335701 now count = " + total);
+                        }
+                        onReadingListener.onReading((int) (((double) ((double) total / (double) 5335701)) * 100));
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(tag, "upload " + " failed, count = " + total, e);
+                    }
+                });
     }
 
     int dataUploadCount = 0;

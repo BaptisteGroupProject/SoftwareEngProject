@@ -236,3 +236,117 @@ subscription OnDeleteLocationPricePaidData {
     updatedAt
   }
 }
+subscription OnCreateCrimeData {
+  onCreateCrimeData {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCrimeData {
+  onUpdateCrimeData {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCrimeData {
+  onDeleteCrimeData {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateUkCrimeData {
+  onCreateUKCrimeData {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUkCrimeData {
+  onUpdateUKCrimeData {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUkCrimeData {
+  onDeleteUKCrimeData {
+    id
+    crimeId
+    month
+    reportedBy
+    fallsWithin
+    longitude
+    latitude
+    location
+    LSOACode
+    LSOAName
+    CrimeType
+    lastOutCome
+    Context
+    createdAt
+    updatedAt
+  }
+}

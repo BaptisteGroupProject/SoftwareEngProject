@@ -16,10 +16,26 @@ public class LoadingActivity extends BaseActivity<ActivityLoadingBinding> {
 
     @Override
     protected void init(Bundle bundle) {
+//        binding.progress.setMax(100);
+//        FileUtils fileUtils = new FileUtils(this);
+//        fileUtils.setOnReadingListener(new FileUtils.OnReadingListener() {
+//            @Override
+//            public void onReading(int i) {
+//                binding.progress.setProgress(i);
+//            }
+//
+//            @Override
+//            public void onSuccess() {
+//
+//            }
+//        });
+//        fileUtils.uploadCrimeData();
         if (Amplify.Auth.getCurrentUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+            finish();
         } else {
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(LoadingActivity.this, LoginActivity.class));
+            finish();
         }
     }
 }

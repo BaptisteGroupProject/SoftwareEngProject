@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,10 +51,10 @@ public class GoogleMapLocation {
     private final Context context;
 
     private Location lastKnownLocation;
-    private final FusedLocationProviderClient fusedLocationProviderClient;
-    private final PlacesClient placesClient;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private PlacesClient placesClient;
 
-    private static final int DEFAULT_ZOOM = 17;
+    public static final int DEFAULT_ZOOM = 17;
 
     OnLocationSuccessListener onLocationSuccessListener;
 
@@ -68,6 +69,10 @@ public class GoogleMapLocation {
         placesClient = Places.createClient(this.context);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.context);
         createLocationRequest();
+    }
+
+    public GoogleMapLocation(Context context) {
+        this.context = context;
     }
 
     public GoogleMap getGoogleMap() {
@@ -147,6 +152,18 @@ public class GoogleMapLocation {
         googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(locationPlaces.getLatitude(), locationPlaces.getLongitude()))
                 .title(locationPlaces.getPostcode()));
+    }
+
+    public void addLocationPlaceMarker(LatLng latLng, String title) {
+        googleMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .title(title));
+    }
+
+    public void addHouseLocation(LatLng latLng) {
+        googleMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .title("house position")).showInfoWindow();
     }
 
     public interface OnLocationSuccessListener {

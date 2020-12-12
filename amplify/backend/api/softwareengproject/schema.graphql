@@ -55,3 +55,34 @@ type LocationPricePaidData @model {
     categoryType: String
     recordStatus: String
 }
+
+type CrimeData @model
+@key(name: "latng-index", fields: ["longitude","latitude"], queryField:"byPosition"){
+    crimeId: ID!
+    month: String
+    reportedBy: String
+    fallsWithin: String
+    longitude: Float
+    latitude: Float
+    location: String
+    LSOACode: String
+    LSOAName: String
+    CrimeType: String
+    lastOutCome: String
+    Context: String
+}
+
+type UKCrimeData @model {
+    crimeId: ID!
+    month: String
+    reportedBy: String
+    fallsWithin: String
+    longitude: Float
+    latitude: Float
+    location: String
+    LSOACode: String
+    LSOAName: String
+    CrimeType: String
+    lastOutCome: String
+    Context: String
+}

@@ -37,12 +37,19 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name=".CrimeHistoryActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".DashboardActivity"
+            android:label="@string/app_name" />
         <activity android:name=".RegisterActivity">
             android:parentActivityName=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
         </activity>
+
         <activity android:name=".ForgotPasswordActivity">
             android:parentActivityName=".LoginActivity">
             <meta-data

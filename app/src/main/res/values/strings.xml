@@ -40,5 +40,7 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="search">Search</string>
+    <string name="crime_history">crime history</string>
+    <string name="logout">logout</string>
 </resources>
 

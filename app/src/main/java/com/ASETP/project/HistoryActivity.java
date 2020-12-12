@@ -16,6 +16,7 @@ import com.ASETP.project.databinding.ActivityHistoryBinding;
 import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.model.PlacePaidData;
 import com.ASETP.project.utils.QueryFactory;
+import com.amazonaws.amplify.generated.graphql.CreateCrimeDataMutation;
 import com.amazonaws.amplify.generated.graphql.QueryByPostcodeQuery;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
@@ -30,9 +31,11 @@ import com.amplifyframework.api.graphql.QueryType;
 import com.amplifyframework.api.graphql.SimpleGraphQLRequest;
 import com.amplifyframework.api.graphql.model.ModelPagination;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.datastore.generated.model.CrimeData;
 import com.amplifyframework.datastore.generated.model.PricePaidJson;
 import com.amplifyframework.rx.RxAmplify;
 import com.apollographql.apollo.GraphQLCall;
+import com.apollographql.apollo.api.Mutation;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.google.android.libraries.places.api.model.Place;
@@ -166,18 +169,18 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> implem
                 }
             }
             if (!isRepeat) {
-                Log.e(tag, placePaidData.toString());
                 data.add(placePaidData);
             }
         }
 
-        switch(sortType) {
+        switch (sortType) {
             case DEFAULT:
                 sortByDate();
                 break;
             case BYPRICE:
                 sortByPrice();
                 break;
+            default:
         }
     }
 
@@ -201,11 +204,12 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> implem
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        Intent intent = getIntent();
-        intent.putExtra(POSTCODE, postcode);
-        if (id == R.id.btnSortByDate) { intent.putExtra(SORTTYPE, DEFAULT); }
-        else if (id == R.id.btnSortByPrice) { intent.putExtra(SORTTYPE, BYPRICE); }
-        finish();
-        startActivity(intent);
+        if (id == R.id.btnSortByDate) {
+            sortByDate();
+            adapter.notifyDataSetChanged();
+        } else if (id == R.id.btnSortByPrice) {
+            sortByPrice();
+            adapter.notifyDataSetChanged();
+        }
     }
 }
