@@ -145,14 +145,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         lat = view.findViewById(R.id.lat);
         lon = view.findViewById(R.id.lon);
         currentLocation = view.findViewById(R.id.location);
-        binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.nav_call) {
-                    signOut();
-                }
-                return false;
+        binding.navView.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.nav_call) {
+                signOut();
             }
+            return false;
         });
 
     }

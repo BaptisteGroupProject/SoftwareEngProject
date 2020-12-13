@@ -5,8 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ASETP.project.adapter.HistoryAdapter;
@@ -73,7 +77,7 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject;
  * @author Mirage
  * @date 2020/11/20
  */
-public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> implements View.OnClickListener {
+public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> {
 
     public static String DATA_KEY = "data";
 
@@ -99,13 +103,29 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> implem
 
     @Override
     protected void init(Bundle bundle) {
-        binding.btnSortByPrice.setOnClickListener(this);
-        binding.btnSortByDate.setOnClickListener(this);
         postcode = getIntent().getStringExtra(POSTCODE);
         sortType = getIntent().getIntExtra(SORTTYPE, DEFAULT);
         initToolBar(binding.appbar.toolbar, true, postcode + " History");
         QueryFactory.init(this);
         queryByPostcode();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.sort_type, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.date) {
+            sortByDate();
+        } else {
+            sortByPrice();
+        }
+        adapter.notifyDataSetChanged();
+        return super.onOptionsItemSelected(item);
     }
 
     private void queryByPostcode() {
@@ -199,17 +219,5 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> implem
 
     private void sortByPrice() {
         Collections.sort(data, (o1, o2) -> Integer.compare(o1.getPrice(), o2.getPrice()));
-    }
-
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.btnSortByDate) {
-            sortByDate();
-            adapter.notifyDataSetChanged();
-        } else if (id == R.id.btnSortByPrice) {
-            sortByPrice();
-            adapter.notifyDataSetChanged();
-        }
     }
 }

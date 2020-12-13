@@ -42,5 +42,8 @@
     <string name="search">Search</string>
     <string name="crime_history">crime history</string>
     <string name="logout">logout</string>
+    <string name="housing_history">Transaction History</string>
+    <string name="sort_by_date">Sort by date</string>
+    <string name="sort_by_price">Sort by price</string>
 </resources>
 

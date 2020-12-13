@@ -10,7 +10,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
 
@@ -98,6 +97,22 @@
             </androidx.cardview.widget.CardView>
 
         </GridLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@color/quantum_white_100"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="@string/housing_history"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/historyChart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
     </LinearLayout>
 
 </ScrollView>
