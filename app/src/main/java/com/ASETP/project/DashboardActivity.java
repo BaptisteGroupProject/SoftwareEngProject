@@ -91,15 +91,21 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding> im
         binding.historyChart.getAxisLeft().enableGridDashedLine(5f, 5f, 0f);
         for (int i = 0; i < data.size(); i++) {
             Entry entry = new Entry(i, data.get(i).getPrice());
+            Log.e(tag, data.get(i).toString());
             xLabel.add(data.get(i).getTransferDate());
             values.add(entry);
         }
-        binding.historyChart.getXAxis().setLabelCount(3,true);
+        binding.historyChart.getXAxis().setLabelCount(3, true);
         binding.historyChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         binding.historyChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                return xLabel.get((int) value);
+                int index = (int) value;
+                if (index < 0 || index >= xLabel.size()) {
+                    return "";
+                } else {
+                    return xLabel.get((int) value);
+                }
             }
         });
         LineDataSet lineDataSet = new LineDataSet(values, "data 1");

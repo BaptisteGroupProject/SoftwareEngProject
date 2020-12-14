@@ -278,7 +278,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
         try {
             List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            Log.e(tag, "postcode = " + addresses.get(0).getPostalCode());
             String[] split = addresses.get(0).getPostalCode().split(" ");
+            if (split.length <= 1) {
+                showToast("No Data Found");
+                return;
+            }
             firstPostcode = split[0];
             secondPostcode = split[1];
         } catch (IOException e) {
