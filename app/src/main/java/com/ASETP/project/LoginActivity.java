@@ -1,5 +1,6 @@
 package com.ASETP.project;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -17,6 +19,7 @@ import com.ASETP.project.databinding.ActivityLoginBinding;
 import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.utils.FileUtils;
 import com.amplifyframework.auth.result.AuthSignInResult;
+import com.amplifyframework.auth.result.AuthSignUpResult;
 import com.amplifyframework.rx.RxAmplify;
 
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -32,6 +35,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener, TextWatcher {
 
     private int maxLoginAttempts = 4;
+
+    private String errorMsg = "User not confirmed in the system.";
 
     @Override
     protected void init(Bundle bundle) {
@@ -75,10 +80,80 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
             @Override
             public void onError(@NonNull Throwable e) {
                 Log.e(tag, "login error", e);
+                if (e.getMessage().equals(errorMsg)) {
+                    Log.e(tag, "111");
+                    showDialog(name, "Confirm Email");
+                }
                 showToast(e.getMessage());
                 hideWaitDialog();
             }
         });
+    }
+
+    private void showDialog(String username, String title) {
+        EditText editText = new EditText(this);
+        editText.setBackground(null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setView(editText)
+                .setTitle(title)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    String code = editText.getText().toString();
+                    confirmEmail(username, code);
+                }).setNegativeButton("RESENT", (dialog, which) -> {
+                    resent(username);
+                }).setCancelable(true);
+        builder.create().show();
+    }
+
+    private void resent(String username) {
+        RxAmplify.Auth.resendSignUpCode(username).subscribeOn(Schedulers.io())
+                .observeOn(AndroidScheduler.mainThread()).subscribe(new SingleObserver<AuthSignUpResult>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                showWaitDialog("");
+            }
+
+            @Override
+            public void onSuccess(@NonNull AuthSignUpResult authSignUpResult) {
+                hideWaitDialog();
+                showDialog(username, "Confirm Email");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                hideWaitDialog();
+                Log.e(tag, "resent error", e);
+                showToast(e.getMessage());
+            }
+        });
+    }
+
+    private void confirmEmail(String username, String code) {
+        RxAmplify.Auth.confirmSignUp(username, code)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidScheduler.mainThread())
+                .subscribe(new SingleObserver<AuthSignUpResult>() {
+                               @Override
+                               public void onSubscribe(@NonNull Disposable d) {
+                                   showWaitDialog("");
+                               }
+
+                               @Override
+                               public void onSuccess(@NonNull AuthSignUpResult authSignUpResult) {
+                                   Log.e(tag, authSignUpResult.toString());
+                                   String inputPassword = binding.inputPassword.getText().toString();
+                                   validate(username, inputPassword);
+                               }
+
+                               @Override
+                               public void onError(@NonNull Throwable e) {
+                                   Log.e(tag, "confirmError", e);
+                                   showToast(e.getMessage());
+                                   hideWaitDialog();
+                                   showDialog(username, "Code error, please try again");
+                               }
+                           }
+                );
     }
 
     private boolean validateEmail(String inputEmail) {

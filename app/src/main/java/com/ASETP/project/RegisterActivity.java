@@ -15,6 +15,8 @@ import androidx.core.content.ContextCompat;
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityRegisterBinding;
 import com.ASETP.project.location.AndroidScheduler;
+import com.amazonaws.services.cognitoidentityprovider.model.UserNotConfirmedException;
+import com.amplifyframework.auth.AuthException;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.auth.result.AuthSignUpResult;
@@ -63,7 +65,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                         hideWaitDialog();
                         showToast("An Email had been send");
                         Log.e(tag, authSignUpResult.toString());
-                        showDialog(email);
+                        showDialog(email, "Confirm Email");
                     }
 
                     @Override
@@ -75,12 +77,12 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                 });
     }
 
-    private void showDialog(String username) {
+    private void showDialog(String username, String title) {
         EditText editText = new EditText(this);
         editText.setBackground(null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setView(editText)
-                .setTitle("Confirm Email")
+                .setTitle(title)
                 .setPositiveButton("OK", (dialog, which) -> {
                     String code = editText.getText().toString();
                     confirmEmail(username, code);
@@ -116,6 +118,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                                    Log.e(tag, "confirmError", e);
                                    showToast(e.getMessage());
                                    hideWaitDialog();
+                                   showDialog(username, "Code error, please try again");
                                }
                            }
                 );
