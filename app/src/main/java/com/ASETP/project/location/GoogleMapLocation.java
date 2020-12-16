@@ -148,8 +148,8 @@ public class GoogleMapLocation {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
     }
 
-    public void addLocationPlaceMarker(LocationPlaces locationPlaces) {
-        googleMap.addMarker(new MarkerOptions()
+    public Marker addLocationPlaceMarker(LocationPlaces locationPlaces) {
+       return googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(locationPlaces.getLatitude(), locationPlaces.getLongitude()))
                 .title(locationPlaces.getPostcode()));
     }

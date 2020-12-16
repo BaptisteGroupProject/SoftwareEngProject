@@ -45,5 +45,6 @@
     <string name="housing_history">Transaction History</string>
     <string name="sort_by_date">Sort by date</string>
     <string name="sort_by_price">Sort by price</string>
+    <string name="heatmap">HeatMap</string>
 </resources>
 

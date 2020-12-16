@@ -1,6 +1,7 @@
 package com.ASETP.project;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -22,7 +23,6 @@ import androidx.core.view.GravityCompat;
 
 
 import com.ASETP.project.base.BaseActivity;
-import com.ASETP.project.dabase.DaoManager;
 import com.ASETP.project.databinding.ActivityMainBinding;
 import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.location.GoogleMapLocation;
@@ -44,12 +44,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
+import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
 
 import java.io.IOException;
@@ -82,6 +86,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
     private TextView username, lat, lon, currentLocation;
 
     private LatLng userLocation;
+
+    private TileOverlay overlay;
+
+    private List<Marker> markerList = new ArrayList<>();
 
 
     /**
@@ -169,6 +177,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
             List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
             Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this);
             startActivityForResult(intent, REQUEST_FOR_PLACE);
+        } else {
+            setHeatMap();
         }
         return true;
     }
@@ -349,6 +359,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         double minLong = latLng.longitude - dLng;
         double maxLong = latLng.longitude + dLng;
         List<LocationPlaces> locationPlaces = new ArrayList<>();
+        List<LatLng> latLngs = new ArrayList<>();
         Gson gson = new Gson();
         for (String temp : locationPlaceByJson.getLocationItems()) {
             LocationPlaces locationPlaces1 = gson.fromJson(temp, LocationPlaces.class);
@@ -356,37 +367,47 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
                     locationPlaces1.getLatitude() < maxLat &&
                     locationPlaces1.getLongitude() > minLong &&
                     locationPlaces1.getLongitude() < maxLong) {
+                latLngs.add(new LatLng(locationPlaces1.getLatitude(), locationPlaces1.getLongitude()));
                 locationPlaces.add(locationPlaces1);
             }
         }
-        setMarker(locationPlaces);
+        markerList = setMarker(locationPlaces);
+        addHeatMap(latLngs);
+    }
+
+    private void addHeatMap(List<LatLng> latLngs) {
+        HeatmapTileProvider provider = new HeatmapTileProvider.Builder().data(latLngs).build();
+        overlay = mapLocation.getGoogleMap().addTileOverlay(new TileOverlayOptions().tileProvider(provider));
+        overlay.setVisible(false);
+    }
+
+    private void setHeatMap() {
+        if (overlay.isVisible()) {
+            for (Marker marker : markerList) {
+                marker.setVisible(true);
+            }
+            overlay.setVisible(false);
+        } else {
+            for (Marker marker : markerList) {
+                marker.setVisible(false);
+            }
+            overlay.setVisible(true);
+        }
     }
 
     private void getWholeLocationPaidData(String postcode, LatLng position) {
         DashboardActivity.startDashboardActivity(this, postcode, position);
     }
 
-
-    private List<LocationPlaces> searchIn500M(LatLng latLng) {
-        //0.5KM
-        double dis = 0.5;
-        double dLng = 2 * Math.asin(Math.sin(dis / (2 * EARTH_RADIUS)) / Math.cos(latLng.latitude * Math.PI / 180));
-        dLng = dLng * 180 / Math.PI;
-        double dLat = dis / EARTH_RADIUS;
-        dLat = dLat * 180 / Math.PI;
-        double minLat = latLng.latitude - dLat;
-        double maxLat = latLng.latitude + dLat;
-        double minLong = latLng.longitude - dLng;
-        double maxLong = latLng.longitude + dLng;
-        return DaoManager.getLocationInstance(this).searchLocationPlacesWithPosition(minLat, maxLat, minLong, maxLong);
-    }
-
-    private void setMarker(List<LocationPlaces> locationPlaces) {
+    private List<Marker> setMarker(List<LocationPlaces> locationPlaces) {
+        List<Marker> markers = new ArrayList<>();
         for (LocationPlaces locationPlaces1 : locationPlaces) {
-            mapLocation.addLocationPlaceMarker(locationPlaces1);
+            markers.add(mapLocation.addLocationPlaceMarker(locationPlaces1));
         }
+        return markers;
     }
 
+    @SuppressLint("PotentialBehaviorOverride")
     private void setOnMarkerListener() {
         mapLocation.getGoogleMap().setOnMarkerClickListener(marker -> {
             getWholeLocationPaidData(marker.getTitle(), marker.getPosition());
