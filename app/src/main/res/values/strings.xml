@@ -46,5 +46,7 @@
     <string name="sort_by_date">Sort by date</string>
     <string name="sort_by_price">Sort by price</string>
     <string name="heatmap">HeatMap</string>
+    <string name="accessKey">AKIAQU2WGXGCLFVTEE6J</string>
+    <string name="secret_key">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</string>
 </resources>
 

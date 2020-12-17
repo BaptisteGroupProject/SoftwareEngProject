@@ -23,6 +23,7 @@ import androidx.core.view.GravityCompat;
 
 
 import com.ASETP.project.base.BaseActivity;
+import com.ASETP.project.dabase.DaoManager;
 import com.ASETP.project.databinding.ActivityMainBinding;
 import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.location.GoogleMapLocation;
@@ -43,7 +44,10 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
@@ -53,8 +57,13 @@ import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
+import com.google.maps.android.data.geojson.GeoJsonFeature;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.geojson.GeoJsonPointStyle;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -65,7 +74,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableEmitter;
 import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.core.CompletableOnSubscribe;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -90,6 +102,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
     private TileOverlay overlay;
 
     private List<Marker> markerList = new ArrayList<>();
+
+    List<GeoJsonLayer> layers = new ArrayList<>();
 
 
     /**
@@ -189,11 +203,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
         getLocationPermission();
         mapLocation.updateLocationUi();
         mapLocation.constantGetLocation(locationCallback);
-
+        mapLocation.getGoogleMap().setOnCameraIdleListener(() -> {
+            Log.e(tag, "move");
+            paringLocationPlace();
+        });
         mapLocation.getGoogleMap().setOnMyLocationButtonClickListener(() -> {
             Log.e(tag, "click");
             if (userLocation != null) {
-                getUserPostcode(userLocation);
+                mapLocation.moveToCamera(userLocation);
+                return true;
             }
             return false;
         });
@@ -242,14 +260,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        switch (requestCode) {
-            case REQUEST_FOR_PLACE:
-                if (resultCode == RESULT_OK) {
-                    Place place = Autocomplete.getPlaceFromIntent(data);
-                    getUserPostcode(place.getLatLng());
-                }
-                break;
-            default:
+        if (requestCode == REQUEST_FOR_PLACE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                mapLocation.moveToCamera(place.getLatLng());
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -278,104 +293,29 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
     public void onPlace(PlaceLikelihood placeLikelihood) {
         userLocation = placeLikelihood.getPlace().getLatLng();
         setTextAndUpload(placeLikelihood);
-        getUserPostcode(placeLikelihood.getPlace().getLatLng());
-//        setMarker(searchIn500M(placeLikelihood.getPlace().getLatLng()));
     }
 
-    String firstPostcode, secondPostcode;
-
-    private void getUserPostcode(LatLng latLng) {
-        Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
-        try {
-            List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-            Log.e(tag, "postcode = " + addresses.get(0).getPostalCode());
-            String[] split = addresses.get(0).getPostalCode().split(" ");
-            if (split.length <= 1) {
-                showToast("No Data Found");
-                return;
-            }
-            firstPostcode = split[0];
-            secondPostcode = split[1];
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        getLocationPaidData(latLng);
-    }
-
-    private void getLocationPaidData(LatLng latLng) {
+    private void paringLocationPlace() {
         mapLocation.getGoogleMap().clear();
-        mapLocation.moveToCamera(latLng);
-        BehaviorSubject<GraphQLRequest<PaginatedResult<LocationPlaceByJson>>> subject =
-                BehaviorSubject.createDefault(ModelQuery.list(LocationPlaceByJson.class,
-                        LocationPlaceByJson.FIRST_POSTCODE.eq(firstPostcode),
-                        ModelPagination.limit(10000)));
-        subject.concatMap(paginatedResultGraphQLRequest -> RxAmplify.API.query("softwareengproject", paginatedResultGraphQLRequest).toObservable())
-                .doOnNext(response -> {
-                    if (response.hasErrors()) {
-                        subject.onError(new Exception(String.format("Query failed: %s", response.getErrors())));
-                    } else if (!response.hasData()) {
-                        subject.onError(new Exception("Empty response from AppSync."));
-                    } else if (response.getData().hasNextResult()) {
-                        subject.onNext(response.getData().getRequestForNextResult());
-                    } else {
-                        subject.onComplete();
-                    }
-                }).concatMapIterable(GraphQLResponse::getData).observeOn(AndroidScheduler.mainThread()).subscribe(new Observer<LocationPlaceByJson>() {
-            @Override
-            public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
-//                //cancel the internet connection created before
-//                unSubscription();
-//                //add this request to management
-//                addSubscription(d);
-                Log.e(tag, "start");
-            }
-
-            @Override
-            public void onNext(@io.reactivex.rxjava3.annotations.NonNull LocationPlaceByJson locationPlaceByJson) {
-                paringLocationPlace(latLng, locationPlaceByJson);
-            }
-
-            @Override
-            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                Log.e(tag, "read error");
-            }
-
-            @Override
-            public void onComplete() {
-                Log.e(tag, "read complete");
-            }
-        });
-    }
-
-    private void paringLocationPlace(LatLng latLng, LocationPlaceByJson locationPlaceByJson) {
-        //0.5KM
-        double dis = 0.5;
-        double dLng = 2 * Math.asin(Math.sin(dis / (2 * EARTH_RADIUS)) / Math.cos(latLng.latitude * Math.PI / 180));
-        dLng = dLng * 180 / Math.PI;
-        double dLat = dis / EARTH_RADIUS;
-        dLat = dLat * 180 / Math.PI;
-        double minLat = latLng.latitude - dLat;
-        double maxLat = latLng.latitude + dLat;
-        double minLong = latLng.longitude - dLng;
-        double maxLong = latLng.longitude + dLng;
-        List<LocationPlaces> locationPlaces = new ArrayList<>();
+        LatLngBounds bounds = mapLocation.getGoogleMap().getProjection().getVisibleRegion().latLngBounds;
+        double minLat = bounds.southwest.latitude;
+        double minLong = bounds.southwest.longitude;
+        double maxLat = bounds.northeast.latitude;
+        double maxLong = bounds.northeast.longitude;
+        List<LocationPlaces> locationPlaces;
         List<LatLng> latLngs = new ArrayList<>();
-        Gson gson = new Gson();
-        for (String temp : locationPlaceByJson.getLocationItems()) {
-            LocationPlaces locationPlaces1 = gson.fromJson(temp, LocationPlaces.class);
-            if (locationPlaces1.getLatitude() > minLat &&
-                    locationPlaces1.getLatitude() < maxLat &&
-                    locationPlaces1.getLongitude() > minLong &&
-                    locationPlaces1.getLongitude() < maxLong) {
-                latLngs.add(new LatLng(locationPlaces1.getLatitude(), locationPlaces1.getLongitude()));
-                locationPlaces.add(locationPlaces1);
-            }
-        }
+        locationPlaces = DaoManager.getLocationInstance(this).searchLocationPlacesWithPosition(minLat, maxLat, minLong, maxLong);
         markerList = setMarker(locationPlaces);
+        for (LocationPlaces locationPlaces1 : locationPlaces) {
+            latLngs.add(new LatLng(locationPlaces1.getLatitude(), locationPlaces1.getLongitude()));
+        }
         addHeatMap(latLngs);
     }
 
     private void addHeatMap(List<LatLng> latLngs) {
+        if (latLngs.size() <= 0) {
+            return;
+        }
         HeatmapTileProvider provider = new HeatmapTileProvider.Builder().data(latLngs).build();
         overlay = mapLocation.getGoogleMap().addTileOverlay(new TileOverlayOptions().tileProvider(provider));
         overlay.setVisible(false);
@@ -441,30 +381,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements O
                     public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
                         Log.e(tag, "update gps error", e);
                         saveSharedPreferences(RxAmplify.Auth.getCurrentUser().getUsername(), userLocation);
-                    }
-                });
-    }
-
-    private void checkPosition(String username) {
-        RxAmplify.API.query("softwareengproject", ModelQuery.list(UserLocation.class, UserLocation.USERNAME.contains(username)))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidScheduler.mainThread())
-                .subscribe(new SingleObserver<GraphQLResponse<PaginatedResult<UserLocation>>>() {
-                    @Override
-                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull GraphQLResponse<PaginatedResult<UserLocation>> paginatedResultGraphQLResponse) {
-                        for (UserLocation userLocation : paginatedResultGraphQLResponse.getData()) {
-                            Log.e(tag, userLocation.toString());
-                        }
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                        Log.e(tag, "checkPosition error", e);
                     }
                 });
     }

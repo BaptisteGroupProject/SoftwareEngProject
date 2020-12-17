@@ -85,13 +85,12 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding> im
     }
 
     private void chartSetting() {
-        binding.historyChart.getDescription().setEnabled(true);
+        binding.historyChart.getDescription().setEnabled(false);
         binding.historyChart.setTouchEnabled(true);
         binding.historyChart.getXAxis().enableGridDashedLine(5f, 5f, 0f);
         binding.historyChart.getAxisLeft().enableGridDashedLine(5f, 5f, 0f);
         for (int i = 0; i < data.size(); i++) {
             Entry entry = new Entry(i, data.get(i).getPrice());
-            Log.e(tag, data.get(i).toString());
             xLabel.add(data.get(i).getTransferDate());
             values.add(entry);
         }
@@ -108,7 +107,7 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding> im
                 }
             }
         });
-        LineDataSet lineDataSet = new LineDataSet(values, "data 1");
+        LineDataSet lineDataSet = new LineDataSet(values, "price data");
         LineData lineData = new LineData(lineDataSet);
         lineData.setValueTextSize(8);
         binding.historyChart.setData(lineData);

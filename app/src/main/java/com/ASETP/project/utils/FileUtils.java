@@ -57,6 +57,8 @@ public class FileUtils {
 
     private final static String rules = "[^,]*,";
 
+    private int databaseLength = 1024 * 1024;
+
     /**
      * print log 10,000 count per term
      */
@@ -73,6 +75,14 @@ public class FileUtils {
 
     int totalCount = 1;
     int missCount = 0;
+
+    public File getLocationDbFile() {
+        return context.getDatabasePath("location.db");
+    }
+
+    public boolean isFileExist() {
+        return context.getDatabasePath("location.db").length() > databaseLength;
+    }
 
     private BufferedReader getReader() throws FileNotFoundException {
         String privateFilePate = context.getFilesDir().getAbsolutePath() + File.separator + "pp-complete.csv";

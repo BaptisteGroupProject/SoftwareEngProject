@@ -31,5 +31,11 @@
       "service": "Pinpoint",
       "providerPlugin": "awscloudformation"
     }
+  },
+  "storage": {
+    "cancel": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

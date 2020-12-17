@@ -10,6 +10,7 @@ import com.ASETP.project.greendao.gen.LocationPlacesDao;
 import com.ASETP.project.greendao.gen.PlacePaidDataDao;
 import com.ASETP.project.model.LocationPlaces;
 import com.ASETP.project.model.PlacePaidData;
+import com.amplifyframework.datastore.generated.model.LocationPlace;
 
 import java.util.List;
 
@@ -90,10 +91,15 @@ public class DaoManager {
                 .where(LocationPlacesDao.Properties.Postcode.like(where)).build().list();
     }
 
+    public List<LocationPlaces> getAllLocation() {
+        return locationPlacesDao.queryBuilder().build().list();
+    }
+
     public List<LocationPlaces> searchLocationPlacesWithPosition(double minLat, double maxLat, double minLong, double maxLong) {
         return locationPlacesDao.queryBuilder()
                 .where(LocationPlacesDao.Properties.Latitude.between(minLat, maxLat))
-                .where(LocationPlacesDao.Properties.Longitude.between(minLong, maxLong)).build().list();
+                .where(LocationPlacesDao.Properties.Longitude.between(minLong, maxLong))
+        .orderRaw("RANDOM()").limit(1000).build().list();
     }
 
     public List<PlacePaidData> searchPlacePaidData(String where) {

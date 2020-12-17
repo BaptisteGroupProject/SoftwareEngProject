@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
     defaultConfig {
         applicationId "com.ASETP.project"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -56,7 +56,7 @@ dependencies {
     implementation 'com.amplifyframework:core:1.4.1'
     implementation 'com.amplifyframework:aws-api:1.4.1'
     // Support for Java 8 features
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
     //Analytics
     implementation 'com.amplifyframework:aws-analytics-pinpoint:1.4.1'
     //Authentication
@@ -73,5 +73,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     // Utilities for Maps SDK for Android (requires Google Play Services)
     implementation 'com.google.maps.android:android-maps-utils:2.2.0'
+    //storage
+    implementation 'com.amplifyframework:aws-storage-s3:1.4.1'
 }
 

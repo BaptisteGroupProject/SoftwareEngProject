@@ -312,6 +312,54 @@ query ListUkCrimeDatas(
     nextToken
   }
 }
+query QueryByFirstPostcode(
+  $firstPostcode: String
+  $sortDirection: ModelSortDirection
+  $filter: ModelLocationPlaceByJsonFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  queryByFirstPostcode(
+    firstPostcode: $firstPostcode
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      firstPostcode
+      locationItems
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query QueryByFirst(
+  $firstPostcode: String
+  $sortDirection: ModelSortDirection
+  $filter: ModelLocationPlaceFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  queryByFirst(
+    firstPostcode: $firstPostcode
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      firstPostcode
+      locationItems
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query QueryByPostcode(
   $postcode: String
   $sortDirection: ModelSortDirection

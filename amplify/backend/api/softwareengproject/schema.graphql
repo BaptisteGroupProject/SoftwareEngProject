@@ -6,13 +6,15 @@ type UserLocation @model {
     location: String
     time: String
 }
-type LocationPlaceByJson @model {
+type LocationPlaceByJson @model
+@key(name: "firstPostcode-index",fields:["firstPostcode"],queryField:"queryByFirstPostcode"){
     id: ID!
     firstPostcode: String
     locationItems: [String!]!
 }
 
-type LocationPlace @model {
+type LocationPlace @model
+@key(name: "firstPostcode-index",fields:["firstPostcode"],queryField:"queryByFirst"){
     id: ID!
     firstPostcode: String
     locationItems: [String!]!
