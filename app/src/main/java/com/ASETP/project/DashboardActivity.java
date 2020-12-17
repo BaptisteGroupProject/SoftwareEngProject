@@ -200,7 +200,7 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding> im
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.history) {
-            HistoryActivity.startHistoryActivity(this, postcode, 1);
+            HistoryActivity.startHistoryActivity(this, postcode);
         } else if (id == R.id.crime) {
             CrimeHistoryActivity.startCrimeHistoryActivity(this, lat);
         }

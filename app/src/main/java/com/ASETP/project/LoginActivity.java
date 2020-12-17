@@ -2,7 +2,6 @@ package com.ASETP.project;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,19 +10,16 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityLoginBinding;
 import com.ASETP.project.location.AndroidScheduler;
-import com.ASETP.project.utils.FileUtils;
 import com.amplifyframework.auth.result.AuthSignInResult;
 import com.amplifyframework.auth.result.AuthSignUpResult;
 import com.amplifyframework.rx.RxAmplify;
 
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -36,7 +32,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
 
     private int maxLoginAttempts = 4;
 
-    private String errorMsg = "User not confirmed in the system.";
+    private final String errorMsg = "User not confirmed in the system.";
 
     @Override
     protected void init(Bundle bundle) {
@@ -99,9 +95,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
                 .setPositiveButton("OK", (dialog, which) -> {
                     String code = editText.getText().toString();
                     confirmEmail(username, code);
-                }).setNegativeButton("RESENT", (dialog, which) -> {
-                    resent(username);
-                }).setCancelable(true);
+                }).setNegativeButton("RESENT", (dialog, which) -> resent(username)).setCancelable(true);
         builder.create().show();
     }
 

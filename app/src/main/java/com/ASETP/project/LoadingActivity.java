@@ -6,9 +6,7 @@ import android.util.Log;
 
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityLoadingBinding;
-import com.ASETP.project.model.GeoJson;
 import com.ASETP.project.utils.FileUtils;
-import com.ASETP.project.utils.GeoJsonUtil;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
@@ -19,15 +17,7 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.rx.RxAmplify;
-import com.amplifyframework.rx.RxStorageBinding;
-import com.amplifyframework.storage.result.StorageUploadFileResult;
 
-import java.io.File;
-
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * @author Mirage
@@ -46,7 +36,7 @@ public class LoadingActivity extends BaseActivity<ActivityLoadingBinding> {
             }
             finish();
         } else {
-            TransferUtility transferUtility = null;
+            TransferUtility transferUtility;
             transferUtility = TransferUtility.builder().context(this)
                     .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
                     .s3Client(new AmazonS3Client(new BasicAWSCredentials(getString(R.string.accessKey), getString(R.string.secret_key)), Region.getRegion(Regions.EU_WEST_1))).build();

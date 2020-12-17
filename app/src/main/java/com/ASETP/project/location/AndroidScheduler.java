@@ -16,7 +16,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  */
 public class AndroidScheduler implements Executor {
 
-
     private static AndroidScheduler instance;
 
     private final Scheduler mMainScheduler;

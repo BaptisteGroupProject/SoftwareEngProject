@@ -47,7 +47,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.pano.setText(item.getPaon());
         holder.duration.setText(item.getDuration());
         holder.newOrOld.setText(item.getNewOrOld());
-        holder.price.setText(item.getPrice() + "");
+        holder.price.setText(String.valueOf(item.getPrice()));
         holder.propertyType.setText(item.getPropertyType());
         holder.time.setText(item.getTransferDate());
         holder.id.setText(item.getUniqueIdentifier());

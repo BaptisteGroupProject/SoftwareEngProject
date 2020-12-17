@@ -5,12 +5,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -151,30 +149,6 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         }
     }
 
-    protected void addSubscription(Disposable disposable) {
-        if (compositeDisposable == null) {
-            compositeDisposable = new CompositeDisposable();
-        }
-        compositeDisposable.add(disposable);
-    }
-
-    protected void unSubscription() {
-        if (compositeDisposable != null) {
-            compositeDisposable.dispose();
-        }
-    }
-
-    protected boolean checkIfInit() {
-        return preferences.getBoolean("init", false);
-    }
-
-    protected void setInitSuccess() {
-        preferences.edit().putBoolean("init", true).apply();
-    }
-
-    protected void clear(String name) {
-        preferences.edit().putString(name, null).apply();
-    }
 
     protected void saveSharedPreferences(String name, UserLocation userLocation) {
         Gson gson = new Gson();
@@ -188,7 +162,7 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         preferences.edit().putString(name, gson.toJson(data)).apply();
     }
 
-    protected void cleanSp(String name) {
+    protected void cleanSp() {
         preferences.edit().clear().apply();
     }
 
@@ -201,7 +175,7 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         Gson gson = new Gson();
         data = gson.fromJson(leftData, new TypeToken<List<UserLocation>>() {
         }.getType());
-        cleanSp(name);
+        cleanSp();
         return data;
     }
 

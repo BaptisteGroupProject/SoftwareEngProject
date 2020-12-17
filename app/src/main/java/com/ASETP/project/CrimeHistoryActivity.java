@@ -34,7 +34,6 @@ import com.google.android.gms.maps.model.LatLng;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -60,7 +59,7 @@ public class CrimeHistoryActivity extends BaseActivity<ActivityCrimeHistoryBindi
 
     private CrimeAdapter adapter;
 
-    private List<ListCrimeDatasQuery.Item> data = new ArrayList<>();
+    private final List<ListCrimeDatasQuery.Item> data = new ArrayList<>();
 
     private RecyclerView crimeList;
 
@@ -223,7 +222,7 @@ public class CrimeHistoryActivity extends BaseActivity<ActivityCrimeHistoryBindi
     }
 
     private void sortByDate() {
-        Collections.sort(data, (o1, o2) -> {
+        data.sort((o1, o2) -> {
             try {
                 return Objects.requireNonNull(new SimpleDateFormat("yyyy-MM", Locale.ENGLISH)
                         .parse(o2.month()))

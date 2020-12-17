@@ -10,7 +10,6 @@ import com.ASETP.project.greendao.gen.LocationPlacesDao;
 import com.ASETP.project.greendao.gen.PlacePaidDataDao;
 import com.ASETP.project.model.LocationPlaces;
 import com.ASETP.project.model.PlacePaidData;
-import com.amplifyframework.datastore.generated.model.LocationPlace;
 
 import java.util.List;
 

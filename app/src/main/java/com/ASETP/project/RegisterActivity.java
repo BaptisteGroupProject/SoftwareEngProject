@@ -1,7 +1,6 @@
 package com.ASETP.project;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,20 +14,19 @@ import androidx.core.content.ContextCompat;
 import com.ASETP.project.base.BaseActivity;
 import com.ASETP.project.databinding.ActivityRegisterBinding;
 import com.ASETP.project.location.AndroidScheduler;
-import com.amazonaws.services.cognitoidentityprovider.model.UserNotConfirmedException;
-import com.amplifyframework.auth.AuthException;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.auth.result.AuthSignUpResult;
 import com.amplifyframework.rx.RxAmplify;
 
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> implements TextWatcher {
+
+    private final int passwordLength = 8;
 
     @Override
     protected void init(Bundle bundle) {
@@ -39,7 +37,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
             String inputPassword = binding.inputPassword.getText().toString();
             if (!validateEmail(inputEmail)) {
                 showToast("Please enter a valid email");
-            } else if (inputPassword.length() < 8) {
+            } else if (inputPassword.length() < passwordLength) {
                 showToast("Password must be at least 8 characters");
             } else {
                 register(inputEmail, inputPassword);

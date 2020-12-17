@@ -1,6 +1,5 @@
 package com.ASETP.project;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,46 +9,24 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ASETP.project.adapter.HistoryAdapter;
 import com.ASETP.project.base.BaseActivity;
-import com.ASETP.project.dabase.DaoManager;
 import com.ASETP.project.databinding.ActivityHistoryBinding;
 import com.ASETP.project.location.AndroidScheduler;
 import com.ASETP.project.model.PlacePaidData;
 import com.ASETP.project.utils.QueryFactory;
-import com.amazonaws.amplify.generated.graphql.CreateCrimeDataMutation;
 import com.amazonaws.amplify.generated.graphql.QueryByPostcodeQuery;
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobile.client.Callback;
-import com.amazonaws.mobile.client.SignInUIOptions;
-import com.amazonaws.mobile.client.UserStateDetails;
 import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
-import com.amplifyframework.api.aws.GsonVariablesSerializer;
-import com.amplifyframework.api.graphql.GraphQLRequest;
-import com.amplifyframework.api.graphql.GraphQLResponse;
-import com.amplifyframework.api.graphql.PaginatedResult;
-import com.amplifyframework.api.graphql.QueryType;
-import com.amplifyframework.api.graphql.SimpleGraphQLRequest;
-import com.amplifyframework.api.graphql.model.ModelPagination;
-import com.amplifyframework.api.graphql.model.ModelQuery;
-import com.amplifyframework.datastore.generated.model.CrimeData;
-import com.amplifyframework.datastore.generated.model.PricePaidJson;
-import com.amplifyframework.rx.RxAmplify;
 import com.apollographql.apollo.GraphQLCall;
-import com.apollographql.apollo.api.Mutation;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
-import com.google.android.libraries.places.api.model.Place;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -60,18 +37,8 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.CompletableEmitter;
 import io.reactivex.rxjava3.core.CompletableObserver;
-import io.reactivex.rxjava3.core.CompletableOnSubscribe;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.core.ObservableSource;
-import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.core.Scheduler;
-import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Consumer;
-import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import io.reactivex.rxjava3.subjects.BehaviorSubject;
 
 /**
  * @author Mirage
@@ -79,32 +46,23 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject;
  */
 public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> {
 
-    public static String DATA_KEY = "data";
-
     public static String POSTCODE = "postcode";
-    public static String SORTTYPE = "sortType";
 
-    private static final int DEFAULT = 1;
-    private static final int BYPRICE = 2;
-
-    private List<PlacePaidData> data = new ArrayList<>();
+    private final List<PlacePaidData> data = new ArrayList<>();
 
     private String postcode;
-    private int sortType;
 
     private HistoryAdapter adapter;
 
-    public static void startHistoryActivity(Context context, String postcode, int sortType) {
+    public static void startHistoryActivity(Context context, String postcode) {
         Intent intent = new Intent(context, HistoryActivity.class);
         intent.putExtra(POSTCODE, postcode);
-        intent.putExtra(SORTTYPE, sortType);
         context.startActivity(intent);
     }
 
     @Override
     protected void init(Bundle bundle) {
         postcode = getIntent().getStringExtra(POSTCODE);
-        sortType = getIntent().getIntExtra(SORTTYPE, DEFAULT);
         initToolBar(binding.appbar.toolbar, true, postcode + " History");
         QueryFactory.init(this);
         queryByPostcode();
@@ -192,20 +150,11 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> {
                 data.add(placePaidData);
             }
         }
-
-        switch (sortType) {
-            case DEFAULT:
-                sortByDate();
-                break;
-            case BYPRICE:
-                sortByPrice();
-                break;
-            default:
-        }
+        sortByDate();
     }
 
     private void sortByDate() {
-        Collections.sort(data, (o1, o2) -> {
+        data.sort((o1, o2) -> {
             try {
                 return Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd HH:ss", Locale.ENGLISH)
                         .parse(o2.getTransferDate()))
@@ -218,6 +167,6 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding> {
 
 
     private void sortByPrice() {
-        Collections.sort(data, (o1, o2) -> Integer.compare(o1.getPrice(), o2.getPrice()));
+        data.sort((o1, o2) -> Integer.compare(o1.getPrice(), o2.getPrice()));
     }
 }
